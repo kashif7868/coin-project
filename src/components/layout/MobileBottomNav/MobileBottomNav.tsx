@@ -10,6 +10,9 @@ import {
   ScanLine,
 } from "lucide-react";
 
+import { useAuthStore } from "@/store/authStore";
+import { useUIStore } from "@/store/uiStore";
+
 const navItems = [
   {
     label: "Home",
@@ -36,21 +39,35 @@ const navItems = [
     label: "Account",
     href: "/account",
     icon: CircleUserRound,
+    protected: true,
   },
 ];
 
 const MobileBottomNav = () => {
   const pathname = usePathname();
 
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated
+  );
+
+  const openAuthRequired = useUIStore(
+    (state) => state.openAuthRequired
+  );
+
+  const isActiveRoute = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+
+    return pathname.startsWith(href);
+  };
+
   return (
     <nav className="fixed inset-x-0 bottom-0 z-[9998] border-t border-black/10 bg-white/95 px-3 pb-[max(env(safe-area-inset-bottom),8px)] pt-2 shadow-[0_-10px_30px_rgba(0,0,0,0.10)] backdrop-blur-xl lg:hidden">
       <div className="mx-auto grid max-w-md grid-cols-5 items-end">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive =
-            item.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(item.href);
+          const isActive = isActiveRoute(item.href);
 
           if (item.isPrimary) {
             return (
@@ -70,11 +87,32 @@ const MobileBottomNav = () => {
             );
           }
 
+          if (item.protected && !isAuthenticated) {
+            return (
+              <button
+                key={item.href}
+                type="button"
+                onClick={openAuthRequired}
+                className="flex min-h-[54px] flex-col items-center justify-center gap-1 rounded-xl"
+              >
+                <Icon
+                  size={21}
+                  strokeWidth={1.7}
+                  className="text-neutral-500"
+                />
+
+                <span className="text-[10px] font-medium text-neutral-500">
+                  {item.label}
+                </span>
+              </button>
+            );
+          }
+
           return (
             <Link
               key={item.href}
               href={item.href}
-              className="flex min-h-[54px] flex-col items-center justify-center gap-1 rounded-xl"
+              className="relative flex min-h-[54px] flex-col items-center justify-center gap-1 rounded-xl"
             >
               <Icon
                 size={21}

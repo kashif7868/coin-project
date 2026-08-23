@@ -21,6 +21,9 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { useAuthStore } from "@/store/authStore";
+import { useUIStore } from "@/store/uiStore";
+
 const mobileLinks = [
   {
     label: "Coins",
@@ -59,6 +62,18 @@ const MobileHeader = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated
+  );
+
+  const user = useAuthStore(
+    (state) => state.user
+  );
+
+  const openAuthRequired = useUIStore(
+    (state) => state.openAuthRequired
+  );
+
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
 
@@ -67,29 +82,67 @@ const MobileHeader = () => {
     };
   }, [isMenuOpen]);
 
+  const handleProtectedAction = (
+    callback?: () => void
+  ) => {
+    if (!isAuthenticated) {
+      setIsMenuOpen(false);
+      openAuthRequired();
+      return;
+    }
+
+    callback?.();
+  };
+
   return (
     <>
       {/* MOBILE HEADER ACTIONS */}
       <div className="flex items-center gap-2 lg:hidden">
-        <Link
-          href="/wishlist"
-          aria-label="Wishlist"
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition-all duration-200 active:scale-95"
-        >
-          <Heart size={18} strokeWidth={1.8} />
-        </Link>
+        {isAuthenticated ? (
+          <Link
+            href="/wishlist"
+            aria-label="Wishlist"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition-all duration-200 active:scale-95"
+          >
+            <Heart size={18} strokeWidth={1.8} />
+          </Link>
+        ) : (
+          <button
+            type="button"
+            aria-label="Wishlist"
+            onClick={() => handleProtectedAction()}
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition-all duration-200 active:scale-95"
+          >
+            <Heart size={18} strokeWidth={1.8} />
+          </button>
+        )}
 
-        <Link
-          href="/cart"
-          aria-label="Cart"
-          className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition-all duration-200 active:scale-95"
-        >
-          <ShoppingCart size={18} strokeWidth={1.8} />
+        {isAuthenticated ? (
+          <Link
+            href="/cart"
+            aria-label="Cart"
+            className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition-all duration-200 active:scale-95"
+          >
+            <ShoppingCart size={18} strokeWidth={1.8} />
 
-          <span className="absolute -right-1 -top-1 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[#d99a31] px-1 text-[8px] font-bold text-black ring-2 ring-black">
-            0
-          </span>
-        </Link>
+            <span className="absolute -right-1 -top-1 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[#d99a31] px-1 text-[8px] font-bold text-black ring-2 ring-black">
+              0
+            </span>
+          </Link>
+        ) : (
+          <button
+            type="button"
+            aria-label="Cart"
+            onClick={() => handleProtectedAction()}
+            className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition-all duration-200 active:scale-95"
+          >
+            <ShoppingCart size={18} strokeWidth={1.8} />
+
+            <span className="absolute -right-1 -top-1 flex h-[16px] min-w-[16px] items-center justify-center rounded-full bg-[#d99a31] px-1 text-[8px] font-bold text-black ring-2 ring-black">
+              0
+            </span>
+          </button>
+        )}
 
         <button
           type="button"
@@ -109,7 +162,6 @@ const MobileHeader = () => {
             : "pointer-events-none invisible"
         } lg:hidden`}
       >
-        {/* BACKDROP */}
         <button
           type="button"
           aria-label="Close navigation"
@@ -119,7 +171,6 @@ const MobileHeader = () => {
           }`}
         />
 
-        {/* DRAWER */}
         <aside
           className={`absolute right-0 top-0 flex h-dvh w-[88%] max-w-[360px] flex-col overflow-hidden border-l border-white/10 bg-[#090909] shadow-[-24px_0_70px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
@@ -210,7 +261,6 @@ const MobileHeader = () => {
             <div className="space-y-1">
               {mobileLinks.map((item) => {
                 const Icon = item.icon;
-
                 const isActive = pathname.startsWith(item.href);
 
                 return (
@@ -254,39 +304,81 @@ const MobileHeader = () => {
 
           {/* ACCOUNT */}
           <div className="border-t border-white/[0.08] bg-[#070707] p-4">
-            <Link
-              href="/account"
-              onClick={() => setIsMenuOpen(false)}
-              className="mb-3 flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.03] p-3"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.07] text-white/65">
-                <CircleUserRound size={21} />
-              </div>
+            {isAuthenticated ? (
+              <>
+                <Link
+                  href="/account"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="mb-3 flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.03] p-3"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d99a31]/10 text-[#d99a31]">
+                    <CircleUserRound size={21} />
+                  </div>
 
-              <div className="min-w-0 flex-1">
-                <p className="text-[12px] font-semibold text-white">
-                  My Account
-                </p>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[12px] font-semibold text-white">
+                      {user?.name || "My Account"}
+                    </p>
 
-                <p className="mt-0.5 text-[9px] text-white/35">
-                  Orders, listings & profile
-                </p>
-              </div>
+                    <p className="mt-0.5 truncate text-[9px] text-white/35">
+                      {user?.email || "Orders, listings & profile"}
+                    </p>
+                  </div>
 
-              <ChevronRight
-                size={16}
-                className="text-white/25"
-              />
-            </Link>
+                  <ChevronRight
+                    size={16}
+                    className="text-white/25"
+                  />
+                </Link>
 
-            <Link
-              href="/login"
-              onClick={() => setIsMenuOpen(false)}
-              className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#d99a31] text-[13px] font-semibold text-black shadow-[0_8px_24px_rgba(217,154,49,0.16)] transition active:scale-[0.98]"
-            >
-              <LogIn size={16} strokeWidth={1.9} />
-              Login / Sign Up
-            </Link>
+                <Link
+                  href="/account"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#d99a31] text-[13px] font-semibold text-black shadow-[0_8px_24px_rgba(217,154,49,0.16)] transition active:scale-[0.98]"
+                >
+                  <CircleUserRound size={16} />
+                  Open Account
+                </Link>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleProtectedAction()
+                  }
+                  className="mb-3 flex w-full items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.03] p-3 text-left"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/[0.07] text-white/65">
+                    <CircleUserRound size={21} />
+                  </div>
+
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[12px] font-semibold text-white">
+                      My Account
+                    </p>
+
+                    <p className="mt-0.5 text-[9px] text-white/35">
+                      Login required
+                    </p>
+                  </div>
+
+                  <ChevronRight
+                    size={16}
+                    className="text-white/25"
+                  />
+                </button>
+
+                <Link
+                  href="/login"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#d99a31] text-[13px] font-semibold text-black shadow-[0_8px_24px_rgba(217,154,49,0.16)] transition active:scale-[0.98]"
+                >
+                  <LogIn size={16} strokeWidth={1.9} />
+                  Login / Sign Up
+                </Link>
+              </>
+            )}
           </div>
         </aside>
       </div>
