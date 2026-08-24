@@ -1,0 +1,380 @@
+.auctionBidPanel,
+.auctionBidPanel *,
+.auctionBidPanel *::before,
+.auctionBidPanel *::after {
+  box-sizing: border-box;
+}
+
+.auctionBidPanel {
+  width: 100%;
+  min-width: 0;
+
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.05);
+}
+
+.auctionBidPanelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.auctionBidPanelLabel {
+  display: block;
+
+  color: #9a9a9a;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.auctionBidPanelCurrent {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.auctionBidPanelIncrement {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding:
+    6px
+    8px;
+
+  border-radius: 999px;
+
+  background: #fff4e2;
+  color: #a96915;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.auctionBidPanelDivider {
+  width: 100%;
+  height: 1px;
+
+  margin: 15px 0;
+
+  background: #eeeeee;
+}
+
+.auctionBidPanelField {
+  width: 100%;
+  min-width: 0;
+}
+
+.auctionBidPanelFieldLabel {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #343434;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.auctionBidPanelInputWrap {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.auctionBidPanelCurrency {
+  position: absolute;
+
+  left: 13px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #777777;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  pointer-events: none;
+}
+
+.auctionBidPanelInput {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+
+  padding:
+    0
+    12px
+    0
+    30px;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #171717;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  outline: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.auctionBidPanelInput:focus {
+  border-color:
+    rgba(217, 154, 49, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.1);
+}
+
+.auctionBidPanelHint {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #9a9a9a;
+
+  font-size: 8px;
+  line-height: 1.3;
+}
+
+.auctionBidPanelPrimaryButton,
+.auctionBidPanelWatchButton {
+  width: 100%;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 12px 0 0;
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  font: inherit;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 150ms ease,
+    box-shadow 160ms ease;
+}
+
+.auctionBidPanelPrimaryButton {
+  border: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+
+  box-shadow:
+    0 8px 20px rgba(217, 154, 49, 0.16);
+}
+
+.auctionBidPanelPrimaryButton:hover {
+  box-shadow:
+    0 10px 26px rgba(217, 154, 49, 0.22);
+}
+
+.auctionBidPanelWatchButton {
+  border: 1px solid #dedede;
+
+  background: #ffffff;
+  color: #333333;
+}
+
+.auctionBidPanelWatchButton:hover {
+  border-color:
+    rgba(217, 154, 49, 0.4);
+
+  background: #fffaf2;
+}
+
+.auctionBidPanelPrimaryButton:active,
+.auctionBidPanelWatchButton:active {
+  transform: scale(0.99);
+}
+
+.auctionBidPanelTrust {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+  padding: 11px;
+
+  border: 1px solid #e6eee8;
+  border-radius: 10px;
+
+  background: #f7fbf8;
+}
+
+.auctionBidPanelTrustIcon {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #e8f5ec;
+  color: #3f8757;
+}
+
+.auctionBidPanelTrustText {
+  min-width: 0;
+}
+
+.auctionBidPanelTrustText strong {
+  display: block;
+
+  color: #2b5e3b;
+
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.auctionBidPanelTrustText span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #6f8174;
+
+  font-size: 8px;
+  line-height: 14px;
+}
+
+.auctionBidPanelReference {
+  margin-top: 12px;
+
+  padding-top: 11px;
+
+  border-top: 1px solid #eeeeee;
+
+  overflow: hidden;
+
+  color: #aaaaaa;
+
+  font-size: 7px;
+  line-height: 1.3;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 359px) {
+  .auctionBidPanel {
+    padding: 13px;
+  }
+
+  .auctionBidPanelCurrent {
+    font-size: 25px;
+  }
+
+  .auctionBidPanelPrimaryButton,
+  .auctionBidPanelWatchButton {
+    height: 41px;
+
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 640px) {
+  .auctionBidPanel {
+    padding: 20px;
+  }
+
+  .auctionBidPanelCurrent {
+    font-size: 31px;
+  }
+
+  .auctionBidPanelFieldLabel {
+    font-size: 11px;
+  }
+
+  .auctionBidPanelInput {
+    height: 46px;
+
+    font-size: 13px;
+  }
+
+  .auctionBidPanelPrimaryButton,
+  .auctionBidPanelWatchButton {
+    height: 45px;
+
+    font-size: 12px;
+  }
+
+  .auctionBidPanelTrustText strong {
+    font-size: 10px;
+  }
+
+  .auctionBidPanelTrustText span {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auctionBidPanelInput,
+  .auctionBidPanelPrimaryButton,
+  .auctionBidPanelWatchButton {
+    transition: none;
+  }
+}
