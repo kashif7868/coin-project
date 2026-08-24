@@ -1,0 +1,511 @@
+/* =========================================================
+   AUTH REQUIRED MODAL
+   Fully isolated responsive CSS
+   ========================================================= */
+
+.overlay,
+.overlay *,
+.overlay *::before,
+.overlay *::after {
+  box-sizing: border-box;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10020;
+
+  width: 100vw;
+  height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* =========================================================
+   BACKDROP
+   ========================================================= */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  cursor: default;
+}
+
+/* =========================================================
+   POSITIONING
+   Mobile = centered responsive card
+   ========================================================= */
+
+.positioner {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    max(14px, env(safe-area-inset-top))
+    12px
+    max(14px, env(safe-area-inset-bottom));
+
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal {
+  position: relative;
+  z-index: 1;
+
+  width: calc(100% - 4px);
+  max-width: 410px;
+  min-width: 0;
+
+  max-height: calc(100dvh - 28px);
+
+  margin: auto;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 22px;
+
+  background: #0a0a0a;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.58);
+}
+
+/* Mobile handle is no longer needed */
+.handle {
+  display: none;
+}
+
+/* =========================================================
+   DECORATION
+   ========================================================= */
+
+.glow {
+  position: absolute;
+
+  top: -80px;
+  right: -70px;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 999px;
+
+  background: rgba(217, 154, 49, 0.12);
+
+  filter: blur(55px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CLOSE BUTTON
+   ========================================================= */
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  color: rgba(255, 255, 255, 0.62);
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.close:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+}
+
+.close:active {
+  transform: scale(0.94);
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.content {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+
+  padding:
+    22px
+    20px
+    20px;
+}
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.iconBox {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(217, 154, 49, 0.18);
+  border-radius: 15px;
+
+  background: rgba(217, 154, 49, 0.1);
+
+  color: #d99a31;
+}
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.title {
+  width: 100%;
+
+  margin: 18px 0 0;
+
+  padding: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 26px;
+  line-height: 1.14;
+  font-weight: 600;
+
+  letter-spacing: -0.02em;
+
+  color: #ffffff;
+
+  overflow-wrap: break-word;
+}
+
+.description {
+  width: 100%;
+  max-width: 340px;
+
+  margin: 10px 0 0;
+
+  padding: 0;
+
+  font-size: 12px;
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.47);
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.actions {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+.primary,
+.secondary {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  margin: 0;
+  padding: 0 16px;
+
+  border-radius: 12px;
+
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 650;
+
+  white-space: nowrap;
+
+  text-align: center;
+  text-decoration: none;
+
+  overflow: hidden;
+
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.primary svg,
+.secondary svg {
+  flex: 0 0 auto;
+}
+
+.primary span,
+.secondary span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.primary {
+  border: 1px solid #d99a31;
+
+  background: #d99a31;
+
+  color: #090909;
+
+  box-shadow:
+    0 10px 26px rgba(217, 154, 49, 0.17);
+}
+
+.primary:hover {
+  background: #e3a43b;
+}
+
+.secondary {
+  border: 1px solid rgba(255, 255, 255, 0.11);
+
+  background: rgba(255, 255, 255, 0.035);
+
+  color: #ffffff;
+}
+
+.secondary:hover {
+  border-color: rgba(217, 154, 49, 0.35);
+
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.primary:active,
+.secondary:active {
+  transform: scale(0.985);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+  width: 100%;
+
+  margin: 17px 0 0;
+
+  padding: 0;
+
+  text-align: center;
+
+  font-size: 9px;
+  line-height: 1.55;
+
+  color: rgba(255, 255, 255, 0.25);
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   SMALL PHONES
+   320px - 359px
+   ========================================================= */
+
+@media (max-width: 359px) {
+  .positioner {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .modal {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .content {
+    padding:
+      18px
+      15px
+      17px;
+  }
+
+  .iconBox {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 14px;
+  }
+
+  .title {
+    margin-top: 15px;
+
+    font-size: 22px;
+  }
+
+  .description {
+    margin-top: 8px;
+
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .actions {
+    margin-top: 18px;
+
+    gap: 8px;
+  }
+
+  .primary,
+  .secondary {
+    height: 44px;
+
+    padding: 0 12px;
+
+    font-size: 12px;
+  }
+
+  .footer {
+    margin-top: 14px;
+
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   NORMAL MOBILE
+   360px - 639px
+   ========================================================= */
+
+@media (min-width: 360px) and (max-width: 639px) {
+  .modal {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+/* =========================================================
+   TABLET / DESKTOP
+   ========================================================= */
+
+@media (min-width: 640px) {
+  .positioner {
+    padding: 24px;
+  }
+
+  .modal {
+    width: min(420px, calc(100vw - 48px));
+
+    max-width: 420px;
+
+    border-radius: 24px;
+
+    box-shadow:
+      0 30px 100px rgba(0, 0, 0, 0.65);
+  }
+
+  .content {
+    padding: 28px;
+  }
+
+  .iconBox {
+    width: 56px;
+    height: 56px;
+
+    border-radius: 16px;
+  }
+
+  .title {
+    margin-top: 20px;
+
+    font-size: 30px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .actions {
+    margin-top: 24px;
+
+    gap: 12px;
+  }
+
+  .primary,
+  .secondary {
+    height: 48px;
+
+    font-size: 13px;
+  }
+
+  .footer {
+    margin-top: 20px;
+
+    font-size: 10px;
+  }
+}
