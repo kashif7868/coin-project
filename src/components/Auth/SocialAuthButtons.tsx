@@ -2,35 +2,35 @@
 
 import { toast } from "sonner";
 
+import styles from "@/components/animations/css/Auth/SocialAuthButtons.module.css";
+
 const SocialAuthButtons = () => {
   const handleGoogleSignIn = () => {
     toast.info("Google Sign-In", {
       description:
-        "Google authentication will be connected with the backend later.",
+        "Google sign-in will be available once account integration is connected.",
     });
   };
 
   return (
-    <div className="w-full min-w-0">
+    <div className={styles.socialAuthSection}>
       <button
         type="button"
         onClick={handleGoogleSignIn}
-        className="flex h-11 w-full min-w-0 items-center justify-center gap-2.5 rounded-xl border border-neutral-200 bg-white px-4 text-[12px] font-semibold text-neutral-800 transition-all duration-200 hover:border-[#d99a31]/40 hover:bg-[#fffaf2] active:scale-[0.99] sm:h-12 sm:gap-3 sm:text-sm"
+        className={styles.socialAuthGoogleButton}
       >
         <GoogleIcon />
 
-        <span className="truncate">
+        <span className={styles.socialAuthGoogleLabel}>
           Continue with Google
         </span>
       </button>
 
-      <div className="relative my-4 sm:my-5">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-neutral-200" />
-        </div>
+      <div className={styles.socialAuthDivider}>
+        <div className={styles.socialAuthDividerLine} />
 
-        <div className="relative flex justify-center">
-          <span className="max-w-full truncate bg-white px-2 text-[8px] uppercase tracking-[0.09em] text-neutral-400 min-[360px]:px-3 min-[360px]:text-[9px] sm:text-[10px] sm:tracking-[0.12em]">
+        <div className={styles.socialAuthDividerLabelWrap}>
+          <span className={styles.socialAuthDividerLabel}>
             Or continue with email
           </span>
         </div>
@@ -47,7 +47,7 @@ const GoogleIcon = () => {
       viewBox="0 0 18 18"
       aria-hidden="true"
       focusable="false"
-      className="shrink-0"
+      className={styles.socialAuthGoogleIcon}
     >
       <path
         fill="#4285F4"

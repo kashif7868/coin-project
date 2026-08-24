@@ -16,6 +16,8 @@ import Header from "@/components/layout/Header/Header";
 import MobileBottomNav from "@/components/layout/MobileBottomNav/MobileBottomNav";
 import Providers from "@/providers/Providers";
 
+import styles from "@/components/animations/css/layout/RootLayout.module.css";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -57,28 +59,24 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="m-0 min-h-dvh w-full min-w-0 bg-white text-neutral-950 antialiased">
+      <body className={styles.rootBody}>
         <Providers>
-          {/* Initial application loader */}
           <PagePreloader />
 
-          {/* Global protected-action modal */}
           <AuthRequiredModal />
 
-          <div className="flex min-h-dvh w-full min-w-0 flex-col">
+          <div className={styles.appShell}>
             <Header />
 
-            <main className="relative w-full min-w-0 flex-1 pb-[84px] lg:pb-0">
+            <main className={styles.mainContent}>
               {children}
             </main>
 
             <Footer />
           </div>
 
-          {/* Mobile-only fixed navigation */}
           <MobileBottomNav />
 
-          {/* Global notifications */}
           <Toaster
             position="top-center"
             richColors
@@ -89,8 +87,7 @@ export default function RootLayout({
             offset={16}
             mobileOffset={12}
             toastOptions={{
-              className:
-                "max-w-[calc(100vw-24px)] border border-[#d99a31]/20 shadow-2xl",
+              className: styles.toast,
             }}
           />
         </Providers>

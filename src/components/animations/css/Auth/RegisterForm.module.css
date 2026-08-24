@@ -1,0 +1,317 @@
+.registerForm,
+.registerForm *,
+.registerForm *::before,
+.registerForm *::after {
+  box-sizing: border-box;
+}
+
+.registerForm {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.registerFieldGroup {
+  min-width: 0;
+}
+
+.registerLabel {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #303030;
+
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.registerInputWrapper {
+  position: relative;
+  min-width: 0;
+}
+
+.registerInputIcon {
+  position: absolute;
+
+  left: 13px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #aaaaaa;
+
+  pointer-events: none;
+}
+
+.registerInput {
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+
+  padding:
+    0
+    13px
+    0
+    39px;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #171717;
+
+  font-size: 12px;
+  line-height: 1;
+
+  outline: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.registerPasswordInput {
+  padding-right: 42px;
+}
+
+.registerInput::placeholder {
+  color: #a7a7a7;
+}
+
+.registerInput:hover:not(:disabled) {
+  border-color: #cfcfcf;
+}
+
+.registerInput:focus {
+  border-color: #d99a31;
+
+  box-shadow:
+    0 0 0 2px rgba(217, 154, 49, 0.08);
+}
+
+.registerInput:disabled {
+  background: #f8f8f8;
+  color: #777777;
+
+  cursor: not-allowed;
+}
+
+.registerPasswordToggle {
+  position: absolute;
+
+  right: 7px;
+  top: 50%;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(-50%);
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #aaaaaa;
+
+  cursor: pointer;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.registerPasswordToggle:hover:not(:disabled) {
+  background: #f6f6f6;
+  color: #555555;
+}
+
+.registerPasswordToggle:active:not(:disabled) {
+  transform:
+    translateY(-50%)
+    scale(0.95);
+}
+
+.registerHint {
+  margin: 4px 0 0;
+
+  color: #a3a3a3;
+
+  font-size: 8px;
+  line-height: 1.3;
+}
+
+.registerTerms {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  cursor: pointer;
+}
+
+.registerCheckbox {
+  width: 15px;
+  height: 15px;
+
+  flex: 0 0 15px;
+
+  margin: 2px 0 0;
+
+  accent-color: #d99a31;
+}
+
+.registerTermsText {
+  min-width: 0;
+
+  color: #747474;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.registerTermsLink {
+  color: #b87516;
+
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition: color 160ms ease;
+}
+
+.registerTermsLink:hover {
+  color: #8f5c13;
+}
+
+.registerSubmitButton {
+  width: 100%;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 14px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+
+  box-shadow:
+    0 8px 20px rgba(217, 154, 49, 0.16);
+
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    opacity 150ms ease;
+}
+
+.registerSubmitButton:hover:not(:disabled) {
+  box-shadow:
+    0 10px 24px rgba(217, 154, 49, 0.22);
+}
+
+.registerSubmitButton:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.registerSubmitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 359px) {
+  .registerForm {
+    gap: 10px;
+  }
+
+  .registerLabel {
+    font-size: 9px;
+  }
+
+  .registerInput {
+    height: 40px;
+
+    font-size: 11px;
+  }
+
+  .registerHint,
+  .registerTermsText {
+    font-size: 8px;
+  }
+
+  .registerSubmitButton {
+    height: 40px;
+
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 640px) {
+  .registerForm {
+    gap: 13px;
+  }
+
+  .registerLabel {
+    font-size: 11px;
+  }
+
+  .registerInput {
+    height: 44px;
+
+    font-size: 13px;
+  }
+
+  .registerHint {
+    font-size: 9px;
+  }
+
+  .registerTermsText {
+    font-size: 10px;
+  }
+
+  .registerSubmitButton {
+    height: 44px;
+
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .registerInput,
+  .registerPasswordToggle,
+  .registerTermsLink,
+  .registerSubmitButton {
+    transition: none;
+  }
+}

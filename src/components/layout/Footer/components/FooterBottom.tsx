@@ -1,37 +1,39 @@
 import Link from "next/link";
 
+import styles from "@/components/animations/css/footer/FooterBottom.module.css";
+
 const FooterBottom = () => {
   return (
-    <div className="flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/35 md:flex-row md:items-center md:justify-between">
-      <p>
+    <div className={styles.footerBottom}>
+      <p className={styles.footerCopyright}>
         © {new Date().getFullYear()} CoinHeritage. All rights reserved.
       </p>
 
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+      <div className={styles.footerPolicyLinks}>
         <Link
           href="/privacy-policy"
-          className="transition-colors duration-200 hover:text-amber-400"
+          className={styles.footerPolicyLink}
         >
           Privacy Policy
         </Link>
 
         <Link
           href="/terms"
-          className="transition-colors duration-200 hover:text-amber-400"
+          className={styles.footerPolicyLink}
         >
-          Terms & Conditions
+          Terms &amp; Conditions
         </Link>
 
         <Link
           href="/shipping-policy"
-          className="transition-colors duration-200 hover:text-amber-400"
+          className={styles.footerPolicyLink}
         >
           Shipping Policy
         </Link>
 
         <Link
           href="/seller-policy"
-          className="transition-colors duration-200 hover:text-amber-400"
+          className={styles.footerPolicyLink}
         >
           Seller Policy
         </Link>

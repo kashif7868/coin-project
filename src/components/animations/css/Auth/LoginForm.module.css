@@ -1,0 +1,328 @@
+.loginForm,
+.loginForm *,
+.loginForm *::before,
+.loginForm *::after {
+  box-sizing: border-box;
+}
+
+.loginForm {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.loginFieldGroup {
+  min-width: 0;
+}
+
+.loginLabel {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #2f2f2f;
+
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.loginInputWrapper {
+  position: relative;
+  min-width: 0;
+}
+
+.loginInputIcon {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #aaaaaa;
+
+  pointer-events: none;
+}
+
+.loginInput {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+
+  padding:
+    0
+    14px
+    0
+    40px;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #171717;
+
+  font-size: 12px;
+  line-height: 1;
+
+  outline: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.loginPasswordInput {
+  padding-right: 42px;
+}
+
+.loginInput::placeholder {
+  color: #a7a7a7;
+}
+
+.loginInput:hover:not(:disabled) {
+  border-color: #cfcfcf;
+}
+
+.loginInput:focus {
+  border-color: #d99a31;
+
+  box-shadow:
+    0 0 0 2px rgba(217, 154, 49, 0.08);
+}
+
+.loginInput:disabled {
+  background: #f8f8f8;
+  color: #777777;
+
+  cursor: not-allowed;
+}
+
+.loginPasswordToggle {
+  position: absolute;
+
+  right: 7px;
+  top: 50%;
+
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transform: translateY(-50%);
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #aaaaaa;
+
+  cursor: pointer;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.loginPasswordToggle:hover:not(:disabled) {
+  background: #f6f6f6;
+  color: #555555;
+}
+
+.loginPasswordToggle:active:not(:disabled) {
+  transform:
+    translateY(-50%)
+    scale(0.95);
+}
+
+.loginOptionsRow {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.loginRemember {
+  min-width: 0;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  cursor: pointer;
+}
+
+.loginCheckbox {
+  width: 15px;
+  height: 15px;
+
+  flex: 0 0 15px;
+
+  margin: 0;
+
+  accent-color: #d99a31;
+}
+
+.loginRememberText {
+  color: #777777;
+
+  font-size: 10px;
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+.loginForgotButton {
+  flex: 0 0 auto;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+  color: #b87516;
+
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition: color 160ms ease;
+}
+
+.loginForgotButton:hover {
+  color: #8f5c13;
+}
+
+.loginSubmitButton {
+  width: 100%;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0 14px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+
+  box-shadow:
+    0 8px 20px rgba(217, 154, 49, 0.16);
+
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease,
+    opacity 150ms ease;
+}
+
+.loginSubmitButton:hover:not(:disabled) {
+  box-shadow:
+    0 10px 24px rgba(217, 154, 49, 0.22);
+}
+
+.loginSubmitButton:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.loginSubmitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 359px) {
+  .loginForm {
+    gap: 12px;
+  }
+
+  .loginLabel {
+    font-size: 9px;
+  }
+
+  .loginInput {
+    height: 42px;
+
+    font-size: 11px;
+  }
+
+  .loginOptionsRow {
+    gap: 8px;
+  }
+
+  .loginRememberText,
+  .loginForgotButton {
+    font-size: 9px;
+  }
+
+  .loginSubmitButton {
+    height: 42px;
+
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 640px) {
+  .loginForm {
+    gap: 15px;
+  }
+
+  .loginLabel {
+    font-size: 11px;
+  }
+
+  .loginInput {
+    height: 46px;
+
+    font-size: 13px;
+  }
+
+  .loginSubmitButton {
+    height: 45px;
+
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loginInput,
+  .loginPasswordToggle,
+  .loginForgotButton,
+  .loginSubmitButton {
+    transition: none;
+  }
+}

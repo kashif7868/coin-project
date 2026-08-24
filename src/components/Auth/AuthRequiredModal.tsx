@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 import { useUIStore } from "@/store/uiStore";
 
-import styles from "../animations/css/Auth/AuthRequiredModal.module.css";
+import styles from "@/components/animations/css/Auth/AuthRequiredModal.module.css";
 
 const AuthRequiredModal = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -67,40 +67,32 @@ const AuthRequiredModal = () => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          exit={{
-            opacity: 0,
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{
             duration: shouldReduceMotion
               ? 0
-              : 0.2,
+              : 0.18,
           }}
-          className={styles.overlay}
+          className={styles.authRequiredOverlay}
         >
-          {/* BACKDROP */}
           <button
             type="button"
             aria-label="Close authentication modal"
             onClick={close}
-            className={styles.backdrop}
+            className={styles.authRequiredBackdrop}
           />
 
-          {/* MODAL POSITION */}
-          <div className={styles.positioner}>
+          <div className={styles.authRequiredPositioner}>
             <motion.div
               initial={
                 shouldReduceMotion
                   ? false
                   : {
                       opacity: 0,
-                      y: 38,
-                      scale: 0.98,
+                      y: 24,
+                      scale: 0.985,
                     }
               }
               animate={
@@ -117,72 +109,95 @@ const AuthRequiredModal = () => {
                   ? undefined
                   : {
                       opacity: 0,
-                      y: 25,
-                      scale: 0.98,
+                      y: 16,
+                      scale: 0.985,
                     }
               }
               transition={{
-                duration: 0.24,
+                duration: 0.22,
                 ease: [0.22, 1, 0.36, 1],
               }}
               role="dialog"
               aria-modal="true"
               aria-labelledby="auth-required-title"
               aria-describedby="auth-required-description"
-              className={styles.modal}
+              className={styles.authRequiredModal}
             >
-              {/* MOBILE HANDLE */}
-              <div className={styles.handle} />
+              <div
+                className={
+                  styles.authRequiredHandle
+                }
+              />
 
-              {/* GOLD GLOW */}
-              <div className={styles.glow} />
+              <div
+                className={
+                  styles.authRequiredGlow
+                }
+              />
 
-              {/* CLOSE BUTTON */}
               <button
                 type="button"
                 aria-label="Close"
                 onClick={close}
-                className={styles.close}
+                className={
+                  styles.authRequiredClose
+                }
               >
                 <X
-                  size={17}
+                  size={16}
                   strokeWidth={1.8}
                 />
               </button>
 
-              {/* CONTENT */}
-              <div className={styles.content}>
-                <div className={styles.iconBox}>
+              <div
+                className={
+                  styles.authRequiredContent
+                }
+              >
+                <div
+                  className={
+                    styles.authRequiredIconBox
+                  }
+                >
                   <LockKeyhole
-                    size={24}
+                    size={22}
                     strokeWidth={1.7}
                   />
                 </div>
 
                 <h2
                   id="auth-required-title"
-                  className={styles.title}
+                  className={
+                    styles.authRequiredTitle
+                  }
                 >
                   Sign in to continue
                 </h2>
 
                 <p
                   id="auth-required-description"
-                  className={styles.description}
+                  className={
+                    styles.authRequiredDescription
+                  }
                 >
-                  Wishlist, cart, bidding and buying
-                  features are available for registered
-                  CoinHeritage members.
+                  Sign in to use your wishlist, cart,
+                  auctions and marketplace account.
                 </p>
 
-                <div className={styles.actions}>
+                <div
+                  className={
+                    styles.authRequiredActions
+                  }
+                >
                   <Link
                     href="/login"
                     onClick={close}
-                    className={styles.primary}
+                    className={
+                      styles.authRequiredPrimary
+                    }
                   >
                     <LogIn
-                      size={17}
+                      size={16}
                       strokeWidth={1.9}
                     />
 
@@ -192,10 +207,12 @@ const AuthRequiredModal = () => {
                   <Link
                     href="/login?mode=register"
                     onClick={close}
-                    className={styles.secondary}
+                    className={
+                      styles.authRequiredSecondary
+                    }
                   >
                     <UserPlus
-                      size={17}
+                      size={16}
                       strokeWidth={1.8}
                     />
 
@@ -203,9 +220,13 @@ const AuthRequiredModal = () => {
                   </Link>
                 </div>
 
-                <p className={styles.footer}>
-                  Your wishlist, cart and marketplace
-                  activity will stay linked to your account.
+                <p
+                  className={
+                    styles.authRequiredFooter
+                  }
+                >
+                  Your saved activity stays linked to
+                  your CoinHeritage account.
                 </p>
               </div>
             </motion.div>

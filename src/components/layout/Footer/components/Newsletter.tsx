@@ -1,59 +1,74 @@
 "use client";
 
 import { Mail } from "lucide-react";
-import { useState } from "react";
+import {
+  useState,
+  type FormEvent,
+} from "react";
+
+import styles from "@/components/animations/css/footer/Newsletter.module.css";
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (
+    event: FormEvent<HTMLFormElement>
+  ) => {
     event.preventDefault();
 
     const trimmedEmail = email.trim();
 
-    if (!trimmedEmail) return;
+    if (!trimmedEmail) {
+      return;
+    }
 
-    console.log("Newsletter email:", trimmedEmail);
+    console.log(
+      "Newsletter email:",
+      trimmedEmail
+    );
 
     // Later:
     // API request for newsletter subscription
   };
 
   return (
-    <div>
-      <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-white">
+    <div className={styles.newsletterSection}>
+      <h3 className={styles.newsletterTitle}>
         Stay Updated
       </h3>
 
-      <p className="mt-4 text-sm leading-6 text-white/55">
-        Get updates on rare coins, auctions, market insights and new
-        collections.
+      <p className={styles.newsletterDescription}>
+        Get updates on rare coins, auctions, market insights
+        and new collections.
       </p>
 
       <form
         onSubmit={handleSubmit}
-        className="mt-5 flex flex-col gap-3 sm:flex-row xl:flex-col"
+        className={styles.newsletterForm}
       >
-        <div className="relative flex-1">
+        <div className={styles.newsletterInputWrapper}>
           <Mail
             size={17}
             strokeWidth={1.8}
-            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
+            className={styles.newsletterIcon}
           />
 
           <input
             type="email"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) =>
+              setEmail(event.target.value)
+            }
             placeholder="Your email address"
             aria-label="Email address"
-            className="h-11 w-full rounded-lg border border-white/10 bg-white/[0.04] pl-10 pr-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-white/35 hover:border-white/20 focus:border-amber-400/60 focus:ring-2 focus:ring-amber-400/10"
+            autoComplete="email"
+            className={styles.newsletterInput}
           />
         </div>
 
         <button
           type="submit"
-          className="h-11 rounded-lg bg-amber-500 px-5 text-sm font-semibold text-black transition-colors duration-200 hover:bg-amber-400"
+          className={styles.newsletterButton}
         >
           Subscribe
         </button>

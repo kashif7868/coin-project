@@ -1,0 +1,307 @@
+.authCardWrapper,
+.authCardWrapper *,
+.authCardWrapper *::before,
+.authCardWrapper *::after {
+  box-sizing: border-box;
+}
+
+.authCardWrapper {
+  width: 100%;
+  max-width: 460px;
+  min-width: 0;
+}
+
+.authCard {
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.1);
+}
+
+.authCardBrandHeader {
+  padding: 20px 24px;
+
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.authCardBrandLink {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 12px;
+
+  max-width: 100%;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+.authCardLogo {
+  width: 44px;
+  height: 44px;
+
+  flex: 0 0 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(217, 154, 49, 0.3);
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f2c56c,
+      #d99a31,
+      #8a5917
+    );
+
+  box-shadow:
+    0 8px 24px rgba(217, 154, 49, 0.2);
+}
+
+.authCardLogo span {
+  color: rgba(0, 0, 0, 0.7);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.authCardBrandText {
+  min-width: 0;
+}
+
+.authCardBrandName {
+  margin: 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.authCardBrandName span {
+  color: #c88925;
+}
+
+.authCardTagline {
+  margin: 6px 0 0;
+
+  color: #a3a3a3;
+
+  font-size: 8px;
+  line-height: 1.2;
+  font-weight: 500;
+
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.authCardContent {
+  min-width: 0;
+
+  padding: 24px;
+}
+
+.authCardIntro {
+  margin-bottom: 24px;
+}
+
+.authCardBadge {
+  width: fit-content;
+  max-width: 100%;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 6px 12px;
+
+  border: 1px solid rgba(217, 154, 49, 0.2);
+  border-radius: 999px;
+
+  background: rgba(217, 154, 49, 0.1);
+
+  color: #b87516;
+}
+
+.authCardBadge svg {
+  flex: 0 0 auto;
+
+  color: #c88925;
+}
+
+.authCardBadge span {
+  overflow: hidden;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.authCardTitle {
+  margin: 16px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 30px;
+  line-height: 1.1;
+  font-weight: 600;
+
+  letter-spacing: -0.02em;
+}
+
+.authCardDescription {
+  margin: 8px 0 0;
+
+  color: #737373;
+
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.authCardFooter {
+  padding: 16px 24px;
+
+  border-top: 1px solid #f5f5f5;
+
+  background: #fffdf9;
+
+  color: #737373;
+
+  font-size: 11px;
+  line-height: 1.5;
+
+  text-align: center;
+}
+
+.authCardFooterLink {
+  color: #b87516;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: color 180ms ease;
+}
+
+.authCardFooterLink:hover {
+  color: #8f5c13;
+}
+
+/* Very small phones */
+
+@media (max-width: 359px) {
+  .authCard {
+    border-radius: 18px;
+  }
+
+  .authCardBrandHeader {
+    padding: 16px;
+  }
+
+  .authCardLogo {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .authCardBrandName {
+    font-size: 18px;
+  }
+
+  .authCardTagline {
+    font-size: 7px;
+  }
+
+  .authCardContent {
+    padding: 18px 16px;
+  }
+
+  .authCardIntro {
+    margin-bottom: 20px;
+  }
+
+  .authCardTitle {
+    font-size: 25px;
+  }
+
+  .authCardDescription {
+    font-size: 12px;
+  }
+
+  .authCardFooter {
+    padding:
+      14px
+      16px;
+
+    font-size: 10px;
+  }
+}
+
+/* Tablet */
+
+@media (min-width: 640px) {
+  .authCardBrandHeader {
+    padding:
+      20px
+      28px;
+  }
+
+  .authCardContent {
+    padding:
+      28px;
+  }
+
+  .authCardFooter {
+    padding:
+      16px
+      28px;
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .authCardFooterLink {
+    transition: none;
+  }
+}

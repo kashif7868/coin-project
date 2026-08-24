@@ -10,6 +10,8 @@ import {
 } from "react";
 import { toast } from "sonner";
 
+import styles from "@/components/animations/css/Auth/ForgotPasswordForm.module.css";
+
 interface ForgotPasswordFormProps {
   onBackToLogin: () => void;
 }
@@ -20,8 +22,7 @@ const emailPattern =
 const ForgotPasswordForm = ({
   onBackToLogin,
 }: ForgotPasswordFormProps) => {
-  const [email, setEmail] =
-    useState("");
+  const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] =
     useState(false);
 
@@ -49,11 +50,6 @@ const ForgotPasswordForm = ({
     setIsSubmitting(true);
 
     try {
-      // Later:
-      // forgotPasswordMutation.mutate({
-      //   email: cleanEmail,
-      // });
-
       await new Promise((resolve) =>
         setTimeout(resolve, 700)
       );
@@ -62,7 +58,7 @@ const ForgotPasswordForm = ({
         "Reset link request received",
         {
           description:
-            "Password reset API will be connected with the backend later.",
+            "Password reset service will be connected later.",
         }
       );
     } finally {
@@ -71,51 +67,63 @@ const ForgotPasswordForm = ({
   };
 
   return (
-    <div className="w-full min-w-0">
+    <div className={styles.forgotPasswordSection}>
       <button
         type="button"
         onClick={onBackToLogin}
-        disabled={isSubmitting}
-        className="mb-4 inline-flex items-center gap-2 rounded-lg text-[10px] font-medium text-neutral-500 transition-colors hover:text-[#b87516] disabled:cursor-not-allowed disabled:opacity-50 sm:mb-5 sm:text-[11px]"
+        className={styles.forgotPasswordBackButton}
       >
         <ArrowLeft
-          size={15}
+          size={14}
           strokeWidth={1.8}
         />
 
-        Back to Sign In
+        <span>Back to Sign In</span>
       </button>
 
-      <div className="mb-5 min-w-0 sm:mb-6">
-        <h2 className="font-serif text-[22px] font-semibold leading-tight text-neutral-900 sm:text-2xl">
-          Forgot Password?
+      <div className={styles.forgotPasswordIntro}>
+        <h2 className={styles.forgotPasswordTitle}>
+          Reset Your Password
         </h2>
 
-        <p className="mt-2 text-[11px] leading-5 text-neutral-500 sm:text-[12px]">
-          Enter the email linked with your CoinHeritage account.
-          We&apos;ll send password reset instructions when the
-          backend authentication service is connected.
+        <p
+          className={
+            styles.forgotPasswordDescription
+          }
+        >
+          Enter the email linked with your CoinHeritage
+          account and we&apos;ll send reset instructions.
         </p>
       </div>
 
       <form
         onSubmit={handleSubmit}
-        className="w-full min-w-0 space-y-4 sm:space-y-5"
+        className={styles.forgotPasswordForm}
         noValidate
       >
-        <div className="min-w-0">
+        <div
+          className={
+            styles.forgotPasswordFieldGroup
+          }
+        >
           <label
             htmlFor="forgotEmail"
-            className="mb-2 block text-[11px] font-medium text-neutral-700 sm:text-[12px]"
+            className={styles.forgotPasswordLabel}
           >
             Email Address
           </label>
 
-          <div className="relative min-w-0">
+          <div
+            className={
+              styles.forgotPasswordInputWrapper
+            }
+          >
             <Mail
-              size={17}
-              strokeWidth={1.8}
-              className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 sm:left-4"
+              size={16}
+              strokeWidth={1.7}
+              className={
+                styles.forgotPasswordInputIcon
+              }
             />
 
             <input
@@ -129,7 +137,7 @@ const ForgotPasswordForm = ({
               }
               placeholder="Enter your email"
               disabled={isSubmitting}
-              className="h-11 w-full min-w-0 rounded-xl border border-neutral-200 bg-white pl-10 pr-3 text-[12px] text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus:border-[#d99a31] focus:ring-2 focus:ring-[#d99a31]/10 disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-500 sm:h-12 sm:pl-11 sm:pr-4 sm:text-sm"
+              className={styles.forgotPasswordInput}
             />
           </div>
         </div>
@@ -137,7 +145,9 @@ const ForgotPasswordForm = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex h-11 w-full items-center justify-center rounded-xl bg-[#d99a31] px-4 text-[12px] font-semibold text-black shadow-[0_10px_24px_rgba(217,154,49,0.18)] transition-colors hover:bg-[#e6aa43] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:h-12 sm:text-sm"
+          className={
+            styles.forgotPasswordSubmitButton
+          }
         >
           {isSubmitting
             ? "Sending..."

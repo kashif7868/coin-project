@@ -3,6 +3,8 @@ import FooterBrand from "./components/FooterBrand";
 import FooterLinks from "./components/FooterLinks";
 import Newsletter from "./components/Newsletter";
 
+import styles from "@/components/animations/css/footer/Footer.module.css";
+
 const marketplaceLinks = [
   { label: "Browse Coins", href: "/coins" },
   { label: "Live Auctions", href: "/auctions" },
@@ -26,34 +28,40 @@ const supportLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-white/10 bg-[#070707]">
-      <div className="mx-auto w-full max-w-[1540px] px-5 py-14 sm:px-7 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-5">
-          <div className="xl:col-span-2">
+    <footer className={styles.footerSection}>
+      <div className={styles.footerContainer}>
+        <div className={styles.footerGrid}>
+          <div className={styles.footerBrandColumn}>
             <FooterBrand />
           </div>
 
-          <FooterLinks
-            title="Marketplace"
-            links={marketplaceLinks}
-          />
+          <div className={styles.footerLinksColumn}>
+            <FooterLinks
+              title="Marketplace"
+              links={marketplaceLinks}
+            />
+          </div>
 
-          <FooterLinks
-            title="Company"
-            links={companyLinks}
-          />
+          <div className={styles.footerLinksColumn}>
+            <FooterLinks
+              title="Company"
+              links={companyLinks}
+            />
+          </div>
 
-          <div className="space-y-10">
+          <div className={styles.footerSupportColumn}>
             <FooterLinks
               title="Support"
               links={supportLinks}
             />
 
-            <Newsletter />
+            <div className={styles.footerNewsletterBlock}>
+              <Newsletter />
+            </div>
           </div>
         </div>
 
-        <div className="mt-12">
+        <div className={styles.footerBottomWrapper}>
           <FooterBottom />
         </div>
       </div>

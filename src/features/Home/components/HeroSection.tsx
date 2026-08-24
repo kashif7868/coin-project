@@ -1,5 +1,6 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import {
   Camera,
@@ -9,10 +10,45 @@ import {
   Sparkles,
   Upload,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+import { useAuthStore } from "@/store/authStore";
+import { useUIStore } from "@/store/uiStore";
 
 import styles from "@/components/animations/css/home/HeroSection.module.css";
 
 const HeroSection = () => {
+  const router = useRouter();
+
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated
+  );
+
+  const openAuthRequired = useUIStore(
+    (state) => state.openAuthRequired
+  );
+
+  const handleProtectedNavigation = (
+    destination: string
+  ) => {
+    if (!isAuthenticated) {
+      openAuthRequired();
+      return;
+    }
+
+    router.push(destination);
+  };
+
+  const handleScanCoin = () => {
+    handleProtectedNavigation("/scan");
+  };
+
+  const handleUploadCoin = () => {
+    handleProtectedNavigation(
+      "/scan?mode=upload"
+    );
+  };
+
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroDesktopBackground}>
@@ -25,8 +61,17 @@ const HeroSection = () => {
           className={styles.heroBackgroundImage}
         />
 
-        <div className={styles.heroBackgroundOverlayHorizontal} />
-        <div className={styles.heroBackgroundOverlayVertical} />
+        <div
+          className={
+            styles.heroBackgroundOverlayHorizontal
+          }
+        />
+
+        <div
+          className={
+            styles.heroBackgroundOverlayVertical
+          }
+        />
       </div>
 
       <div className={styles.heroMobileBackground} />
@@ -34,14 +79,22 @@ const HeroSection = () => {
       <div className={styles.heroContainer}>
         <div className={styles.heroGrid}>
           <div className={styles.heroContent}>
-            <div className={styles.heroIdentificationBadge}>
+            <div
+              className={
+                styles.heroIdentificationBadge
+              }
+            >
               <Sparkles
                 size={12}
                 strokeWidth={1.8}
-                className={styles.heroIdentificationBadgeIcon}
+                className={
+                  styles.heroIdentificationBadgeIcon
+                }
               />
 
-              <span>Instant Coin Identification</span>
+              <span>
+                Instant Coin Identification
+              </span>
             </div>
 
             <h1 className={styles.heroTitle}>
@@ -52,49 +105,70 @@ const HeroSection = () => {
             </h1>
 
             <p className={styles.heroDescription}>
-              Scan or upload a coin to discover its identity,
-              history, details and estimated collectible value.
+              Scan or upload a coin to discover its
+              identity, history, details and estimated
+              collectible value.
             </p>
 
             <div className={styles.heroActions}>
-              <Link
-                href="/scan"
+              <button
+                type="button"
+                onClick={handleScanCoin}
                 className={styles.heroPrimaryAction}
+                aria-label="Scan a coin"
               >
-                <Camera size={16} strokeWidth={1.8} />
-                <span>Scan a Coin</span>
-              </Link>
+                <Camera
+                  size={16}
+                  strokeWidth={1.8}
+                />
 
-              <Link
-                href="/scan?mode=upload"
+                <span>Scan a Coin</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleUploadCoin}
                 className={styles.heroSecondaryAction}
+                aria-label="Upload coin images"
               >
-                <Upload size={16} strokeWidth={1.8} />
+                <Upload
+                  size={16}
+                  strokeWidth={1.8}
+                />
+
                 <span>Upload Images</span>
-              </Link>
+              </button>
             </div>
 
             <div className={styles.heroTrustGrid}>
               <TrustItem
-                icon={<Sparkles size={14} />}
+                icon={
+                  <Sparkles size={14} />
+                }
                 title="Smart Identification"
                 subtitle="Fast Results"
               />
 
               <TrustItem
-                icon={<ShieldCheck size={14} />}
+                icon={
+                  <ShieldCheck size={14} />
+                }
                 title="Trusted Data"
                 subtitle="Verified Sources"
               />
 
               <TrustItem
-                icon={<LockKeyhole size={14} />}
+                icon={
+                  <LockKeyhole size={14} />
+                }
                 title="Secure & Safe"
                 subtitle="Protected Access"
               />
 
               <TrustItem
-                icon={<Globe2 size={14} />}
+                icon={
+                  <Globe2 size={14} />
+                }
                 title="Worldwide"
                 subtitle="Collector Network"
               />
@@ -104,7 +178,11 @@ const HeroSection = () => {
           <div className={styles.heroCoinArt}>
             <div className={styles.heroCoinGlow} />
 
-            <div className={styles.heroCoinImageWrapper}>
+            <div
+              className={
+                styles.heroCoinImageWrapper
+              }
+            >
               <Image
                 src="/images/home/hero-coins.webp"
                 alt="Historical collectible coins"
@@ -116,9 +194,21 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className={styles.heroIdentifierColumn}>
-            <div className={styles.heroIdentifierCard}>
-              <div className={styles.heroIdentifierHeading}>
+          <div
+            className={
+              styles.heroIdentifierColumn
+            }
+          >
+            <div
+              className={
+                styles.heroIdentifierCard
+              }
+            >
+              <div
+                className={
+                  styles.heroIdentifierHeading
+                }
+              >
                 <Sparkles
                   size={16}
                   strokeWidth={1.8}
@@ -127,38 +217,66 @@ const HeroSection = () => {
                 <h2>Coin Identifier</h2>
               </div>
 
-              <p className={styles.heroIdentifierDescription}>
-                Upload or scan your coin to instantly discover
-                its identity, history and key details.
+              <p
+                className={
+                  styles.heroIdentifierDescription
+                }
+              >
+                Upload or scan your coin to instantly
+                discover its identity, history and key
+                details.
               </p>
 
-              <div className={styles.heroIdentifierDropzone}>
-                <div className={styles.heroIdentifierCamera}>
+              <div
+                className={
+                  styles.heroIdentifierDropzone
+                }
+              >
+                <div
+                  className={
+                    styles.heroIdentifierCamera
+                  }
+                >
                   <Camera
                     size={24}
                     strokeWidth={1.6}
                   />
                 </div>
 
-                <p className={styles.heroIdentifierTitle}>
+                <p
+                  className={
+                    styles.heroIdentifierTitle
+                  }
+                >
                   Scan your coin
                 </p>
 
-                <p className={styles.heroIdentifierSubtitle}>
+                <p
+                  className={
+                    styles.heroIdentifierSubtitle
+                  }
+                >
                   or upload clear images
                   <br />
                   (Front &amp; Back)
                 </p>
 
-                <Link
-                  href="/scan"
-                  className={styles.heroIdentifierButton}
+                <button
+                  type="button"
+                  onClick={handleScanCoin}
+                  className={
+                    styles.heroIdentifierButton
+                  }
                 >
                   Identify My Coin
-                </Link>
+                </button>
               </div>
 
-              <p className={styles.heroSupportedFormats}>
+              <p
+                className={
+                  styles.heroSupportedFormats
+                }
+              >
                 Supported formats: JPG, PNG, WEBP
               </p>
             </div>

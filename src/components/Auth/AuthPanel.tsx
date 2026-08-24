@@ -5,6 +5,7 @@ import {
   motion,
   useReducedMotion,
 } from "framer-motion";
+import Link from "next/link";
 import {
   usePathname,
   useRouter,
@@ -12,17 +13,17 @@ import {
 } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import AuthCard from "./AuthCard";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import SocialAuthButtons from "./SocialAuthButtons";
 
+import styles from "@/components/animations/css/Auth/AuthPanel.module.css";
+
 type AuthMode = "login" | "register" | "forgot";
 
 const AuthPanel = () => {
   const shouldReduceMotion = useReducedMotion();
-
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -73,7 +74,7 @@ const AuthPanel = () => {
     : {
         initial: {
           opacity: 0,
-          y: 12,
+          y: 8,
         },
         animate: {
           opacity: 1,
@@ -81,7 +82,7 @@ const AuthPanel = () => {
         },
         exit: {
           opacity: 0,
-          y: -8,
+          y: -6,
         },
         transition: {
           duration: 0.2,
@@ -90,105 +91,149 @@ const AuthPanel = () => {
       };
 
   return (
-    <div className="w-full min-w-0 max-w-[460px]">
-      <AnimatePresence mode="wait">
-        {mode === "login" && (
-          <motion.div
-            key="login"
-            {...motionProps}
-            className="w-full min-w-0"
-          >
-            <AuthCard
-              title="Welcome Back"
-              description="Sign in to access your collection, wishlist, cart, auctions and seller account."
+    <div className={styles.authPanelShell}>
+      <Link
+        href="/"
+        className={styles.authPanelBrand}
+        aria-label="CoinHeritage home"
+      >
+        <div className={styles.authPanelBrandCoin}>
+          CH
+        </div>
+
+        <div className={styles.authPanelBrandText}>
+          <div className={styles.authPanelBrandName}>
+            Coin
+            <span>Heritage</span>
+          </div>
+
+          <div className={styles.authPanelBrandTagline}>
+            Discover. Collect. Own History.
+          </div>
+        </div>
+      </Link>
+
+      <div className={styles.authPanelCard}>
+        {mode !== "forgot" && (
+          <div className={styles.authPanelTabs}>
+            <button
+              type="button"
+              onClick={() => changeMode("login")}
+              className={`${styles.authPanelTab} ${
+                mode === "login"
+                  ? styles.authPanelTabActive
+                  : ""
+              }`}
             >
-              <SocialAuthButtons />
+              Sign In
+            </button>
 
-              <LoginForm />
+            <button
+              type="button"
+              onClick={() => changeMode("register")}
+              className={`${styles.authPanelTab} ${
+                mode === "register"
+                  ? styles.authPanelTabActive
+                  : ""
+              }`}
+            >
+              Create Account
+            </button>
+          </div>
+        )}
 
-              <div className="mt-5 text-center">
-                <button
-                  type="button"
-                  onClick={() =>
+        <div className={styles.authPanelBody}>
+          <AnimatePresence mode="wait">
+            {mode === "login" && (
+              <motion.div
+                key="login"
+                {...motionProps}
+                className={styles.authPanelMode}
+              >
+                <div className={styles.authPanelIntro}>
+                  <h1 className={styles.authPanelTitle}>
+                    Welcome Back
+                  </h1>
+
+                  <p className={styles.authPanelDescription}>
+                    Sign in to access your collection,
+                    wishlist, cart and auctions.
+                  </p>
+                </div>
+
+                <SocialAuthButtons />
+
+                <LoginForm
+                  onForgotPassword={() =>
                     changeMode("forgot")
                   }
-                  className="text-[11px] font-medium text-[#b87516] transition-colors hover:text-[#8f5c13]"
-                >
-                  Forgot your password?
-                </button>
-              </div>
+                />
 
-              <div className="mt-5 border-t border-neutral-100 pt-5 text-center">
-                <span className="text-[11px] text-neutral-500">
+                <div className={styles.authPanelSwitchRow}>
                   Don&apos;t have an account?{" "}
-                </span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      changeMode("register")
+                    }
+                  >
+                    Create Account
+                  </button>
+                </div>
+              </motion.div>
+            )}
 
-                <button
-                  type="button"
-                  onClick={() =>
-                    changeMode("register")
-                  }
-                  className="text-[11px] font-semibold text-[#b87516] transition-colors hover:text-[#8f5c13]"
-                >
-                  Create Account
-                </button>
-              </div>
-            </AuthCard>
-          </motion.div>
-        )}
+            {mode === "register" && (
+              <motion.div
+                key="register"
+                {...motionProps}
+                className={styles.authPanelMode}
+              >
+                <div className={styles.authPanelIntro}>
+                  <h1 className={styles.authPanelTitle}>
+                    Create Your Account
+                  </h1>
 
-        {mode === "register" && (
-          <motion.div
-            key="register"
-            {...motionProps}
-            className="w-full min-w-0"
-          >
-            <AuthCard
-              title="Create Your Account"
-              description="Join CoinHeritage to save coins, buy from sellers, bid in auctions and list your own collection."
-            >
-              <SocialAuthButtons />
+                  <p className={styles.authPanelDescription}>
+                    Join CoinHeritage to collect, discover,
+                    buy and sell remarkable coins.
+                  </p>
+                </div>
 
-              <RegisterForm />
+                <SocialAuthButtons />
 
-              <div className="mt-5 border-t border-neutral-100 pt-5 text-center">
-                <span className="text-[11px] text-neutral-500">
+                <RegisterForm />
+
+                <div className={styles.authPanelSwitchRow}>
                   Already have an account?{" "}
-                </span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      changeMode("login")
+                    }
+                  >
+                    Sign In
+                  </button>
+                </div>
+              </motion.div>
+            )}
 
-                <button
-                  type="button"
-                  onClick={() =>
+            {mode === "forgot" && (
+              <motion.div
+                key="forgot"
+                {...motionProps}
+                className={styles.authPanelMode}
+              >
+                <ForgotPasswordForm
+                  onBackToLogin={() =>
                     changeMode("login")
                   }
-                  className="text-[11px] font-semibold text-[#b87516] transition-colors hover:text-[#8f5c13]"
-                >
-                  Sign In
-                </button>
-              </div>
-            </AuthCard>
-          </motion.div>
-        )}
-
-        {mode === "forgot" && (
-          <motion.div
-            key="forgot"
-            {...motionProps}
-            className="w-full min-w-0"
-          >
-            <AuthCard
-              title="Reset Your Password"
-              description="Recover access to your CoinHeritage account."
-            >
-              <ForgotPasswordForm
-                onBackToLogin={() =>
-                  changeMode("login")
-                }
-              />
-            </AuthCard>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </div>
   );
 };
