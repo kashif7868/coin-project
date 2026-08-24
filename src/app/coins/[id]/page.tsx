@@ -6,10 +6,15 @@ interface CoinDetailsRouteProps {
   }>;
 }
 
+export const dynamicParams = true;
+export const dynamic = "force-dynamic";
+
 export default async function Page({
   params,
 }: CoinDetailsRouteProps) {
   const { id } = await params;
 
-  return <CoinDetailsPage coinId={id} />;
+  return (
+    <CoinDetailsPage coinId={id} />
+  );
 }
