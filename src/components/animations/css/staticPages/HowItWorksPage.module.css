@@ -1,0 +1,351 @@
+.howPage,
+.howPage *,
+.howPage *::before,
+.howPage *::after {
+  box-sizing: border-box;
+}
+
+.howPage {
+  width: 100%;
+  min-width: 0;
+
+  background: #f7f5f1;
+}
+
+.howContainer {
+  width: 100%;
+  max-width: 1180px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.howHero {
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  padding:
+    42px
+    14px
+    38px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #070707,
+      #11100d 62%,
+      #191106
+    );
+
+  text-align: center;
+}
+
+.howHeroGlowLeft,
+.howHeroGlowRight {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(70px);
+
+  pointer-events: none;
+}
+
+.howHeroGlowLeft {
+  top: -110px;
+  left: -90px;
+
+  width: 270px;
+  height: 270px;
+
+  background: rgba(217, 154, 49, 0.12);
+}
+
+.howHeroGlowRight {
+  right: -110px;
+  bottom: -120px;
+
+  width: 300px;
+  height: 300px;
+
+  background: rgba(151, 94, 16, 0.14);
+}
+
+.howHeroBadge {
+  position: relative;
+  z-index: 1;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 999px;
+
+  background: rgba(217, 154, 49, 0.08);
+  color: #d99a31;
+}
+
+.howHeroBadge span {
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.howHeroTitle {
+  position: relative;
+  z-index: 1;
+
+  margin: 14px 0 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 600;
+}
+
+.howHeroTitle span {
+  color: #d99a31;
+}
+
+.howHeroDescription {
+  position: relative;
+  z-index: 1;
+
+  max-width: 620px;
+
+  margin:
+    12px
+    auto
+    0;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.howContent {
+  padding:
+    22px
+    14px
+    100px;
+}
+
+.howStepsGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 12px;
+}
+
+.howStepCard {
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 15px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.04);
+}
+
+.howStepTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.howStepIcon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  background: rgba(217, 154, 49, 0.09);
+  color: #b87516;
+}
+
+.howStepNumber {
+  color: #d5d5d5;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.howStepCard h2 {
+  margin: 14px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.howStepCard p {
+  margin: 7px 0 0;
+
+  color: #747474;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.howTrustCard {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-top: 16px;
+  padding: 16px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.14);
+  border-radius: 14px;
+
+  background: #fffbf5;
+}
+
+.howTrustIcon {
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(217, 154, 49, 0.1);
+  color: #b87516;
+}
+
+.howTrustCard h2 {
+  margin: 0;
+
+  color: #342713;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+}
+
+.howTrustCard p {
+  margin: 5px 0 0;
+
+  color: #756956;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+@media (min-width: 640px) {
+  .howHero {
+    padding:
+      54px
+      24px
+      48px;
+  }
+
+  .howHeroTitle {
+    font-size: 44px;
+  }
+
+  .howHeroDescription {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .howContent {
+    padding:
+      28px
+      24px
+      42px;
+  }
+
+  .howStepsGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+
+  .howStepCard {
+    padding: 20px;
+  }
+
+  .howStepCard h2 {
+    font-size: 20px;
+  }
+
+  .howStepCard p,
+  .howTrustCard p {
+    font-size: 10px;
+    line-height: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .howHero {
+    padding:
+      66px
+      32px
+      58px;
+  }
+
+  .howHeroTitle {
+    font-size: 52px;
+  }
+
+  .howContent {
+    padding:
+      34px
+      32px
+      50px;
+  }
+
+  .howStepsGrid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+}
