@@ -1,0 +1,456 @@
+.collectionHero,
+.collectionHero *,
+.collectionHero *::before,
+.collectionHero *::after {
+  box-sizing: border-box;
+}
+
+.collectionHero {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  padding:
+    34px
+    14px
+    32px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #070707 0%,
+      #100f0c 58%,
+      #191106 100%
+    );
+
+  color: #ffffff;
+}
+
+.collectionHeroContainer {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1240px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.collectionHeroGlowLeft,
+.collectionHeroGlowRight {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(72px);
+}
+
+.collectionHeroGlowLeft {
+  top: -110px;
+  left: -110px;
+
+  width: 280px;
+  height: 280px;
+
+  background:
+    rgba(217, 154, 49, 0.12);
+}
+
+.collectionHeroGlowRight {
+  right: -130px;
+  bottom: -150px;
+
+  width: 340px;
+  height: 340px;
+
+  background:
+    rgba(145, 91, 18, 0.14);
+}
+
+.collectionHeroContent {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 28px;
+}
+
+.collectionHeroText {
+  min-width: 0;
+}
+
+.collectionHeroBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 999px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+.collectionHeroBadge span {
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.collectionHeroCategory {
+  margin:
+    16px
+    0
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.38);
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.collectionHeroTitle {
+  max-width: 720px;
+
+  margin:
+    7px
+    0
+    0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+}
+
+.collectionHeroTitle span {
+  color: #d99a31;
+}
+
+.collectionHeroDescription {
+  max-width: 620px;
+
+  margin:
+    14px
+    0
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.collectionHeroStats {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  max-width: 620px;
+
+  margin-top: 20px;
+}
+
+.collectionHeroStat {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+}
+
+.collectionHeroStat > svg {
+  flex: 0 0 auto;
+
+  color: #d99a31;
+}
+
+.collectionHeroStat div {
+  min-width: 0;
+}
+
+.collectionHeroStat strong,
+.collectionHeroStat span {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.collectionHeroStat strong {
+  color: #ffffff;
+
+  font-size: 11px;
+  line-height: 1;
+}
+
+.collectionHeroStat span {
+  margin-top: 4px;
+
+  color:
+    rgba(255, 255, 255, 0.38);
+
+  font-size: 7px;
+  line-height: 1;
+}
+
+.collectionHeroReference {
+  display: block;
+
+  margin-top: 16px;
+
+  overflow: hidden;
+
+  color:
+    rgba(255, 255, 255, 0.24);
+
+  font-size: 7px;
+  line-height: 1.3;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.collectionHeroVisual {
+  display: none;
+}
+
+.collectionHeroVisualGlow {
+  position: absolute;
+
+  inset: 50% auto auto 50%;
+
+  width: 270px;
+  height: 270px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(217, 154, 49, 0.11);
+
+  filter: blur(45px);
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.collectionHeroImageWrap {
+  position: relative;
+
+  width: 270px;
+  height: 270px;
+
+  margin: 0 auto;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.18);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(217, 154, 49, 0.1),
+      rgba(0, 0, 0, 0.2)
+    );
+
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.28);
+}
+
+.collectionHeroImage {
+  object-fit: contain;
+
+  padding: 30px;
+}
+
+.collectionHeroVisualBadge {
+  position: absolute;
+
+  left: 50%;
+  bottom: 12px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding:
+    7px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.2);
+  border-radius: 999px;
+
+  background:
+    rgba(10, 10, 10, 0.82);
+
+  color: #d99a31;
+
+  transform:
+    translateX(-50%);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.collectionHeroVisualBadge span {
+  color: #ffffff;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+@media (max-width: 359px) {
+  .collectionHero {
+    padding:
+      28px
+      10px
+      28px;
+  }
+
+  .collectionHeroTitle {
+    font-size: 29px;
+  }
+
+  .collectionHeroDescription {
+    font-size: 10px;
+    line-height: 17px;
+  }
+
+  .collectionHeroStats {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .collectionHero {
+    padding:
+      42px
+      24px
+      38px;
+  }
+
+  .collectionHeroTitle {
+    font-size: 44px;
+  }
+
+  .collectionHeroDescription {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .collectionHeroStats {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .collectionHeroStat strong {
+    font-size: 12px;
+  }
+
+  .collectionHeroStat span {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .collectionHero {
+    padding:
+      52px
+      32px
+      46px;
+  }
+
+  .collectionHeroContent {
+    grid-template-columns:
+      minmax(0, 1.35fr)
+      minmax(300px, 0.65fr);
+
+    gap: 40px;
+  }
+
+  .collectionHeroTitle {
+    font-size: 52px;
+  }
+
+  .collectionHeroVisual {
+    position: relative;
+
+    display: block;
+
+    min-height: 310px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .collectionHeroImageWrap {
+    width: 300px;
+    height: 300px;
+  }
+
+  .collectionHeroVisualGlow {
+    width: 310px;
+    height: 310px;
+  }
+}

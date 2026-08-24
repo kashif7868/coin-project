@@ -1,0 +1,243 @@
+.collectionStats,
+.collectionStats *,
+.collectionStats *::before,
+.collectionStats *::after {
+  box-sizing: border-box;
+}
+
+.collectionStats {
+  width: 100%;
+  min-width: 0;
+
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.05);
+}
+
+.collectionStatsHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.collectionStatsEyebrow {
+  margin: 0;
+
+  color: #a1a1a1;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.collectionStatsTitle {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.collectionStatsGrid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin-top: 16px;
+}
+
+.collectionStatsItem {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 10px;
+
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+
+  background: #faf9f7;
+}
+
+.collectionStatsIcon {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.collectionStatsText {
+  min-width: 0;
+}
+
+.collectionStatsText span,
+.collectionStatsText strong {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.collectionStatsText span {
+  color: #9a9a9a;
+
+  font-size: 7px;
+  line-height: 1;
+}
+
+.collectionStatsText strong {
+  margin-top: 4px;
+
+  color: #2a2a2a;
+
+  font-size: 10px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.collectionStatsHighlight {
+  margin-top: 15px;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.14);
+  border-radius: 10px;
+
+  background: #fffbf5;
+}
+
+.collectionStatsHighlight > span {
+  display: block;
+
+  color: #a17b3f;
+
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collectionStatsHighlight strong {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #3a2b16;
+
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.collectionStatsHighlight p {
+  margin: 6px 0 0;
+
+  color: #746856;
+
+  font-size: 8px;
+  line-height: 14px;
+}
+
+.collectionStatsReference {
+  margin-top: 12px;
+
+  padding-top: 11px;
+
+  border-top:
+    1px solid #eeeeee;
+
+  overflow: hidden;
+
+  color: #aaaaaa;
+
+  font-size: 7px;
+  line-height: 1.3;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 359px) {
+  .collectionStats {
+    padding: 13px;
+  }
+
+  .collectionStatsTitle {
+    font-size: 18px;
+  }
+
+  .collectionStatsGrid {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .collectionStats {
+    padding: 20px;
+  }
+
+  .collectionStatsTitle {
+    font-size: 22px;
+  }
+
+  .collectionStatsText span {
+    font-size: 8px;
+  }
+
+  .collectionStatsText strong {
+    font-size: 11px;
+  }
+
+  .collectionStatsHighlight > span {
+    font-size: 8px;
+  }
+
+  .collectionStatsHighlight strong {
+    font-size: 11px;
+  }
+
+  .collectionStatsHighlight p {
+    font-size: 9px;
+    line-height: 15px;
+  }
+}

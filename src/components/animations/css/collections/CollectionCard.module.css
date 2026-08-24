@@ -1,0 +1,275 @@
+.collectionCard,
+.collectionCard *,
+.collectionCard *::before,
+.collectionCard *::after {
+  box-sizing: border-box;
+}
+
+.collectionCard {
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.045);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.collectionCard:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(217, 154, 49, 0.26);
+
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.075);
+}
+
+.collectionCardImageArea {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  aspect-ratio: 16 / 10;
+
+  display: block;
+
+  overflow: hidden;
+
+  background: #111111;
+
+  text-decoration: none;
+}
+
+.collectionCardImage {
+  object-fit: cover;
+
+  transform: scale(1.01);
+
+  transition:
+    transform 260ms ease;
+}
+
+.collectionCard:hover .collectionCardImage {
+  transform: scale(1.055);
+}
+
+.collectionCardOverlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.06),
+      rgba(0, 0, 0, 0.76)
+    );
+}
+
+.collectionCardFeatured {
+  position: absolute;
+
+  top: 10px;
+  left: 10px;
+
+  z-index: 2;
+
+  padding:
+    5px
+    8px;
+
+  border-radius: 999px;
+
+  background: #d99a31;
+  color: #111111;
+
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.collectionCardImageContent {
+  position: absolute;
+
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+
+  z-index: 2;
+}
+
+.collectionCardCategory {
+  display: block;
+
+  color:
+    rgba(255, 255, 255, 0.62);
+
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.collectionCardImageTitle {
+  margin: 5px 0 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 18px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.collectionCardBody {
+  padding: 12px;
+}
+
+.collectionCardDescription {
+  display: -webkit-box;
+
+  min-height: 42px;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  color: #747474;
+
+  font-size: 9px;
+  line-height: 14px;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.collectionCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  padding-top: 10px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+.collectionCardCount {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #7d7d7d;
+}
+
+.collectionCardCount svg {
+  flex: 0 0 auto;
+
+  color: #b87516;
+}
+
+.collectionCardCount span {
+  overflow: hidden;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 600;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.collectionCardAction {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #a96d18;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.collectionCardAction svg {
+  transition:
+    transform 160ms ease;
+}
+
+.collectionCardAction:hover svg {
+  transform: translateX(2px);
+}
+
+@media (max-width: 359px) {
+  .collectionCardBody {
+    padding: 10px;
+  }
+
+  .collectionCardImageTitle {
+    font-size: 16px;
+  }
+
+  .collectionCardDescription {
+    font-size: 8px;
+    line-height: 13px;
+  }
+}
+
+@media (min-width: 640px) {
+  .collectionCardBody {
+    padding: 14px;
+  }
+
+  .collectionCardImageTitle {
+    font-size: 20px;
+  }
+
+  .collectionCardDescription {
+    font-size: 10px;
+    line-height: 15px;
+  }
+
+  .collectionCardCount span,
+  .collectionCardAction {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collectionCard,
+  .collectionCardImage,
+  .collectionCardAction svg {
+    transition: none;
+  }
+}

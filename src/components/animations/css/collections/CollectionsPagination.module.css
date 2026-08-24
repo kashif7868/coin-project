@@ -1,0 +1,164 @@
+.collectionsPagination,
+.collectionsPagination *,
+.collectionsPagination *::before,
+.collectionsPagination *::after {
+  box-sizing: border-box;
+}
+
+.collectionsPagination {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 24px;
+}
+
+.collectionsPaginationPages {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.collectionsPaginationArrow,
+.collectionsPaginationPage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #555555;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 150ms ease;
+}
+
+.collectionsPaginationArrow {
+  width: 34px;
+  height: 34px;
+}
+
+.collectionsPaginationPage {
+  min-width: 34px;
+  height: 34px;
+
+  padding:
+    0
+    8px;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.collectionsPaginationArrow:hover:not(:disabled),
+.collectionsPaginationPage:hover {
+  border-color:
+    rgba(217, 154, 49, 0.4);
+
+  background: #fffaf2;
+
+  color: #a96d18;
+}
+
+.collectionsPaginationPageActive {
+  border-color: #d99a31;
+
+  background: #d99a31;
+  color: #111111;
+}
+
+.collectionsPaginationPageActive:hover {
+  background: #e4a641;
+  color: #111111;
+}
+
+.collectionsPaginationArrow:active:not(:disabled),
+.collectionsPaginationPage:active {
+  transform: scale(0.95);
+}
+
+.collectionsPaginationArrow:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+.collectionsPaginationEllipsis {
+  min-width: 22px;
+
+  color: #999999;
+
+  font-size: 12px;
+  line-height: 1;
+
+  text-align: center;
+}
+
+@media (max-width: 359px) {
+  .collectionsPagination {
+    gap: 5px;
+
+    margin-top: 20px;
+  }
+
+  .collectionsPaginationPages {
+    gap: 3px;
+  }
+
+  .collectionsPaginationArrow,
+  .collectionsPaginationPage {
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+
+    padding: 0;
+
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 640px) {
+  .collectionsPagination {
+    margin-top: 30px;
+  }
+
+  .collectionsPaginationArrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .collectionsPaginationPage {
+    min-width: 38px;
+    height: 38px;
+
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collectionsPaginationArrow,
+  .collectionsPaginationPage {
+    transition: none;
+  }
+}
