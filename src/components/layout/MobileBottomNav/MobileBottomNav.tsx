@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import {
+  usePathname,
+  useRouter,
+} from "next/navigation";
 import {
   CircleUserRound,
   Coins,
@@ -31,6 +34,7 @@ const navItems = [
     href: "/scan",
     icon: ScanLine,
     isPrimary: true,
+    protected: true,
   },
   {
     label: "Auctions",
@@ -47,6 +51,7 @@ const navItems = [
 
 const MobileBottomNav = () => {
   const pathname = usePathname();
+  const router = useRouter();
 
   const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated
@@ -67,6 +72,17 @@ const MobileBottomNav = () => {
     );
   };
 
+  const handleProtectedNavigation = (
+    href: string
+  ) => {
+    if (!isAuthenticated) {
+      openAuthRequired();
+      return;
+    }
+
+    router.push(href);
+  };
+
   return (
     <nav
       aria-label="Mobile bottom navigation"
@@ -75,37 +91,64 @@ const MobileBottomNav = () => {
       <div className={styles.inner}>
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = isActiveRoute(item.href);
+          const isActive =
+            isActiveRoute(item.href);
 
           if (item.isPrimary) {
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={isActive ? "page" : undefined}
-                className={styles.primaryItem}
-              >
-                <div
-                  className={`${styles.primaryButton} ${
-                    isActive ? styles.primaryActive : ""
-                  }`}
-                >
-                  <Icon size={24} strokeWidth={1.9} />
-                </div>
-
-                <span className={styles.primaryLabel}>
-                  {item.label}
-                </span>
-              </Link>
-            );
-          }
-
-          if (item.protected && !isAuthenticated) {
             return (
               <button
                 key={item.href}
                 type="button"
-                onClick={openAuthRequired}
+                onClick={() =>
+                  handleProtectedNavigation(
+                    item.href
+                  )
+                }
+                aria-current={
+                  isActive
+                    ? "page"
+                    : undefined
+                }
+                aria-label="Open coin scanner"
+                className={
+                  styles.primaryItem
+                }
+              >
+                <div
+                  className={`${styles.primaryButton} ${
+                    isActive
+                      ? styles.primaryActive
+                      : ""
+                  }`}
+                >
+                  <Icon
+                    size={24}
+                    strokeWidth={1.9}
+                  />
+                </div>
+
+                <span
+                  className={
+                    styles.primaryLabel
+                  }
+                >
+                  {item.label}
+                </span>
+              </button>
+            );
+          }
+
+          if (
+            item.protected &&
+            !isAuthenticated
+          ) {
+            return (
+              <button
+                key={item.href}
+                type="button"
+                onClick={
+                  openAuthRequired
+                }
                 aria-label={`Open ${item.label}`}
                 className={styles.item}
               >
@@ -115,7 +158,9 @@ const MobileBottomNav = () => {
                   className={styles.icon}
                 />
 
-                <span className={styles.label}>
+                <span
+                  className={styles.label}
+                >
                   {item.label}
                 </span>
               </button>
@@ -126,29 +171,47 @@ const MobileBottomNav = () => {
             <Link
               key={item.href}
               href={item.href}
-              aria-current={isActive ? "page" : undefined}
+              aria-current={
+                isActive
+                  ? "page"
+                  : undefined
+              }
               className={`${styles.item} ${
-                isActive ? styles.activeItem : ""
+                isActive
+                  ? styles.activeItem
+                  : ""
               }`}
             >
               <Icon
                 size={20}
-                strokeWidth={isActive ? 2.1 : 1.7}
+                strokeWidth={
+                  isActive
+                    ? 2.1
+                    : 1.7
+                }
                 className={`${styles.icon} ${
-                  isActive ? styles.activeIcon : ""
+                  isActive
+                    ? styles.activeIcon
+                    : ""
                 }`}
               />
 
               <span
                 className={`${styles.label} ${
-                  isActive ? styles.activeLabel : ""
+                  isActive
+                    ? styles.activeLabel
+                    : ""
                 }`}
               >
                 {item.label}
               </span>
 
               {isActive && (
-                <span className={styles.activeDot} />
+                <span
+                  className={
+                    styles.activeDot
+                  }
+                />
               )}
             </Link>
           );

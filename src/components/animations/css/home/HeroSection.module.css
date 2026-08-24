@@ -147,6 +147,17 @@
 }
 
 .heroPrimaryAction,
+.heroSecondaryAction,
+.heroIdentifierButton {
+  font: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.heroPrimaryAction,
 .heroSecondaryAction {
   min-width: 0;
   height: 44px;
@@ -159,20 +170,27 @@
   font-size: 11px;
   line-height: 1;
   font-weight: 600;
-  text-decoration: none;
+
   transition:
     background-color 180ms ease,
     transform 160ms ease,
-    border-color 180ms ease;
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .heroPrimaryAction {
+  border: 0;
   background: #dfa02d;
   color: #000000;
 }
 
 .heroPrimaryAction:hover {
   background: #ebb247;
+}
+
+.heroPrimaryAction:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(223, 160, 45, 0.22);
 }
 
 .heroSecondaryAction {
@@ -182,7 +200,13 @@
 }
 
 .heroSecondaryAction:hover {
+  border-color: #d99a31;
   background: rgba(255, 255, 255, 0.05);
+}
+
+.heroSecondaryAction:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.16);
 }
 
 .heroPrimaryAction:active,
@@ -379,22 +403,33 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   margin-top: 16px;
   padding: 0 20px;
+
+  border: 0;
   border-radius: 8px;
+
   background: #12171c;
   color: #ffffff;
+
   font-size: 10px;
   line-height: 1;
   font-weight: 600;
-  text-decoration: none;
+
   transition:
     background-color 180ms ease,
-    transform 160ms ease;
+    transform 160ms ease,
+    box-shadow 180ms ease;
 }
 
 .heroIdentifierButton:hover {
   background: #000000;
+}
+
+.heroIdentifierButton:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.18);
 }
 
 .heroIdentifierButton:active {
@@ -642,5 +677,13 @@
 
   .heroIdentifierSubtitle {
     font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroPrimaryAction,
+  .heroSecondaryAction,
+  .heroIdentifierButton {
+    transition: none;
   }
 }
