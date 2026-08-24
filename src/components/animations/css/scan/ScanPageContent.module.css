@@ -1,0 +1,637 @@
+.scanPage,
+.scanPage *,
+.scanPage *::before,
+.scanPage *::after {
+  box-sizing: border-box;
+}
+
+.scanPage {
+  width: 100%;
+  min-width: 0;
+
+  padding:
+    24px
+    14px
+    100px;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(217, 154, 49, 0.06),
+      transparent 28%
+    ),
+    #f7f5f1;
+}
+
+.scanContainer {
+  width: 100%;
+  max-width: 1180px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.scanHeading {
+  max-width: 640px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.scanHeadingBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(217, 154, 49, 0.18);
+  border-radius: 999px;
+
+  background: rgba(217, 154, 49, 0.08);
+  color: #b87516;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.scanHeading h1 {
+  margin: 10px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 28px;
+  line-height: 1.08;
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+}
+
+.scanHeading p {
+  max-width: 520px;
+
+  margin:
+    8px
+    auto
+    0;
+
+  color: #737373;
+
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.scanWorkspace {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 16px;
+
+  margin-top: 22px;
+}
+
+.cameraPanel,
+.uploadPanel {
+  width: 100%;
+  min-width: 0;
+
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 16px 42px rgba(0, 0, 0, 0.06);
+}
+
+/* CAMERA */
+
+.cameraPanel {
+  padding: 12px;
+}
+
+.cameraViewport {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  background: #090909;
+}
+
+.cameraVideo,
+.capturedImage {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.cameraVideo {
+  background: #000000;
+}
+
+.capturedImage {
+  background: #0b0b0b;
+}
+
+.cameraMessage {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 20px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  text-align: center;
+}
+
+.cameraMessage svg {
+  color: #d99a31;
+}
+
+.cameraMessage p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.cameraMessage span {
+  max-width: 260px;
+
+  color: rgba(255, 255, 255, 0.44);
+
+  font-size: 10px;
+  line-height: 16px;
+}
+
+/* COIN GUIDE */
+
+.coinGuide {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.coinGuideCircle {
+  width: min(60vw, 250px);
+  height: min(60vw, 250px);
+
+  border: 2px dashed rgba(217, 154, 49, 0.72);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 999px rgba(0, 0, 0, 0.14),
+    0 0 30px rgba(217, 154, 49, 0.12);
+}
+
+.hiddenCanvas {
+  display: none;
+}
+
+/* CAMERA ACTIONS */
+
+.cameraActions {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 9px;
+
+  margin-top: 12px;
+}
+
+.captureButton,
+.secondaryButton,
+.uploadButton {
+  width: 100%;
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 0;
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  outline: none;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 150ms ease,
+    box-shadow 160ms ease;
+}
+
+.captureButton {
+  border: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+
+  box-shadow:
+    0 8px 20px rgba(217, 154, 49, 0.17);
+}
+
+.captureButton:hover {
+  box-shadow:
+    0 10px 24px rgba(217, 154, 49, 0.22);
+}
+
+.secondaryButton {
+  border: 1px solid #e4e4e4;
+
+  background: #ffffff;
+  color: #333333;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.secondaryButton:hover {
+  border-color: rgba(217, 154, 49, 0.38);
+
+  background: #fffaf2;
+}
+
+.captureButton:active,
+.secondaryButton:active,
+.uploadButton:active {
+  transform: scale(0.99);
+}
+
+.captureButton:focus-visible,
+.secondaryButton:focus-visible,
+.uploadButton:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.14);
+}
+
+/* UPLOAD PANEL */
+
+.uploadPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 24px 18px;
+
+  text-align: center;
+}
+
+.uploadIcon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background: #fbf5ec;
+  color: #c57f18;
+}
+
+.uploadPanel h2 {
+  margin: 14px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.uploadPanel p {
+  max-width: 330px;
+
+  margin: 8px 0 0;
+
+  color: #737373;
+
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.uploadButton {
+  max-width: 240px;
+
+  margin-top: 16px;
+
+  border: 1px solid #d99a31;
+
+  background: #12171c;
+  color: #ffffff;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.uploadButton:hover {
+  background: #000000;
+}
+
+.fileInput {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  overflow: hidden;
+
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+
+  white-space: nowrap;
+}
+
+.selectedFiles {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin-top: 16px;
+}
+
+.selectedFile {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 10px;
+
+  border: 1px solid #ececec;
+  border-radius: 9px;
+
+  background: #fafafa;
+
+  color: #555555;
+
+  text-align: left;
+}
+
+.selectedFile svg {
+  flex: 0 0 auto;
+
+  color: #3b8c56;
+}
+
+.selectedFile span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  font-size: 9px;
+  line-height: 1.2;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* VERY SMALL MOBILE */
+
+@media (max-width: 359px) {
+  .scanPage {
+    padding:
+      18px
+      10px
+      92px;
+  }
+
+  .scanHeading h1 {
+    font-size: 24px;
+  }
+
+  .scanHeading p {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .cameraPanel {
+    padding: 9px;
+  }
+
+  .cameraViewport {
+    border-radius: 12px;
+  }
+
+  .coinGuideCircle {
+    width: min(64vw, 210px);
+    height: min(64vw, 210px);
+  }
+
+  .captureButton,
+  .secondaryButton,
+  .uploadButton {
+    height: 40px;
+
+    font-size: 10px;
+  }
+
+  .uploadPanel {
+    padding:
+      20px
+      14px;
+  }
+
+  .uploadPanel h2 {
+    font-size: 18px;
+  }
+}
+
+/* MOBILE LANDSCAPE / SMALL TABLET */
+
+@media (min-width: 480px) {
+  .cameraActions {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* TABLET */
+
+@media (min-width: 640px) {
+  .scanPage {
+    padding:
+      30px
+      24px
+      40px;
+  }
+
+  .scanHeading h1 {
+    font-size: 34px;
+  }
+
+  .scanHeading p {
+    font-size: 12px;
+    line-height: 19px;
+  }
+
+  .scanWorkspace {
+    gap: 20px;
+
+    margin-top: 28px;
+  }
+
+  .cameraPanel {
+    padding: 14px;
+  }
+
+  .captureButton,
+  .secondaryButton,
+  .uploadButton {
+    height: 44px;
+
+    font-size: 12px;
+  }
+
+  .uploadPanel {
+    padding:
+      28px
+      22px;
+  }
+
+  .uploadPanel h2 {
+    font-size: 22px;
+  }
+
+  .uploadPanel p {
+    font-size: 11px;
+  }
+
+  .selectedFile span {
+    font-size: 10px;
+  }
+}
+
+/* DESKTOP */
+
+@media (min-width: 1024px) {
+  .scanPage {
+    padding:
+      36px
+      32px
+      48px;
+  }
+
+  .scanWorkspace {
+    grid-template-columns:
+      minmax(0, 1.55fr)
+      minmax(300px, 0.75fr);
+
+    align-items: start;
+  }
+
+  .cameraViewport {
+    aspect-ratio: 16 / 10;
+  }
+
+  .coinGuideCircle {
+    width: 260px;
+    height: 260px;
+  }
+
+  .uploadPanel {
+    position: sticky;
+    top: 96px;
+  }
+}
+
+/* LARGE DESKTOP */
+
+@media (min-width: 1280px) {
+  .scanContainer {
+    max-width: 1240px;
+  }
+
+  .scanHeading h1 {
+    font-size: 38px;
+  }
+
+  .cameraViewport {
+    min-height: 520px;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .captureButton,
+  .secondaryButton,
+  .uploadButton {
+    transition: none;
+  }
+}
