@@ -24,42 +24,19 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useUIStore } from "@/store/uiStore";
 
+import styles from "@/components/animations/css/header/MobileHeader.module.css";
+
 const mobileLinks = [
-  {
-    label: "Coins",
-    href: "/coins",
-    icon: Coins,
-  },
-  {
-    label: "Auctions",
-    href: "/auctions",
-    icon: Gavel,
-  },
-  {
-    label: "Collections",
-    href: "/collections",
-    icon: Layers3,
-  },
-  {
-    label: "How It Works",
-    href: "/how-it-works",
-    icon: BadgeHelp,
-  },
-  {
-    label: "About Us",
-    href: "/about-us",
-    icon: Info,
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    icon: ContactRound,
-  },
+  { label: "Coins", href: "/coins", icon: Coins },
+  { label: "Auctions", href: "/auctions", icon: Gavel },
+  { label: "Collections", href: "/collections", icon: Layers3 },
+  { label: "How It Works", href: "/how-it-works", icon: BadgeHelp },
+  { label: "About Us", href: "/about-us", icon: Info },
+  { label: "Contact", href: "/contact", icon: ContactRound },
 ];
 
 const MobileHeader = () => {
   const pathname = usePathname();
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isAuthenticated = useAuthStore(
@@ -72,17 +49,10 @@ const MobileHeader = () => {
     (state) => state.openAuthRequired
   );
 
-  /* ---------------------------------------------------------
-     BODY SCROLL LOCK
-     --------------------------------------------------------- */
-
   useEffect(() => {
-    if (!isMenuOpen) {
-      return;
-    }
+    if (!isMenuOpen) return;
 
     const previousOverflow = document.body.style.overflow;
-
     document.body.style.overflow = "hidden";
 
     return () => {
@@ -90,22 +60,12 @@ const MobileHeader = () => {
     };
   }, [isMenuOpen]);
 
-  /* ---------------------------------------------------------
-     CLOSE DRAWER AFTER ROUTE CHANGE
-     --------------------------------------------------------- */
-
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  /* ---------------------------------------------------------
-     ESC KEY
-     --------------------------------------------------------- */
-
   useEffect(() => {
-    if (!isMenuOpen) {
-      return;
-    }
+    if (!isMenuOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -121,30 +81,23 @@ const MobileHeader = () => {
   }, [isMenuOpen]);
 
   const openProtectedFeature = () => {
-    if (isAuthenticated) {
-      return;
-    }
+    if (isAuthenticated) return;
 
     setIsMenuOpen(false);
     openAuthRequired();
   };
 
-  const isRouteActive = (href: string) => {
-    return pathname === href || pathname.startsWith(`${href}/`);
-  };
+  const isRouteActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <>
-      {/* =====================================================
-          MOBILE HEADER ACTIONS
-          ===================================================== */}
-
-      <div className="flex shrink-0 items-center gap-1.5 sm:gap-2 lg:hidden">
+      <div className={styles.mobileActions}>
         {isAuthenticated ? (
           <Link
             href="/wishlist"
             aria-label="Open wishlist"
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition duration-200 hover:border-[#d99a31]/30 hover:text-[#d99a31] active:scale-95"
+            className={styles.headerIconButton}
           >
             <Heart size={17} strokeWidth={1.8} />
           </Link>
@@ -153,7 +106,7 @@ const MobileHeader = () => {
             type="button"
             aria-label="Open wishlist"
             onClick={openProtectedFeature}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition duration-200 hover:border-[#d99a31]/30 hover:text-[#d99a31] active:scale-95"
+            className={styles.headerIconButton}
           >
             <Heart size={17} strokeWidth={1.8} />
           </button>
@@ -163,26 +116,20 @@ const MobileHeader = () => {
           <Link
             href="/cart"
             aria-label="Open cart"
-            className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition duration-200 hover:border-[#d99a31]/30 hover:text-[#d99a31] active:scale-95"
+            className={`${styles.headerIconButton} ${styles.cartButton}`}
           >
             <ShoppingCart size={18} strokeWidth={1.8} />
-
-            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#d99a31] px-1 text-[8px] font-bold leading-none text-black ring-2 ring-[#090909]">
-              0
-            </span>
+            <span className={styles.cartBadge}>0</span>
           </Link>
         ) : (
           <button
             type="button"
             aria-label="Open cart"
             onClick={openProtectedFeature}
-            className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-white/80 transition duration-200 hover:border-[#d99a31]/30 hover:text-[#d99a31] active:scale-95"
+            className={`${styles.headerIconButton} ${styles.cartButton}`}
           >
             <ShoppingCart size={18} strokeWidth={1.8} />
-
-            <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#d99a31] px-1 text-[8px] font-bold leading-none text-black ring-2 ring-[#090909]">
-              0
-            </span>
+            <span className={styles.cartBadge}>0</span>
           </button>
         )}
 
@@ -192,67 +139,50 @@ const MobileHeader = () => {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation-drawer"
           onClick={() => setIsMenuOpen(true)}
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#d99a31] text-black shadow-[0_5px_18px_rgba(217,154,49,0.25)] transition duration-200 hover:bg-[#e4a641] active:scale-95"
+          className={styles.menuButton}
         >
           <Menu size={19} strokeWidth={2} />
         </button>
       </div>
 
-      {/* =====================================================
-          MOBILE DRAWER
-          ===================================================== */}
-
       <div
-        className={`fixed inset-0 z-[9999] lg:hidden ${
-          isMenuOpen
-            ? "pointer-events-auto visible"
-            : "pointer-events-none invisible"
+        className={`${styles.drawerRoot} ${
+          isMenuOpen ? styles.drawerOpen : styles.drawerClosed
         }`}
       >
-        {/* Backdrop */}
-
         <button
           type="button"
           aria-label="Close navigation menu"
           onClick={() => setIsMenuOpen(false)}
-          className={`absolute inset-0 h-full w-full bg-black/75 backdrop-blur-[3px] transition-opacity duration-300 ${
-            isMenuOpen ? "opacity-100" : "opacity-0"
+          className={`${styles.backdrop} ${
+            isMenuOpen ? styles.backdropOpen : ""
           }`}
         />
-
-        {/* Drawer */}
 
         <aside
           id="mobile-navigation-drawer"
           aria-label="Mobile navigation"
-          className={`absolute right-0 top-0 flex h-dvh w-[min(88vw,360px)] min-w-0 flex-col overflow-hidden border-l border-white/10 bg-[#090909] shadow-[-24px_0_70px_rgba(0,0,0,0.5)] transition-transform duration-300 ease-out ${
-            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`${styles.drawer} ${
+            isMenuOpen ? styles.drawerVisible : ""
           }`}
         >
-          {/* BRAND */}
-
-          <div className="shrink-0 border-b border-white/[0.08] px-4 pb-4 pt-[max(16px,env(safe-area-inset-top))] sm:px-5">
-            <div className="flex min-w-0 items-center justify-between gap-3">
+          <div className={styles.drawerHeader}>
+            <div className={styles.drawerHeaderInner}>
               <Link
                 href="/"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex min-w-0 items-center gap-2.5 sm:gap-3"
+                className={styles.drawerBrand}
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d99a31]/40 bg-gradient-to-br from-[#f0bd5e] via-[#d99a31] to-[#885612] shadow-[0_0_22px_rgba(217,154,49,0.14)] sm:h-11 sm:w-11">
-                  <span className="font-serif text-[12px] font-bold text-black sm:text-[13px]">
-                    CH
-                  </span>
+                <div className={styles.drawerLogo}>
+                  <span>CH</span>
                 </div>
 
-                <div className="min-w-0">
-                  <p className="whitespace-nowrap font-serif text-[17px] font-semibold leading-none text-white sm:text-[19px]">
-                    Coin
-                    <span className="text-[#d99a31]">
-                      Heritage
-                    </span>
+                <div className={styles.brandText}>
+                  <p className={styles.brandName}>
+                    Coin<span>Heritage</span>
                   </p>
 
-                  <p className="mt-1.5 hidden whitespace-nowrap text-[7px] font-medium tracking-[0.08em] text-white/35 min-[340px]:block sm:text-[8px]">
+                  <p className={styles.brandTagline}>
                     DISCOVER. COLLECT. OWN HISTORY.
                   </p>
                 </div>
@@ -262,65 +192,48 @@ const MobileHeader = () => {
                 type="button"
                 aria-label="Close navigation menu"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/70 transition hover:bg-white/[0.08] hover:text-white active:scale-95 sm:h-10 sm:w-10"
+                className={styles.closeButton}
               >
                 <X size={18} />
               </button>
             </div>
           </div>
 
-          {/* SCROLLABLE CONTENT */}
-
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-            {/* AI SCANNER */}
-
-            <div className="px-4 pt-4 sm:px-5 sm:pt-5">
+          <div className={styles.drawerContent}>
+            <div className={styles.scannerWrapper}>
               <Link
                 href="/scan"
                 onClick={() => setIsMenuOpen(false)}
-                className="relative flex min-w-0 items-center gap-3 overflow-hidden rounded-2xl border border-[#d99a31]/25 bg-gradient-to-r from-[#1a140b] to-[#0e0d0b] p-3.5 sm:gap-4 sm:p-4"
+                className={styles.scannerCard}
               >
-                <div className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-[#d99a31]/10 blur-2xl" />
+                <div className={styles.scannerGlow} />
 
-                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#d99a31] text-black sm:h-11 sm:w-11">
-                  <ScanLine
-                    size={21}
-                    strokeWidth={1.9}
-                  />
+                <div className={styles.scannerIcon}>
+                  <ScanLine size={21} strokeWidth={1.9} />
                 </div>
 
-                <div className="relative min-w-0 flex-1">
-                  <div className="flex min-w-0 items-center gap-1.5">
-                    <p className="truncate text-[12px] font-semibold text-white sm:text-[13px]">
-                      AI Coin Scanner
-                    </p>
-
-                    <Sparkles
-                      size={12}
-                      className="shrink-0 text-[#d99a31]"
-                    />
+                <div className={styles.scannerText}>
+                  <div className={styles.scannerTitleRow}>
+                    <p>AI Coin Scanner</p>
+                    <Sparkles size={12} />
                   </div>
 
-                  <p className="mt-1 text-[9px] leading-4 text-white/45 sm:text-[10px]">
+                  <span>
                     Scan a coin and identify it instantly.
-                  </p>
+                  </span>
                 </div>
 
                 <ChevronRight
                   size={17}
-                  className="relative shrink-0 text-[#d99a31]"
+                  className={styles.scannerArrow}
                 />
               </Link>
             </div>
 
-            {/* NAVIGATION */}
+            <nav className={styles.navigation}>
+              <p className={styles.navigationTitle}>Explore</p>
 
-            <nav className="px-3 pb-4 pt-4 sm:px-4">
-              <p className="px-2 pb-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-white/25">
-                Explore
-              </p>
-
-              <div className="space-y-1">
+              <div className={styles.navigationLinks}>
                 {mobileLinks.map((item) => {
                   const Icon = item.icon;
                   const isActive = isRouteActive(item.href);
@@ -330,39 +243,28 @@ const MobileHeader = () => {
                       key={item.href}
                       href={item.href}
                       onClick={() => setIsMenuOpen(false)}
-                      aria-current={
-                        isActive ? "page" : undefined
-                      }
-                      className={`flex min-h-12 min-w-0 items-center gap-3 rounded-xl px-3 transition-colors ${
-                        isActive
-                          ? "bg-[#d99a31]/10 text-[#e2a643]"
-                          : "text-white/70 hover:bg-white/[0.04] hover:text-white active:bg-white/[0.06]"
+                      aria-current={isActive ? "page" : undefined}
+                      className={`${styles.navLink} ${
+                        isActive ? styles.navLinkActive : ""
                       }`}
                     >
                       <div
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                          isActive
-                            ? "bg-[#d99a31]/15 text-[#d99a31]"
-                            : "bg-white/[0.04] text-white/55"
+                        className={`${styles.navIcon} ${
+                          isActive ? styles.navIconActive : ""
                         }`}
                       >
-                        <Icon
-                          size={18}
-                          strokeWidth={1.7}
-                        />
+                        <Icon size={18} strokeWidth={1.7} />
                       </div>
 
-                      <span className="min-w-0 flex-1 truncate text-[13px] font-medium">
+                      <span className={styles.navLabel}>
                         {item.label}
                       </span>
 
                       <ChevronRight
                         size={16}
-                        className={
-                          isActive
-                            ? "shrink-0 text-[#d99a31]"
-                            : "shrink-0 text-white/20"
-                        }
+                        className={`${styles.navArrow} ${
+                          isActive ? styles.navArrowActive : ""
+                        }`}
                       />
                     </Link>
                   );
@@ -371,41 +273,35 @@ const MobileHeader = () => {
             </nav>
           </div>
 
-          {/* ACCOUNT FOOTER */}
-
-          <div className="shrink-0 border-t border-white/[0.08] bg-[#070707] px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-4">
+          <div className={styles.accountFooter}>
             {isAuthenticated ? (
               <>
                 <Link
                   href="/account"
                   onClick={() => setIsMenuOpen(false)}
-                  className="mb-3 flex min-w-0 items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.03] p-3 transition hover:bg-white/[0.05]"
+                  className={styles.accountCard}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#d99a31]/10 text-[#d99a31]">
+                  <div className={styles.accountIcon}>
                     <CircleUserRound size={21} />
                   </div>
 
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-[12px] font-semibold text-white">
-                      {user?.name || "My Account"}
-                    </p>
-
-                    <p className="mt-0.5 truncate text-[9px] text-white/35">
-                      {user?.email ||
-                        "Orders, listings & profile"}
-                    </p>
+                  <div className={styles.accountText}>
+                    <p>{user?.name || "My Account"}</p>
+                    <span>
+                      {user?.email || "Orders, listings & profile"}
+                    </span>
                   </div>
 
                   <ChevronRight
                     size={16}
-                    className="shrink-0 text-white/25"
+                    className={styles.accountArrow}
                   />
                 </Link>
 
                 <Link
                   href="/account"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#d99a31] px-4 text-[13px] font-semibold text-black shadow-[0_8px_24px_rgba(217,154,49,0.16)] transition hover:bg-[#e4a641] active:scale-[0.98]"
+                  className={styles.accountButton}
                 >
                   <CircleUserRound size={16} />
                   Open Account
@@ -416,37 +312,29 @@ const MobileHeader = () => {
                 <button
                   type="button"
                   onClick={openProtectedFeature}
-                  className="mb-3 flex w-full min-w-0 items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.03] p-3 text-left transition hover:bg-white/[0.05]"
+                  className={styles.accountCard}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/[0.07] text-white/65">
+                  <div className={styles.guestIcon}>
                     <CircleUserRound size={21} />
                   </div>
 
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[12px] font-semibold text-white">
-                      My Account
-                    </p>
-
-                    <p className="mt-0.5 text-[9px] text-white/35">
-                      Login required
-                    </p>
+                  <div className={styles.accountText}>
+                    <p>My Account</p>
+                    <span>Login required</span>
                   </div>
 
                   <ChevronRight
                     size={16}
-                    className="shrink-0 text-white/25"
+                    className={styles.accountArrow}
                   />
                 </button>
 
                 <Link
                   href="/login"
                   onClick={() => setIsMenuOpen(false)}
-                  className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#d99a31] px-4 text-[13px] font-semibold text-black shadow-[0_8px_24px_rgba(217,154,49,0.16)] transition hover:bg-[#e4a641] active:scale-[0.98]"
+                  className={styles.accountButton}
                 >
-                  <LogIn
-                    size={16}
-                    strokeWidth={1.9}
-                  />
+                  <LogIn size={16} strokeWidth={1.9} />
                   Login / Sign Up
                 </Link>
               </>

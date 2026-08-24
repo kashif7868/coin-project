@@ -1,0 +1,229 @@
+.actions,
+.actions *,
+.actions *::before,
+.actions *::after {
+  box-sizing: border-box;
+}
+
+.actions {
+  display: none;
+
+  flex: 0 0 auto;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: rgba(255, 255, 255, 0.8);
+
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 160ms ease;
+}
+
+.iconButton:hover {
+  border-color: rgba(251, 191, 36, 0.3);
+
+  background: rgba(255, 255, 255, 0.07);
+
+  color: #fbbf24;
+}
+
+.iconButton:active {
+  transform: scale(0.95);
+}
+
+.cartButton {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+
+  top: -4px;
+  right: -4px;
+
+  min-width: 16px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 4px;
+
+  border: 2px solid #090909;
+  border-radius: 999px;
+
+  background: #f59e0b;
+
+  color: #000000;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.account {
+  max-width: 170px;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.account:hover {
+  border-color: rgba(251, 191, 36, 0.4);
+
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.accountIcon {
+  width: 32px;
+  height: 32px;
+
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(245, 158, 11, 0.15);
+
+  color: #fbbf24;
+}
+
+.accountText {
+  min-width: 0;
+
+  text-align: left;
+}
+
+.accountName {
+  margin: 0;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accountSubtext {
+  margin: 3px 0 0;
+
+  overflow: hidden;
+
+  color: rgba(255, 255, 255, 0.4);
+
+  font-size: 8px;
+  line-height: 1;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.loginButton {
+  min-width: 0;
+  height: 36px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 16px;
+
+  border-radius: 8px;
+
+  background: #f59e0b;
+
+  color: #000000;
+
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  text-decoration: none;
+
+  transition:
+    background-color 180ms ease,
+    transform 160ms ease;
+}
+
+.loginButton:hover {
+  background: #fbbf24;
+}
+
+.loginButton:active {
+  transform: scale(0.97);
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .actions {
+    display: flex;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1280px) {
+  .actions {
+    gap: 16px;
+  }
+
+  .loginButton {
+    height: 40px;
+
+    padding: 0 20px;
+
+    font-size: 13px;
+  }
+}

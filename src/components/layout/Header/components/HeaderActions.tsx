@@ -10,6 +10,8 @@ import {
 import { useAuthStore } from "@/store/authStore";
 import { useUIStore } from "@/store/uiStore";
 
+import styles from "@/components/animations/css/header/HeaderActions.module.css";
+
 const HeaderActions = () => {
   const isAuthenticated = useAuthStore(
     (state) => state.isAuthenticated
@@ -24,13 +26,13 @@ const HeaderActions = () => {
   );
 
   return (
-    <div className="hidden shrink-0 items-center gap-3 lg:flex xl:gap-4">
+    <div className={styles.actions}>
       {/* Wishlist */}
       {isAuthenticated ? (
         <Link
           href="/wishlist"
           aria-label="Wishlist"
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/80 transition-all duration-200 hover:border-amber-400/30 hover:bg-white/[0.07] hover:text-amber-400"
+          className={styles.iconButton}
         >
           <Heart size={18} strokeWidth={1.7} />
         </Link>
@@ -39,7 +41,7 @@ const HeaderActions = () => {
           type="button"
           aria-label="Wishlist"
           onClick={openAuthRequired}
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/80 transition-all duration-200 hover:border-amber-400/30 hover:bg-white/[0.07] hover:text-amber-400"
+          className={styles.iconButton}
         >
           <Heart size={18} strokeWidth={1.7} />
         </button>
@@ -50,11 +52,11 @@ const HeaderActions = () => {
         <Link
           href="/cart"
           aria-label="Cart"
-          className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/80 transition-all duration-200 hover:border-amber-400/30 hover:bg-white/[0.07] hover:text-amber-400"
+          className={`${styles.iconButton} ${styles.cartButton}`}
         >
           <ShoppingCart size={19} strokeWidth={1.7} />
 
-          <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-amber-500 px-1 text-[8px] font-bold text-black ring-2 ring-[#090909]">
+          <span className={styles.badge}>
             0
           </span>
         </Link>
@@ -63,11 +65,11 @@ const HeaderActions = () => {
           type="button"
           aria-label="Cart"
           onClick={openAuthRequired}
-          className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/80 transition-all duration-200 hover:border-amber-400/30 hover:bg-white/[0.07] hover:text-amber-400"
+          className={`${styles.iconButton} ${styles.cartButton}`}
         >
           <ShoppingCart size={19} strokeWidth={1.7} />
 
-          <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-amber-500 px-1 text-[8px] font-bold text-black ring-2 ring-[#090909]">
+          <span className={styles.badge}>
             0
           </span>
         </button>
@@ -77,21 +79,21 @@ const HeaderActions = () => {
       {isAuthenticated ? (
         <Link
           href="/account"
-          className="flex max-w-[170px] items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-2.5 py-1.5 text-white transition-all duration-200 hover:border-amber-400/40 hover:bg-white/[0.07]"
+          className={styles.account}
         >
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-500/15 text-amber-400">
+          <div className={styles.accountIcon}>
             <CircleUserRound
               size={18}
               strokeWidth={1.8}
             />
           </div>
 
-          <div className="min-w-0 text-left">
-            <p className="truncate text-[10px] font-semibold">
+          <div className={styles.accountText}>
+            <p className={styles.accountName}>
               {user?.name || "My Account"}
             </p>
 
-            <p className="truncate text-[8px] text-white/40">
+            <p className={styles.accountSubtext}>
               View profile
             </p>
           </div>
@@ -99,7 +101,7 @@ const HeaderActions = () => {
       ) : (
         <Link
           href="/login"
-          className="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-lg bg-amber-500 px-4 text-[12px] font-semibold text-black transition-all duration-200 hover:bg-amber-400 xl:h-10 xl:px-5 xl:text-[13px]"
+          className={styles.loginButton}
         >
           Login / Sign Up
         </Link>
