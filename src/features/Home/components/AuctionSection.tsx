@@ -1,15 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { Gavel } from "lucide-react";
 import { motion } from "framer-motion";
+import { Gavel } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 import { useAuthStore } from "@/store/authStore";
 import { useUIStore } from "@/store/uiStore";
 
-const AUCTION_END = new Date("2026-08-26T23:59:59").getTime();
+const AUCTION_END = new Date(
+  "2026-08-26T23:59:59+05:00"
+).getTime();
 
 const AuctionSection = () => {
   const isAuthenticated = useAuthStore(
@@ -20,40 +22,49 @@ const AuctionSection = () => {
     (state) => state.openAuthRequired
   );
 
-  const [now, setNow] = useState(() => Date.now());
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
+    setNow(Date.now());
+
     const interval = window.setInterval(() => {
       setNow(Date.now());
     }, 1000);
 
-    return () => window.clearInterval(interval);
+    return () => {
+      window.clearInterval(interval);
+    };
   }, []);
 
   const remaining = useMemo(() => {
-    const difference = Math.max(AUCTION_END - now, 0);
+    if (now === null) {
+      return {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        ended: false,
+      };
+    }
 
-    const days = Math.floor(
-      difference / (1000 * 60 * 60 * 24)
-    );
-
-    const hours = Math.floor(
-      (difference / (1000 * 60 * 60)) % 24
-    );
-
-    const minutes = Math.floor(
-      (difference / (1000 * 60)) % 60
-    );
-
-    const seconds = Math.floor(
-      (difference / 1000) % 60
+    const difference = Math.max(
+      AUCTION_END - now,
+      0
     );
 
     return {
-      days,
-      hours,
-      minutes,
-      seconds,
+      days: Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+      ),
+      hours: Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+      ),
+      minutes: Math.floor(
+        (difference / (1000 * 60)) % 60
+      ),
+      seconds: Math.floor(
+        (difference / 1000) % 60
+      ),
       ended: difference === 0,
     };
   }, [now]);
@@ -69,30 +80,37 @@ const AuctionSection = () => {
       return;
     }
 
-    // Later:
-    // open bid modal or call auction API.
-
     toast.info("Bid panel coming next", {
-      description: "British India 1/2 Anna · Current bid $42.00",
+      description:
+        "British India 1/2 Anna · Current bid $42.00",
     });
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 18 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
+      initial={{
+        opacity: 0,
+        y: 16,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
       transition={{
-        duration: 0.55,
+        duration: 0.5,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="w-full overflow-hidden rounded-2xl bg-[#0b1115] text-white shadow-[0_14px_34px_rgba(0,0,0,0.16)]"
+      className="w-full min-w-0 overflow-hidden rounded-2xl bg-[#0b1115] text-white shadow-[0_14px_34px_rgba(0,0,0,0.16)]"
     >
-      <div className="grid min-h-[300px] grid-cols-1 sm:grid-cols-2">
-        {/* LEFT */}
-        <div className="flex min-w-0 flex-col justify-center p-5">
-          <div className="inline-flex w-fit items-center gap-2 rounded-md border border-[#d99a31]/30 bg-[#d99a31]/10 px-3 py-1.5">
-            <span className="relative flex h-2 w-2">
+      <div className="grid min-w-0 grid-cols-1 xl:grid-cols-2">
+        {/* CONTENT */}
+        <div className="flex min-w-0 flex-col justify-center p-4 sm:p-5">
+          <div className="inline-flex w-fit max-w-full items-center gap-2 rounded-md border border-[#d99a31]/30 bg-[#d99a31]/10 px-3 py-1.5">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-70" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
             </span>
@@ -100,38 +118,35 @@ const AuctionSection = () => {
             <Gavel
               size={12}
               strokeWidth={1.8}
-              className="text-[#d99a31]"
+              className="shrink-0 text-[#d99a31]"
             />
 
-            <span className="text-[9px] font-semibold text-[#d99a31]">
+            <span className="truncate text-[9px] font-semibold text-[#d99a31]">
               Live Auction
             </span>
           </div>
 
-          <div className="mt-4 grid grid-cols-4 gap-2">
+          <div className="mt-4 grid min-w-0 grid-cols-4 gap-1.5 sm:gap-2">
             <TimeBox
               value={remaining.days}
               label="Days"
             />
-
             <TimeBox
               value={remaining.hours}
               label="Hours"
             />
-
             <TimeBox
               value={remaining.minutes}
               label="Min"
             />
-
             <TimeBox
               value={remaining.seconds}
               label="Sec"
             />
           </div>
 
-          <div className="mt-5">
-            <h3 className="text-[13px] font-semibold leading-5">
+          <div className="mt-5 min-w-0">
+            <h3 className="truncate text-[13px] font-semibold leading-5">
               British India 1/2 Anna
             </h3>
 
@@ -144,8 +159,8 @@ const AuctionSection = () => {
             </p>
           </div>
 
-          <div className="mt-4 flex items-center justify-between gap-3">
-            <div>
+          <div className="mt-4 flex min-w-0 items-center justify-between gap-3">
+            <div className="min-w-0">
               <p className="text-[8px] text-white/45">
                 Current Bid
               </p>
@@ -155,7 +170,7 @@ const AuctionSection = () => {
               </p>
             </div>
 
-            <div className="text-right">
+            <div className="shrink-0 text-right">
               <p className="text-[8px] text-white/45">
                 Total Bids
               </p>
@@ -169,14 +184,11 @@ const AuctionSection = () => {
           <motion.button
             type="button"
             onClick={handleBid}
-            whileHover={{
-              y: -1,
-            }}
             whileTap={{
               scale: 0.97,
             }}
             disabled={remaining.ended}
-            className="mt-4 flex h-10 w-full items-center justify-center rounded-lg bg-[#dfa02d] text-[10px] font-semibold text-black transition-colors hover:bg-[#eab148] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/35"
+            className="mt-4 flex h-10 w-full items-center justify-center rounded-lg bg-[#dfa02d] px-4 text-[10px] font-semibold text-black transition-colors hover:bg-[#eab148] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/35"
           >
             {remaining.ended
               ? "Auction Ended"
@@ -184,14 +196,14 @@ const AuctionSection = () => {
           </motion.button>
         </div>
 
-        {/* RIGHT */}
-        <div className="relative min-h-[260px] overflow-hidden sm:min-h-[300px]">
+        {/* IMAGE */}
+        <div className="relative min-h-[220px] min-w-0 overflow-hidden sm:min-h-[260px] xl:min-h-[300px]">
           <motion.div
             whileHover={{
-              scale: 1.03,
+              scale: 1.025,
             }}
             transition={{
-              duration: 0.45,
+              duration: 0.4,
               ease: "easeOut",
             }}
             className="absolute inset-0"
@@ -200,12 +212,12 @@ const AuctionSection = () => {
               src="/images/home/auction-coin.webp"
               alt="British India Half Anna live auction"
               fill
-              sizes="320px"
-              className="object-cover object-center"
+              sizes="(max-width: 1279px) 100vw, 20vw"
+              className="object-contain object-center p-4"
             />
           </motion.div>
 
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0b1115]/40 via-transparent to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0b1115]/20 via-transparent to-transparent" />
 
           <div className="absolute bottom-3 right-3 rounded-full border border-white/10 bg-black/50 px-3 py-1.5 backdrop-blur-md">
             <span className="text-[8px] font-medium text-white/70">
@@ -234,7 +246,7 @@ const TimeBox = ({
   label,
 }: TimeBoxProps) => {
   return (
-    <div className="rounded-md border border-white/[0.05] bg-white/[0.05] px-1 py-2 text-center">
+    <div className="min-w-0 rounded-md border border-white/[0.05] bg-white/[0.05] px-1 py-2 text-center">
       <motion.p
         key={value}
         initial={{
@@ -245,12 +257,12 @@ const TimeBox = ({
           opacity: 1,
           y: 0,
         }}
-        className="text-[12px] font-semibold leading-none"
+        className="truncate text-[11px] font-semibold leading-none sm:text-[12px]"
       >
         {String(value).padStart(2, "0")}
       </motion.p>
 
-      <p className="mt-1 text-[6px] text-white/40">
+      <p className="mt-1 truncate text-[6px] text-white/40">
         {label}
       </p>
     </div>

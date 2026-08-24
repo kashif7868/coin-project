@@ -11,24 +11,26 @@ const SocialAuthButtons = () => {
   };
 
   return (
-    <div>
+    <div className="w-full min-w-0">
       <button
         type="button"
         onClick={handleGoogleSignIn}
-        className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-neutral-200 bg-white text-sm font-semibold text-neutral-800 transition-all duration-200 hover:border-[#d99a31]/40 hover:bg-[#fffaf2] active:scale-[0.99]"
+        className="flex h-11 w-full min-w-0 items-center justify-center gap-2.5 rounded-xl border border-neutral-200 bg-white px-4 text-[12px] font-semibold text-neutral-800 transition-all duration-200 hover:border-[#d99a31]/40 hover:bg-[#fffaf2] active:scale-[0.99] sm:h-12 sm:gap-3 sm:text-sm"
       >
         <GoogleIcon />
 
-        <span>Continue with Google</span>
+        <span className="truncate">
+          Continue with Google
+        </span>
       </button>
 
-      <div className="relative my-5">
+      <div className="relative my-4 sm:my-5">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-neutral-200" />
         </div>
 
         <div className="relative flex justify-center">
-          <span className="bg-white px-3 text-[10px] uppercase tracking-[0.12em] text-neutral-400">
+          <span className="max-w-full truncate bg-white px-2 text-[8px] uppercase tracking-[0.09em] text-neutral-400 min-[360px]:px-3 min-[360px]:text-[9px] sm:text-[10px] sm:tracking-[0.12em]">
             Or continue with email
           </span>
         </div>
@@ -45,6 +47,7 @@ const GoogleIcon = () => {
       viewBox="0 0 18 18"
       aria-hidden="true"
       focusable="false"
+      className="shrink-0"
     >
       <path
         fill="#4285F4"

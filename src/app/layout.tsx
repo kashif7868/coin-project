@@ -1,6 +1,12 @@
-import type { Metadata } from "next";
+import type {
+  Metadata,
+  Viewport,
+} from "next";
 import type { ReactNode } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+} from "next/font/google";
 import { Toaster } from "sonner";
 
 import AuthRequiredModal from "@/components/Auth/AuthRequiredModal";
@@ -31,6 +37,14 @@ export const metadata: Metadata = {
     "Discover, scan, collect and trade historical coins with CoinHeritage.",
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+  themeColor: "#080808",
+};
+
 interface RootLayoutProps {
   children: ReactNode;
 }
@@ -41,34 +55,42 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen bg-black text-white">
+      <body className="m-0 min-h-dvh w-full min-w-0 bg-white text-neutral-950 antialiased">
         <Providers>
+          {/* Initial application loader */}
           <PagePreloader />
 
+          {/* Global protected-action modal */}
           <AuthRequiredModal />
 
-          <div className="flex min-h-screen flex-col">
+          <div className="flex min-h-dvh w-full min-w-0 flex-col">
             <Header />
 
-            <main className="flex-1 pb-24 lg:pb-0">
+            <main className="relative w-full min-w-0 flex-1 pb-[84px] lg:pb-0">
               {children}
             </main>
 
             <Footer />
-
-            <MobileBottomNav />
           </div>
 
+          {/* Mobile-only fixed navigation */}
+          <MobileBottomNav />
+
+          {/* Global notifications */}
           <Toaster
-            position="top-right"
+            position="top-center"
             richColors
             closeButton
             duration={3500}
+            visibleToasts={3}
+            gap={8}
+            offset={16}
+            mobileOffset={12}
             toastOptions={{
               className:
-                "border border-[#d99a31]/20 bg-[#111111] text-white shadow-2xl",
+                "max-w-[calc(100vw-24px)] border border-[#d99a31]/20 shadow-2xl",
             }}
           />
         </Providers>

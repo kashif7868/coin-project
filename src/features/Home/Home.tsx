@@ -13,59 +13,90 @@ import TrustSection from "./components/TrustSection";
 
 const Home = () => {
   return (
-    <main className="overflow-x-hidden bg-white text-black">
+    <div className="w-full min-w-0 bg-white text-black">
       <HeroSection />
 
       {/* Search + Stats */}
-      <section className="relative z-30 bg-white px-4 pb-4 sm:px-6 lg:px-8">
-        <div className="mx-auto -mt-8 grid w-full max-w-[1540px] gap-5 lg:-mt-10 lg:grid-cols-[minmax(0,3fr)_minmax(360px,2fr)]">
-          <FadeIn y={18}>
+      <section className="relative z-30 w-full bg-white px-4 pb-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid w-full min-w-0 max-w-[1540px] gap-4 lg:-mt-4 lg:grid-cols-[minmax(0,3fr)_minmax(360px,2fr)] lg:gap-5">
+          <FadeIn
+            y={18}
+            className="min-w-0"
+          >
             <CoinSearchFilters />
           </FadeIn>
 
-          <FadeIn delay={0.08} y={18}>
+          <FadeIn
+            delay={0.08}
+            y={18}
+            className="min-w-0"
+          >
             <MarketplaceStats />
           </FadeIn>
         </div>
       </section>
 
-      {/* Main Figma Grid */}
-      <section className="bg-white px-4 pb-6 sm:px-6 lg:px-8">
-        <div className="mx-auto grid w-full max-w-[1540px] items-start gap-5 lg:grid-cols-[minmax(0,3fr)_minmax(360px,2fr)]">
-          {/* LEFT */}
+      {/* Main Content */}
+      <section className="w-full bg-white px-4 pb-6 sm:px-6 lg:px-8">
+        <div className="mx-auto grid w-full min-w-0 max-w-[1540px] items-start gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(360px,2fr)] lg:gap-5">
+          {/* Left Column */}
           <div className="min-w-0">
-            <FadeIn y={20}>
+            <FadeIn
+              y={20}
+              className="min-w-0"
+            >
               <HowItWorks />
             </FadeIn>
 
-            <FadeIn delay={0.08} y={20} className="mt-3">
+            <FadeIn
+              delay={0.08}
+              y={20}
+              className="mt-3 min-w-0"
+            >
               <FeaturedCoins />
             </FadeIn>
 
-            <FadeIn delay={0.14} y={18} className="mt-2">
+            <FadeIn
+              delay={0.14}
+              y={18}
+              className="mt-2 min-w-0"
+            >
               <TrustSection />
             </FadeIn>
           </div>
 
-          {/* RIGHT */}
-          <FadeIn delay={0.1} y={20} className="min-w-0">
+          {/* Right Column */}
+          <FadeIn
+            delay={0.1}
+            y={20}
+            className="min-w-0"
+          >
             <AuctionSection />
           </FadeIn>
         </div>
       </section>
 
-      <FadeIn y={24}>
+      <FadeIn
+        y={24}
+        className="w-full min-w-0"
+      >
         <BlogSection />
       </FadeIn>
 
-      <FadeIn y={24}>
+      <FadeIn
+        y={24}
+        className="w-full min-w-0"
+      >
         <FaqSection />
       </FadeIn>
 
-      <FadeIn y={24}>
+      <FadeIn
+        y={24}
+        className="w-full min-w-0"
+      >
         <Testimonials />
       </FadeIn>
-    </main>
+    </div>
   );
 };
 

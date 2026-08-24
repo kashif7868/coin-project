@@ -12,10 +12,15 @@ import {
 } from "react";
 import { toast } from "sonner";
 
+const emailPattern =
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] =
     useState("");
+  const [rememberMe, setRememberMe] =
+    useState(false);
   const [showPassword, setShowPassword] =
     useState(false);
   const [isSubmitting, setIsSubmitting] =
@@ -35,11 +40,22 @@ const LoginForm = () => {
       return;
     }
 
+    if (!emailPattern.test(cleanEmail)) {
+      toast.error(
+        "Please enter a valid email address."
+      );
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
       // Later:
-      // loginMutation.mutate({ email, password });
+      // loginMutation.mutate({
+      //   email: cleanEmail,
+      //   password,
+      //   rememberMe,
+      // });
 
       await new Promise((resolve) =>
         setTimeout(resolve, 700)
@@ -57,66 +73,68 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-5"
+      className="w-full min-w-0 space-y-4 sm:space-y-5"
+      noValidate
     >
-      <div>
+      {/* Email */}
+      <div className="min-w-0">
         <label
           htmlFor="email"
-          className="mb-2 block text-[12px] font-medium text-neutral-700"
+          className="mb-2 block text-[11px] font-medium text-neutral-700 sm:text-[12px]"
         >
           Email Address
         </label>
 
-        <div className="relative">
+        <div className="relative min-w-0">
           <Mail
             size={17}
             strokeWidth={1.8}
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"
+            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 sm:left-4"
           />
 
           <input
             id="email"
             type="email"
+            inputMode="email"
             autoComplete="email"
             value={email}
             onChange={(event) =>
               setEmail(event.target.value)
             }
             placeholder="Enter your email"
-            className="h-12 w-full rounded-xl border border-neutral-200 bg-white pl-11 pr-4 text-sm text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus:border-[#d99a31] focus:ring-2 focus:ring-[#d99a31]/10"
+            disabled={isSubmitting}
+            className="h-11 w-full min-w-0 rounded-xl border border-neutral-200 bg-white pl-10 pr-3 text-[12px] text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus:border-[#d99a31] focus:ring-2 focus:ring-[#d99a31]/10 disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-500 sm:h-12 sm:pl-11 sm:pr-4 sm:text-sm"
           />
         </div>
       </div>
 
-      <div>
+      {/* Password */}
+      <div className="min-w-0">
         <label
           htmlFor="password"
-          className="mb-2 block text-[12px] font-medium text-neutral-700"
+          className="mb-2 block text-[11px] font-medium text-neutral-700 sm:text-[12px]"
         >
           Password
         </label>
 
-        <div className="relative">
+        <div className="relative min-w-0">
           <LockKeyhole
             size={17}
             strokeWidth={1.8}
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"
+            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 sm:left-4"
           />
 
           <input
             id="password"
-            type={
-              showPassword
-                ? "text"
-                : "password"
-            }
+            type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             value={password}
             onChange={(event) =>
               setPassword(event.target.value)
             }
             placeholder="Enter your password"
-            className="h-12 w-full rounded-xl border border-neutral-200 bg-white pl-11 pr-12 text-sm text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus:border-[#d99a31] focus:ring-2 focus:ring-[#d99a31]/10"
+            disabled={isSubmitting}
+            className="h-11 w-full min-w-0 rounded-xl border border-neutral-200 bg-white pl-10 pr-11 text-[12px] text-neutral-900 outline-none transition-all placeholder:text-neutral-400 focus:border-[#d99a31] focus:ring-2 focus:ring-[#d99a31]/10 disabled:cursor-not-allowed disabled:bg-neutral-50 disabled:text-neutral-500 sm:h-12 sm:pl-11 sm:pr-12 sm:text-sm"
           />
 
           <button
@@ -126,12 +144,12 @@ const LoginForm = () => {
                 ? "Hide password"
                 : "Show password"
             }
+            aria-pressed={showPassword}
             onClick={() =>
-              setShowPassword(
-                (current) => !current
-              )
+              setShowPassword((current) => !current)
             }
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 transition-colors hover:text-neutral-700"
+            disabled={isSubmitting}
+            className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-neutral-400 transition-colors hover:bg-neutral-100 hover:text-neutral-700 disabled:cursor-not-allowed disabled:opacity-50 sm:right-2.5"
           >
             {showPassword ? (
               <EyeOff size={17} />
@@ -142,21 +160,28 @@ const LoginForm = () => {
         </div>
       </div>
 
-      <label className="flex cursor-pointer items-center gap-2">
+      {/* Remember Me */}
+      <label className="flex w-fit cursor-pointer items-center gap-2">
         <input
           type="checkbox"
-          className="h-4 w-4 rounded border-neutral-300 accent-[#d99a31]"
+          checked={rememberMe}
+          onChange={(event) =>
+            setRememberMe(event.target.checked)
+          }
+          disabled={isSubmitting}
+          className="h-4 w-4 shrink-0 rounded border-neutral-300 accent-[#d99a31]"
         />
 
-        <span className="text-[11px] text-neutral-500">
+        <span className="text-[10px] text-neutral-500 sm:text-[11px]">
           Remember me
         </span>
       </label>
 
+      {/* Submit */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="flex h-12 w-full items-center justify-center rounded-xl bg-[#d99a31] text-sm font-semibold text-black shadow-[0_10px_24px_rgba(217,154,49,0.18)] transition-all hover:bg-[#e6aa43] disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex h-11 w-full items-center justify-center rounded-xl bg-[#d99a31] px-4 text-[12px] font-semibold text-black shadow-[0_10px_24px_rgba(217,154,49,0.18)] transition-all hover:bg-[#e6aa43] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 sm:h-12 sm:text-sm"
       >
         {isSubmitting
           ? "Signing In..."

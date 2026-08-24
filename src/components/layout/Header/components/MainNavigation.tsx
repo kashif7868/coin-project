@@ -17,24 +17,27 @@ const MainNavigation = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden lg:flex items-center gap-8">
+    <nav className="relative z-10 hidden min-w-0 items-center gap-4 lg:flex xl:gap-6 2xl:gap-8">
       {navItems.map((item) => {
-        const isActive = pathname === item.href;
+        const isActive =
+          item.href === "/"
+            ? pathname === "/"
+            : pathname.startsWith(item.href);
 
         return (
           <Link
             key={item.href}
             href={item.href}
-            className={`relative text-sm font-medium transition-colors duration-200 ${
+            className={`relative whitespace-nowrap text-[13px] font-medium transition-colors duration-200 xl:text-[14px] ${
               isActive
-                ? "text-amber-400"
-                : "text-white/85 hover:text-amber-400"
+                ? "text-[#E5A12B]"
+                : "text-[#E8E8E8] hover:text-[#E5A12B]"
             }`}
           >
             {item.label}
 
             {isActive && (
-              <span className="absolute -bottom-3 left-0 h-[2px] w-full rounded-full bg-amber-400" />
+              <span className="absolute -bottom-[14px] left-0 h-[2px] w-full rounded-full bg-[#E5A12B]" />
             )}
           </Link>
         );
