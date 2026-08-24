@@ -1,0 +1,171 @@
+.pagination,
+.pagination *,
+.pagination *::before,
+.pagination *::after {
+  box-sizing: border-box;
+}
+
+.pagination {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 24px;
+}
+
+.paginationPages {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.paginationArrow,
+.paginationPage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #555555;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 150ms ease;
+}
+
+.paginationArrow {
+  width: 34px;
+  height: 34px;
+}
+
+.paginationPage {
+  min-width: 34px;
+  height: 34px;
+
+  padding:
+    0
+    8px;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.paginationArrow:hover:not(:disabled),
+.paginationPage:hover {
+  border-color:
+    rgba(217, 154, 49, 0.4);
+
+  background: #fffaf2;
+
+  color: #a96d18;
+}
+
+.paginationPageActive {
+  border-color: #d99a31;
+
+  background: #d99a31;
+  color: #111111;
+}
+
+.paginationPageActive:hover {
+  background: #e4a641;
+  color: #111111;
+}
+
+.paginationArrow:active:not(:disabled),
+.paginationPage:active {
+  transform: scale(0.95);
+}
+
+.paginationArrow:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+.paginationEllipsis {
+  min-width: 22px;
+
+  color: #999999;
+
+  font-size: 12px;
+  line-height: 1;
+
+  text-align: center;
+}
+
+@media (max-width: 359px) {
+  .pagination {
+    gap: 5px;
+
+    margin-top: 20px;
+  }
+
+  .paginationPages {
+    gap: 3px;
+  }
+
+  .paginationArrow,
+  .paginationPage {
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+
+    padding: 0;
+
+    font-size: 9px;
+  }
+
+  .paginationPages
+    .paginationPage:nth-of-type(4),
+  .paginationPages
+    .paginationPage:nth-of-type(5) {
+    display: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .pagination {
+    margin-top: 30px;
+  }
+
+  .paginationArrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .paginationPage {
+    min-width: 38px;
+    height: 38px;
+
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paginationArrow,
+  .paginationPage {
+    transition: none;
+  }
+}

@@ -1,0 +1,462 @@
+.coinsFiltersDesktop,
+.coinsFiltersDesktop *,
+.coinsFiltersDesktop *::before,
+.coinsFiltersDesktop *::after,
+.coinsFiltersMobileRoot,
+.coinsFiltersMobileRoot *,
+.coinsFiltersMobileRoot *::before,
+.coinsFiltersMobileRoot *::after {
+  box-sizing: border-box;
+}
+
+.coinsFiltersDesktop {
+  display: none;
+}
+
+.coinsFiltersCard {
+  width: 100%;
+  min-width: 0;
+}
+
+.coinsFiltersHeader {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding-bottom: 14px;
+
+  border-bottom:
+    1px solid #eeeeee;
+}
+
+.coinsFiltersTitle {
+  margin: 0;
+
+  color: #171717;
+
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.coinsFiltersSubtitle {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #929292;
+
+  font-size: 8px;
+  line-height: 1.3;
+}
+
+.coinsFiltersReset {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+  color: #b87516;
+
+  font: inherit;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.coinsFiltersGroup {
+  width: 100%;
+
+  margin-top: 16px;
+}
+
+.coinsFiltersLabel {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #4a4a4a;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.coinsFiltersSelect,
+.coinsFiltersInput {
+  width: 100%;
+  height: 40px;
+
+  min-width: 0;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #303030;
+
+  font-size: 10px;
+
+  outline: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.coinsFiltersSelect {
+  padding:
+    0
+    30px
+    0
+    10px;
+
+  cursor: pointer;
+}
+
+.coinsFiltersInput {
+  padding:
+    0
+    10px;
+}
+
+.coinsFiltersSelect:focus,
+.coinsFiltersInput:focus {
+  border-color:
+    rgba(217, 154, 49, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.09);
+}
+
+.coinsFiltersPriceGrid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.coinsFiltersApply {
+  width: 100%;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 18px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+
+  font: inherit;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* MOBILE DRAWER */
+
+.coinsFiltersMobileRoot {
+  position: fixed;
+  inset: 0;
+
+  z-index: 10020;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+.coinsFiltersMobileOpen {
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+.coinsFiltersBackdrop {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background:
+    rgba(0, 0, 0, 0.64);
+
+  opacity: 0;
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+
+  transition:
+    opacity 220ms ease;
+}
+
+.coinsFiltersMobileOpen
+  .coinsFiltersBackdrop {
+  opacity: 1;
+}
+
+.coinsFiltersDrawer {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  max-height: min(88dvh, 720px);
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border-radius:
+    20px
+    20px
+    0
+    0;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 -20px 60px rgba(0, 0, 0, 0.2);
+
+  transform:
+    translateY(100%);
+
+  transition:
+    transform 240ms ease;
+}
+
+.coinsFiltersMobileOpen
+  .coinsFiltersDrawer {
+  transform:
+    translateY(0);
+}
+
+.coinsFiltersDrawerHeader {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding:
+    14px
+    16px;
+
+  border-bottom:
+    1px solid #eeeeee;
+}
+
+.coinsFiltersDrawerTitle {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #171717;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.coinsFiltersDrawerTitle svg {
+  color: #b87516;
+}
+
+.coinsFiltersClose {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #555555;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.coinsFiltersDrawerBody {
+  min-height: 0;
+
+  overflow-y: auto;
+
+  padding:
+    16px
+    16px
+    max(
+      18px,
+      env(safe-area-inset-bottom)
+    );
+
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 359px) {
+  .coinsFiltersDrawerHeader {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .coinsFiltersDrawerBody {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .coinsFiltersSelect,
+  .coinsFiltersInput {
+    height: 38px;
+
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 640px) {
+  .coinsFiltersDrawer {
+    left: auto;
+
+    width: min(420px, 92vw);
+    height: 100dvh;
+    max-height: none;
+
+    border-radius:
+      18px
+      0
+      0
+      18px;
+
+    transform:
+      translateX(100%);
+  }
+
+  .coinsFiltersMobileOpen
+    .coinsFiltersDrawer {
+    transform:
+      translateX(0);
+  }
+
+  .coinsFiltersDrawerHeader {
+    padding:
+      18px
+      20px;
+  }
+
+  .coinsFiltersDrawerBody {
+    padding:
+      20px
+      20px
+      max(
+        20px,
+        env(safe-area-inset-bottom)
+      );
+  }
+}
+
+@media (min-width: 1024px) {
+  .coinsFiltersDesktop {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 18px;
+
+    border: 1px solid #e9e9e9;
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.04);
+  }
+
+  .coinsFiltersMobileRoot {
+    display: none;
+  }
+
+  .coinsFiltersTitle {
+    font-size: 13px;
+  }
+
+  .coinsFiltersSubtitle {
+    font-size: 9px;
+  }
+
+  .coinsFiltersLabel {
+    font-size: 10px;
+  }
+
+  .coinsFiltersSelect,
+  .coinsFiltersInput {
+    height: 42px;
+
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coinsFiltersBackdrop,
+  .coinsFiltersDrawer,
+  .coinsFiltersSelect,
+  .coinsFiltersInput {
+    transition: none;
+  }
+}

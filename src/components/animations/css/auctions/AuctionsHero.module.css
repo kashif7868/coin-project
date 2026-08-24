@@ -1,0 +1,318 @@
+.auctionsHero,
+.auctionsHero *,
+.auctionsHero *::before,
+.auctionsHero *::after {
+  box-sizing: border-box;
+}
+
+.auctionsHero {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  padding:
+    34px
+    14px
+    30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #070707 0%,
+      #100e0b 60%,
+      #191105 100%
+    );
+
+  color: #ffffff;
+}
+
+.auctionsHeroContainer {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1240px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.auctionsHeroGlowLeft,
+.auctionsHeroGlowRight {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(70px);
+}
+
+.auctionsHeroGlowLeft {
+  top: -100px;
+  left: -100px;
+
+  width: 260px;
+  height: 260px;
+
+  background:
+    rgba(217, 154, 49, 0.12);
+}
+
+.auctionsHeroGlowRight {
+  right: -120px;
+  bottom: -130px;
+
+  width: 300px;
+  height: 300px;
+
+  background:
+    rgba(145, 91, 18, 0.14);
+}
+
+.auctionsHeroBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 999px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+.auctionsHeroBadge span {
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.auctionsHeroContent {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 24px;
+
+  margin-top: 18px;
+}
+
+.auctionsHeroText {
+  min-width: 0;
+}
+
+.auctionsHeroTitle {
+  max-width: 740px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+}
+
+.auctionsHeroTitle span {
+  color: #d99a31;
+}
+
+.auctionsHeroDescription {
+  max-width: 560px;
+
+  margin:
+    12px
+    0
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.auctionsHeroStats {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  max-width: 360px;
+
+  margin-top: 20px;
+}
+
+.auctionsHeroStat {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding:
+    10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+}
+
+.auctionsHeroStat > svg {
+  flex: 0 0 auto;
+
+  color: #d99a31;
+}
+
+.auctionsHeroStat div {
+  min-width: 0;
+}
+
+.auctionsHeroStat strong,
+.auctionsHeroStat span {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.auctionsHeroStat strong {
+  color: #ffffff;
+
+  font-size: 13px;
+  line-height: 1;
+}
+
+.auctionsHeroStat span {
+  margin-top: 4px;
+
+  color:
+    rgba(255, 255, 255, 0.4);
+
+  font-size: 8px;
+  line-height: 1;
+}
+
+.auctionsHeroVisual {
+  display: none;
+}
+
+.auctionsHeroVisualCircle {
+  width: 92px;
+  height: 92px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(217, 154, 49, 0.16),
+      rgba(217, 154, 49, 0.03)
+    );
+
+  color: #d99a31;
+
+  box-shadow:
+    0 0 38px rgba(217, 154, 49, 0.08);
+}
+
+@media (max-width: 359px) {
+  .auctionsHero {
+    padding:
+      28px
+      10px
+      26px;
+  }
+
+  .auctionsHeroTitle {
+    font-size: 29px;
+  }
+
+  .auctionsHeroDescription {
+    font-size: 10px;
+    line-height: 17px;
+  }
+
+  .auctionsHeroStats {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .auctionsHero {
+    padding:
+      42px
+      24px
+      36px;
+  }
+
+  .auctionsHeroTitle {
+    font-size: 44px;
+  }
+
+  .auctionsHeroDescription {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .auctionsHeroStats {
+    gap: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .auctionsHero {
+    padding:
+      54px
+      32px
+      44px;
+  }
+
+  .auctionsHeroTitle {
+    font-size: 52px;
+  }
+
+  .auctionsHeroVisual {
+    display: block;
+  }
+}

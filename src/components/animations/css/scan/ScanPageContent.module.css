@@ -116,10 +116,126 @@
     0 16px 42px rgba(0, 0, 0, 0.06);
 }
 
+/* CAPTURE PROGRESS */
+
+.captureProgress {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(40px, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 14px;
+}
+
+.captureStep {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #a3a3a3;
+}
+
+.captureStep > span {
+  width: 24px;
+  height: 24px;
+
+  flex: 0 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #dedede;
+  border-radius: 50%;
+
+  background: #fafafa;
+
+  color: #8a8a8a;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.captureStep p {
+  margin: 0;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.captureStepActive {
+  color: #b87516;
+}
+
+.captureStepActive > span {
+  border-color: #d99a31;
+
+  background: rgba(217, 154, 49, 0.1);
+
+  color: #b87516;
+}
+
+.captureStepDone {
+  color: #4b7c5b;
+}
+
+.captureStepDone > span {
+  border-color: #4b7c5b;
+
+  background: #eff8f2;
+
+  color: #347249;
+}
+
+.captureProgressLine {
+  height: 1px;
+
+  background: #e5e5e5;
+}
+
 /* CAMERA */
 
 .cameraPanel {
   padding: 12px;
+}
+
+.captureInstruction {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-bottom: 10px;
+
+  color: #737373;
+
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.captureInstruction svg {
+  color: #c88925;
+}
+
+.captureInstruction strong {
+  color: #171717;
+
+  text-transform: capitalize;
 }
 
 .cameraViewport {
@@ -204,8 +320,11 @@
   inset: 0;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  gap: 16px;
 
   pointer-events: none;
 }
@@ -214,21 +333,37 @@
   width: min(60vw, 250px);
   height: min(60vw, 250px);
 
-  border: 2px dashed rgba(217, 154, 49, 0.72);
+  border: 2px dashed rgba(217, 154, 49, 0.76);
   border-radius: 50%;
 
   box-shadow:
-    0 0 0 999px rgba(0, 0, 0, 0.14),
+    0 0 0 999px rgba(0, 0, 0, 0.13),
     0 0 30px rgba(217, 154, 49, 0.12);
+}
+
+.coinGuideLabel {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.58);
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 9px;
+  line-height: 1;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .hiddenCanvas {
   display: none;
 }
 
-/* CAMERA ACTIONS */
+/* ACTIONS */
 
-.cameraActions {
+.cameraActions,
+.reviewActions {
   width: 100%;
 
   display: grid;
@@ -241,7 +376,8 @@
 
 .captureButton,
 .secondaryButton,
-.uploadButton {
+.uploadButton,
+.analyzeButton {
   width: 100%;
   height: 42px;
 
@@ -272,7 +408,8 @@
     box-shadow 160ms ease;
 }
 
-.captureButton {
+.captureButton,
+.analyzeButton {
   border: 0;
 
   background:
@@ -292,7 +429,8 @@
     0 8px 20px rgba(217, 154, 49, 0.17);
 }
 
-.captureButton:hover {
+.captureButton:hover,
+.analyzeButton:hover {
   box-shadow:
     0 10px 24px rgba(217, 154, 49, 0.22);
 }
@@ -316,18 +454,145 @@
 
 .captureButton:active,
 .secondaryButton:active,
-.uploadButton:active {
+.uploadButton:active,
+.analyzeButton:active {
   transform: scale(0.99);
 }
 
 .captureButton:focus-visible,
 .secondaryButton:focus-visible,
-.uploadButton:focus-visible {
+.uploadButton:focus-visible,
+.analyzeButton:focus-visible {
   box-shadow:
     0 0 0 3px rgba(217, 154, 49, 0.14);
 }
 
-/* UPLOAD PANEL */
+/* REVIEW */
+
+.reviewPanel {
+  width: 100%;
+  min-width: 0;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 12px;
+
+  border: 1px solid #dcece1;
+  border-radius: 12px;
+
+  background: #f6fbf7;
+}
+
+.reviewHeader > svg {
+  flex: 0 0 auto;
+
+  color: #3f8757;
+}
+
+.reviewHeader h2 {
+  margin: 0;
+
+  color: #1f4c2e;
+
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.reviewHeader p {
+  margin: 3px 0 0;
+
+  color: #6b806f;
+
+  font-size: 9px;
+  line-height: 1.3;
+}
+
+.reviewGrid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 12px;
+}
+
+.reviewImageCard {
+  min-width: 0;
+
+  padding: 8px;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+
+  background: #fafafa;
+}
+
+.reviewImageCard > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #666666;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.reviewImageCard img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  display: block;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  background: #111111;
+}
+
+.reviewImageCard button {
+  width: 100%;
+  height: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 8px;
+  padding: 0 10px;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #555555;
+
+  font: inherit;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* UPLOAD */
 
 .uploadPanel {
   display: flex;
@@ -461,7 +726,7 @@
   text-overflow: ellipsis;
 }
 
-/* VERY SMALL MOBILE */
+/* VERY SMALL */
 
 @media (max-width: 359px) {
   .scanPage {
@@ -495,10 +760,15 @@
 
   .captureButton,
   .secondaryButton,
-  .uploadButton {
+  .uploadButton,
+  .analyzeButton {
     height: 40px;
 
     font-size: 10px;
+  }
+
+  .reviewGrid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .uploadPanel {
@@ -512,10 +782,11 @@
   }
 }
 
-/* MOBILE LANDSCAPE / SMALL TABLET */
+/* SMALL TABLET */
 
 @media (min-width: 480px) {
-  .cameraActions {
+  .cameraActions,
+  .reviewActions {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
@@ -552,10 +823,15 @@
 
   .captureButton,
   .secondaryButton,
-  .uploadButton {
+  .uploadButton,
+  .analyzeButton {
     height: 44px;
 
     font-size: 12px;
+  }
+
+  .captureStep p {
+    font-size: 10px;
   }
 
   .uploadPanel {
@@ -631,7 +907,8 @@
 @media (prefers-reduced-motion: reduce) {
   .captureButton,
   .secondaryButton,
-  .uploadButton {
+  .uploadButton,
+  .analyzeButton {
     transition: none;
   }
 }

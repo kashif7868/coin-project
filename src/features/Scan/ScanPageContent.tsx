@@ -5,6 +5,8 @@ import {
   CameraOff,
   CheckCircle2,
   RefreshCcw,
+  RotateCcw,
+  ScanLine,
   Upload,
 } from "lucide-react";
 import {
@@ -26,11 +28,17 @@ type CameraStatus =
   | "denied"
   | "unavailable";
 
+type CoinSide = "front" | "back";
+
+interface CapturedCoinImages {
+  front: string | null;
+  back: string | null;
+}
+
 const ScanPageContent = () => {
   const searchParams = useSearchParams();
 
-  const requestedMode =
-    searchParams.get("mode");
+  const requestedMode = searchParams.get("mode");
 
   const videoRef =
     useRef<HTMLVideoElement | null>(null);
@@ -47,8 +55,14 @@ const ScanPageContent = () => {
   const [cameraStatus, setCameraStatus] =
     useState<CameraStatus>("idle");
 
-  const [capturedImage, setCapturedImage] =
-    useState<string | null>(null);
+  const [currentSide, setCurrentSide] =
+    useState<CoinSide>("front");
+
+  const [capturedImages, setCapturedImages] =
+    useState<CapturedCoinImages>({
+      front: null,
+      back: null,
+    });
 
   const [uploadedFiles, setUploadedFiles] =
     useState<File[]>([]);
@@ -59,9 +73,7 @@ const ScanPageContent = () => {
     if (stream) {
       stream
         .getTracks()
-        .forEach((track) => {
-          track.stop();
-        });
+        .forEach((track) => track.stop());
     }
 
     streamRef.current = null;
@@ -89,43 +101,29 @@ const ScanPageContent = () => {
 
     stopCamera();
 
-    setCapturedImage(null);
     setCameraStatus("requesting");
 
     try {
-      /*
-       * Mobile:
-       * prefer rear/environment camera.
-       *
-       * Desktop:
-       * browser automatically selects
-       * the available webcam.
-       */
       const stream =
         await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: {
               ideal: "environment",
             },
-
             width: {
               ideal: 1920,
             },
-
             height: {
               ideal: 1080,
             },
           },
-
           audio: false,
         });
 
       streamRef.current = stream;
 
       if (videoRef.current) {
-        videoRef.current.srcObject =
-          stream;
-
+        videoRef.current.srcObject = stream;
         await videoRef.current.play();
       }
 
@@ -169,13 +167,6 @@ const ScanPageContent = () => {
     }
   }, [stopCamera]);
 
-  /*
-   * If normal /scan is opened,
-   * immediately request the camera.
-   *
-   * If /scan?mode=upload is opened,
-   * show upload mode instead.
-   */
   useEffect(() => {
     if (requestedMode === "upload") {
       stopCamera();
@@ -193,7 +184,7 @@ const ScanPageContent = () => {
     stopCamera,
   ]);
 
-  const captureCoin = () => {
+  const captureCurrentSide = () => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
 
@@ -235,27 +226,52 @@ const ScanPageContent = () => {
         0.92
       );
 
-    setCapturedImage(image);
+    setCapturedImages((current) => ({
+      ...current,
+      [currentSide]: image,
+    }));
+
+    if (currentSide === "front") {
+      setCurrentSide("back");
+
+      toast.success(
+        "Front side captured",
+        {
+          description:
+            "Now turn the coin over and capture the back.",
+        }
+      );
+
+      return;
+    }
 
     stopCamera();
 
     toast.success(
-      "Coin image captured"
+      "Both sides captured"
     );
-
-    /*
-     * Later:
-     *
-     * Convert canvas image to Blob/File
-     * and send it to:
-     *
-     * 1. image quality endpoint
-     * 2. coin identification service
-     */
   };
 
-  const retakeImage = () => {
-    setCapturedImage(null);
+  const retakeSide = (
+    side: CoinSide
+  ) => {
+    setCapturedImages((current) => ({
+      ...current,
+      [side]: null,
+    }));
+
+    setCurrentSide(side);
+
+    void startCamera();
+  };
+
+  const restartCapture = () => {
+    setCapturedImages({
+      front: null,
+      back: null,
+    });
+
+    setCurrentSide("front");
 
     void startCamera();
   };
@@ -292,9 +308,6 @@ const ScanPageContent = () => {
       return;
     }
 
-    /*
-     * Front + back only for now.
-     */
     const selected =
       validFiles.slice(0, 2);
 
@@ -305,14 +318,33 @@ const ScanPageContent = () => {
         ? "Front and back images selected"
         : "Coin image selected"
     );
+  };
 
-    /*
-     * Later:
-     *
-     * selected files →
-     * quality API →
-     * identification API
-     */
+  const isCaptureComplete =
+    Boolean(
+      capturedImages.front &&
+      capturedImages.back
+    );
+
+  const handleAnalyze = () => {
+    if (
+      !isCaptureComplete &&
+      uploadedFiles.length < 2
+    ) {
+      toast.error(
+        "Please provide both front and back images."
+      );
+
+      return;
+    }
+
+    toast.info(
+      "Coin analysis ready",
+      {
+        description:
+          "Next step is connecting these images to your quality and identification API.",
+      }
+    );
   };
 
   return (
@@ -332,9 +364,9 @@ const ScanPageContent = () => {
           </h1>
 
           <p>
-            Capture clear images of the front and
-            back of your coin to discover its
-            identity, history and collectible details.
+            Capture clear images of both sides of
+            your coin to discover its identity,
+            history and collectible details.
           </p>
         </div>
 
@@ -347,179 +379,343 @@ const ScanPageContent = () => {
             >
               <div
                 className={
-                  styles.cameraViewport
+                  styles.captureProgress
                 }
               >
-                {!capturedImage && (
-                  <video
-                    ref={videoRef}
-                    autoPlay
-                    muted
-                    playsInline
-                    className={
-                      styles.cameraVideo
-                    }
-                  />
-                )}
+                <div
+                  className={`${styles.captureStep} ${
+                    capturedImages.front
+                      ? styles.captureStepDone
+                      : currentSide === "front"
+                      ? styles.captureStepActive
+                      : ""
+                  }`}
+                >
+                  <span>1</span>
+                  <p>Front</p>
+                </div>
 
-                {capturedImage && (
-                  <img
-                    src={capturedImage}
-                    alt="Captured coin"
-                    className={
-                      styles.capturedImage
-                    }
-                  />
-                )}
+                <div
+                  className={
+                    styles.captureProgressLine
+                  }
+                />
 
-                {!capturedImage &&
-                  cameraStatus ===
-                    "requesting" && (
-                    <div
-                      className={
-                        styles.cameraMessage
-                      }
-                    >
-                      <Camera
-                        size={28}
-                      />
-
-                      <p>
-                        Opening camera...
-                      </p>
-                    </div>
-                  )}
-
-                {!capturedImage &&
-                  (
-                    cameraStatus ===
-                      "denied" ||
-                    cameraStatus ===
-                      "unavailable"
-                  ) && (
-                    <div
-                      className={
-                        styles.cameraMessage
-                      }
-                    >
-                      <CameraOff
-                        size={30}
-                      />
-
-                      <p>
-                        Camera unavailable
-                      </p>
-
-                      <span>
-                        Allow camera access or
-                        upload images instead.
-                      </span>
-                    </div>
-                  )}
-
-                {cameraStatus ===
-                  "active" &&
-                  !capturedImage && (
-                    <div
-                      className={
-                        styles.coinGuide
-                      }
-                    >
-                      <div
-                        className={
-                          styles.coinGuideCircle
-                        }
-                      />
-                    </div>
-                  )}
+                <div
+                  className={`${styles.captureStep} ${
+                    capturedImages.back
+                      ? styles.captureStepDone
+                      : currentSide === "back"
+                      ? styles.captureStepActive
+                      : ""
+                  }`}
+                >
+                  <span>2</span>
+                  <p>Back</p>
+                </div>
               </div>
 
-              <canvas
-                ref={canvasRef}
-                className={
-                  styles.hiddenCanvas
-                }
-              />
+              {!isCaptureComplete ? (
+                <>
+                  <div
+                    className={
+                      styles.captureInstruction
+                    }
+                  >
+                    <ScanLine size={16} />
 
-              <div
-                className={
-                  styles.cameraActions
-                }
-              >
-                {!capturedImage &&
-                  cameraStatus ===
-                    "active" && (
+                    <span>
+                      Capture the{" "}
+                      <strong>
+                        {currentSide}
+                      </strong>{" "}
+                      side of the coin
+                    </span>
+                  </div>
+
+                  <div
+                    className={
+                      styles.cameraViewport
+                    }
+                  >
+                    <video
+                      ref={videoRef}
+                      autoPlay
+                      muted
+                      playsInline
+                      className={
+                        styles.cameraVideo
+                      }
+                    />
+
+                    {cameraStatus ===
+                      "requesting" && (
+                      <div
+                        className={
+                          styles.cameraMessage
+                        }
+                      >
+                        <Camera
+                          size={28}
+                        />
+
+                        <p>
+                          Opening camera...
+                        </p>
+                      </div>
+                    )}
+
+                    {(
+                      cameraStatus ===
+                        "denied" ||
+                      cameraStatus ===
+                        "unavailable"
+                    ) && (
+                      <div
+                        className={
+                          styles.cameraMessage
+                        }
+                      >
+                        <CameraOff
+                          size={30}
+                        />
+
+                        <p>
+                          Camera unavailable
+                        </p>
+
+                        <span>
+                          Allow camera access or
+                          upload images instead.
+                        </span>
+                      </div>
+                    )}
+
+                    {cameraStatus ===
+                      "active" && (
+                      <div
+                        className={
+                          styles.coinGuide
+                        }
+                      >
+                        <div
+                          className={
+                            styles.coinGuideCircle
+                          }
+                        />
+
+                        <span
+                          className={
+                            styles.coinGuideLabel
+                          }
+                        >
+                          Keep the full coin inside
+                          the circle
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <canvas
+                    ref={canvasRef}
+                    className={
+                      styles.hiddenCanvas
+                    }
+                  />
+
+                  <div
+                    className={
+                      styles.cameraActions
+                    }
+                  >
+                    {cameraStatus ===
+                      "active" && (
+                      <button
+                        type="button"
+                        onClick={
+                          captureCurrentSide
+                        }
+                        className={
+                          styles.captureButton
+                        }
+                      >
+                        <Camera size={18} />
+
+                        Capture{" "}
+                        {currentSide === "front"
+                          ? "Front"
+                          : "Back"}
+                      </button>
+                    )}
+
+                    {cameraStatus !==
+                      "active" && (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          void startCamera()
+                        }
+                        className={
+                          styles.captureButton
+                        }
+                      >
+                        <Camera size={17} />
+
+                        Open Camera
+                      </button>
+                    )}
+
                     <button
                       type="button"
                       onClick={
-                        captureCoin
+                        openUploadPicker
                       }
                       className={
-                        styles.captureButton
+                        styles.secondaryButton
                       }
                     >
-                      <Camera
-                        size={18}
-                      />
+                      <Upload size={17} />
 
-                      Capture Coin
+                      Upload Instead
                     </button>
-                  )}
-
-                {capturedImage && (
-                  <button
-                    type="button"
-                    onClick={
-                      retakeImage
-                    }
-                    className={
-                      styles.secondaryButton
-                    }
-                  >
-                    <RefreshCcw
-                      size={16}
-                    />
-
-                    Retake
-                  </button>
-                )}
-
-                {cameraStatus !==
-                  "active" &&
-                  !capturedImage && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        void startCamera()
-                      }
-                      className={
-                        styles.captureButton
-                      }
-                    >
-                      <Camera
-                        size={17}
-                      />
-
-                      Open Camera
-                    </button>
-                  )}
-
-                <button
-                  type="button"
-                  onClick={
-                    openUploadPicker
-                  }
+                  </div>
+                </>
+              ) : (
+                <div
                   className={
-                    styles.secondaryButton
+                    styles.reviewPanel
                   }
                 >
-                  <Upload
-                    size={17}
-                  />
+                  <div
+                    className={
+                      styles.reviewHeader
+                    }
+                  >
+                    <CheckCircle2
+                      size={20}
+                    />
 
-                  Upload Images
-                </button>
-              </div>
+                    <div>
+                      <h2>
+                        Both sides captured
+                      </h2>
+
+                      <p>
+                        Review the images before
+                        analysis.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={
+                      styles.reviewGrid
+                    }
+                  >
+                    <div
+                      className={
+                        styles.reviewImageCard
+                      }
+                    >
+                      <span>
+                        Front
+                      </span>
+
+                      {capturedImages.front && (
+                        <img
+                          src={
+                            capturedImages.front
+                          }
+                          alt="Front side of captured coin"
+                        />
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          retakeSide(
+                            "front"
+                          )
+                        }
+                      >
+                        <RefreshCcw
+                          size={14}
+                        />
+                        Retake
+                      </button>
+                    </div>
+
+                    <div
+                      className={
+                        styles.reviewImageCard
+                      }
+                    >
+                      <span>
+                        Back
+                      </span>
+
+                      {capturedImages.back && (
+                        <img
+                          src={
+                            capturedImages.back
+                          }
+                          alt="Back side of captured coin"
+                        />
+                      )}
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          retakeSide(
+                            "back"
+                          )
+                        }
+                      >
+                        <RefreshCcw
+                          size={14}
+                        />
+                        Retake
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    className={
+                      styles.reviewActions
+                    }
+                  >
+                    <button
+                      type="button"
+                      onClick={
+                        restartCapture
+                      }
+                      className={
+                        styles.secondaryButton
+                      }
+                    >
+                      <RotateCcw
+                        size={16}
+                      />
+                      Start Again
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={
+                        handleAnalyze
+                      }
+                      className={
+                        styles.analyzeButton
+                      }
+                    >
+                      <ScanLine
+                        size={17}
+                      />
+                      Analyze Coin
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -542,13 +738,15 @@ const ScanPageContent = () => {
 
             <p>
               Use sharp, well-lit images with
-              minimal glare and the entire coin
+              minimal glare and the complete coin
               visible.
             </p>
 
             <button
               type="button"
-              onClick={openUploadPicker}
+              onClick={
+                openUploadPicker
+              }
               className={
                 styles.uploadButton
               }
@@ -592,11 +790,28 @@ const ScanPageContent = () => {
                         {index === 0
                           ? "Front"
                           : "Back"}
-                        :{" "}
-                        {file.name}
+                        : {file.name}
                       </span>
                     </div>
                   )
+                )}
+
+                {uploadedFiles.length ===
+                  2 && (
+                  <button
+                    type="button"
+                    onClick={
+                      handleAnalyze
+                    }
+                    className={
+                      styles.analyzeButton
+                    }
+                  >
+                    <ScanLine
+                      size={17}
+                    />
+                    Analyze Coin
+                  </button>
                 )}
               </div>
             )}

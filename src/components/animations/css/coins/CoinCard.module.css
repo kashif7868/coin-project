@@ -1,0 +1,348 @@
+.coinCard,
+.coinCard *,
+.coinCard *::before,
+.coinCard *::after {
+  box-sizing: border-box;
+}
+
+.coinCard {
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.04);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.coinCard:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    rgba(217, 154, 49, 0.24);
+
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.07);
+}
+
+.coinCardImageArea {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle,
+      #fbf5ec,
+      #f5f2ed
+    );
+}
+
+.coinCardImageLink {
+  position: absolute;
+  inset: 0;
+
+  display: block;
+}
+
+.coinCardImage {
+  object-fit: contain;
+
+  padding: 16px;
+
+  transition:
+    transform 220ms ease;
+}
+
+.coinCard:hover .coinCardImage {
+  transform: scale(1.035);
+}
+
+.coinCardFeatured {
+  position: absolute;
+
+  top: 9px;
+  left: 9px;
+
+  z-index: 2;
+
+  padding:
+    5px
+    7px;
+
+  border-radius: 999px;
+
+  background: #d99a31;
+  color: #111111;
+
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.coinCardWishlist,
+.coinCardCartButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  outline: none;
+}
+
+.coinCardWishlist {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  z-index: 2;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.92);
+  color: #777777;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.05);
+
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    transform 150ms ease;
+}
+
+.coinCardWishlist:hover {
+  border-color:
+    rgba(217, 154, 49, 0.4);
+
+  color: #b87516;
+}
+
+.coinCardWishlist:active {
+  transform: scale(0.94);
+}
+
+.coinCardBody {
+  padding: 11px;
+}
+
+.coinCardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  color: #929292;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.coinCardMeta span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.coinCardTitle {
+  display: block;
+
+  margin-top: 6px;
+
+  overflow: hidden;
+
+  color: #191919;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.coinCardTitle:hover {
+  color: #a96d18;
+}
+
+.coinCardAttributes {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  margin-top: 8px;
+}
+
+.coinCardAttributes span {
+  padding:
+    4px
+    6px;
+
+  border-radius: 6px;
+
+  background: #f7f5f1;
+  color: #747474;
+
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.coinCardFooter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 11px;
+
+  padding-top: 10px;
+
+  border-top:
+    1px solid #f0f0f0;
+}
+
+.coinCardPriceLabel {
+  display: block;
+
+  color: #a3a3a3;
+
+  font-size: 7px;
+  line-height: 1;
+}
+
+.coinCardPrice {
+  margin:
+    3px
+    0
+    0;
+
+  color: #171717;
+
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.coinCardCartButton {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: #151515;
+  color: #ffffff;
+
+  transition:
+    background-color 160ms ease,
+    transform 150ms ease;
+}
+
+.coinCardCartButton:hover {
+  background: #d99a31;
+
+  color: #111111;
+}
+
+.coinCardCartButton:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 359px) {
+  .coinCardBody {
+    padding: 9px;
+  }
+
+  .coinCardImage {
+    padding: 12px;
+  }
+
+  .coinCardTitle {
+    font-size: 12px;
+  }
+
+  .coinCardCartButton {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+  }
+}
+
+@media (min-width: 640px) {
+  .coinCardBody {
+    padding: 13px;
+  }
+
+  .coinCardTitle {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .coinCardMeta {
+    font-size: 9px;
+  }
+
+  .coinCardAttributes span {
+    font-size: 8px;
+  }
+
+  .coinCardPrice {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coinCard,
+  .coinCardImage,
+  .coinCardWishlist,
+  .coinCardCartButton {
+    transition: none;
+  }
+}

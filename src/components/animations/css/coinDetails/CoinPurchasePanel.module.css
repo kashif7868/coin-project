@@ -1,0 +1,528 @@
+.purchasePanel,
+.purchasePanel *,
+.purchasePanel *::before,
+.purchasePanel *::after {
+  box-sizing: border-box;
+}
+
+.purchasePanel {
+  width: 100%;
+  min-width: 0;
+
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.05);
+}
+
+.purchasePriceRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.purchasePriceLabel {
+  display: block;
+
+  color: #9a9a9a;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.purchasePrice {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.purchaseStock {
+  flex: 0 0 auto;
+
+  padding:
+    6px
+    8px;
+
+  border-radius: 999px;
+
+  background: #eef8f1;
+  color: #3f7d50;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.purchaseDivider {
+  width: 100%;
+  height: 1px;
+
+  margin: 15px 0;
+
+  background: #eeeeee;
+}
+
+.purchaseQuantitySection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.purchaseSectionLabel {
+  margin: 0;
+
+  color: #303030;
+
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.purchaseQuantityHint {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9b9b9b;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.purchaseQuantityControl {
+  flex: 0 0 auto;
+
+  display: grid;
+  grid-template-columns:
+    30px
+    34px
+    30px;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  border: 1px solid #e3e3e3;
+  border-radius: 9px;
+
+  background: #ffffff;
+}
+
+.purchaseQuantityButton {
+  width: 30px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: #ffffff;
+  color: #555555;
+
+  font: inherit;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.purchaseQuantityButton:hover:not(:disabled) {
+  background: #fff7ea;
+  color: #a96d18;
+}
+
+.purchaseQuantityButton:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+}
+
+.purchaseQuantityValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 32px;
+
+  border-left: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+
+  color: #171717;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.purchaseTotalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 15px;
+
+  padding:
+    11px
+    12px;
+
+  border-radius: 10px;
+
+  background: #f8f6f2;
+}
+
+.purchaseTotalRow span {
+  color: #777777;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.purchaseTotalRow strong {
+  color: #171717;
+
+  font-size: 13px;
+  line-height: 1;
+}
+
+.purchaseActions {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  gap: 9px;
+
+  margin-top: 14px;
+}
+
+.purchaseCartButton,
+.purchaseBuyButton {
+  width: 100%;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 0;
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  font: inherit;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 150ms ease,
+    box-shadow 160ms ease;
+}
+
+.purchaseCartButton {
+  border: 1px solid #dedede;
+
+  background: #ffffff;
+  color: #252525;
+}
+
+.purchaseCartButton:hover {
+  border-color:
+    rgba(217, 154, 49, 0.42);
+
+  background: #fffaf2;
+}
+
+.purchaseBuyButton {
+  border: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+
+  box-shadow:
+    0 8px 20px rgba(217, 154, 49, 0.16);
+}
+
+.purchaseBuyButton:hover {
+  box-shadow:
+    0 10px 26px rgba(217, 154, 49, 0.22);
+}
+
+.purchaseCartButton:active,
+.purchaseBuyButton:active {
+  transform: scale(0.99);
+}
+
+.purchaseTrust {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-top: 15px;
+
+  padding:
+    11px;
+
+  border: 1px solid #e6eee8;
+  border-radius: 10px;
+
+  background: #f7fbf8;
+}
+
+.purchaseTrustIcon {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #e8f5ec;
+  color: #3f8757;
+}
+
+.purchaseTrustText {
+  min-width: 0;
+}
+
+.purchaseTrustText strong {
+  display: block;
+
+  color: #2b5e3b;
+
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.purchaseTrustText span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #6f8174;
+
+  font-size: 8px;
+  line-height: 14px;
+}
+
+.purchaseSeller {
+  margin-top: 15px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+.purchaseSellerLabel {
+  display: block;
+
+  color: #9c9c9c;
+
+  font-size: 8px;
+  line-height: 1;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.purchaseSellerInfo {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  margin-top: 9px;
+}
+
+.purchaseSellerAvatar {
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #efc35e,
+      #d99a31,
+      #9b651d
+    );
+
+  color: #1b1308;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.purchaseSellerText {
+  min-width: 0;
+}
+
+.purchaseSellerText strong,
+.purchaseSellerText span {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.purchaseSellerText strong {
+  color: #222222;
+
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.purchaseSellerText span {
+  margin-top: 3px;
+
+  color: #929292;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.purchaseReference {
+  display: block;
+
+  margin-top: 12px;
+
+  overflow: hidden;
+
+  color: #aaaaaa;
+
+  font-size: 7px;
+  line-height: 1.3;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 359px) {
+  .purchasePanel {
+    padding: 13px;
+  }
+
+  .purchasePrice {
+    font-size: 25px;
+  }
+
+  .purchaseCartButton,
+  .purchaseBuyButton {
+    height: 41px;
+
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 480px) {
+  .purchaseActions {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) {
+  .purchasePanel {
+    padding: 20px;
+  }
+
+  .purchasePrice {
+    font-size: 31px;
+  }
+
+  .purchaseSectionLabel {
+    font-size: 11px;
+  }
+
+  .purchaseCartButton,
+  .purchaseBuyButton {
+    height: 45px;
+
+    font-size: 12px;
+  }
+
+  .purchaseTrustText strong {
+    font-size: 10px;
+  }
+
+  .purchaseTrustText span {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .purchaseQuantityButton,
+  .purchaseCartButton,
+  .purchaseBuyButton {
+    transition: none;
+  }
+}

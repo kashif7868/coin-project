@@ -1,0 +1,391 @@
+.coinsHero,
+.coinsHero *,
+.coinsHero *::before,
+.coinsHero *::after {
+  box-sizing: border-box;
+}
+
+.coinsHero {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  padding:
+    34px
+    14px
+    28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #080808 0%,
+      #11100d 60%,
+      #171006 100%
+    );
+
+  color: #ffffff;
+}
+
+.coinsHeroContainer {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1240px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.coinsHeroGlowLeft,
+.coinsHeroGlowRight {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(70px);
+}
+
+.coinsHeroGlowLeft {
+  top: -110px;
+  left: -90px;
+
+  width: 260px;
+  height: 260px;
+
+  background:
+    rgba(217, 154, 49, 0.12);
+}
+
+.coinsHeroGlowRight {
+  right: -110px;
+  bottom: -130px;
+
+  width: 300px;
+  height: 300px;
+
+  background:
+    rgba(143, 92, 19, 0.13);
+}
+
+.coinsHeroBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 999px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+.coinsHeroBadge span {
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.coinsHeroContent {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-top: 18px;
+}
+
+.coinsHeroText {
+  min-width: 0;
+}
+
+.coinsHeroTitle {
+  max-width: 720px;
+
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+
+  color: #ffffff;
+}
+
+.coinsHeroTitle span {
+  color: #d99a31;
+}
+
+.coinsHeroDescription {
+  max-width: 560px;
+
+  margin:
+    12px
+    0
+    0;
+
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.coinsHeroVisual {
+  display: none;
+}
+
+.coinsHeroIconCircle {
+  width: 86px;
+  height: 86px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.24);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(217, 154, 49, 0.16),
+      rgba(217, 154, 49, 0.04)
+    );
+
+  color: #d99a31;
+
+  box-shadow:
+    0 0 32px rgba(217, 154, 49, 0.08);
+}
+
+.coinsHeroSearch {
+  position: relative;
+
+  width: 100%;
+  max-width: 720px;
+
+  display: flex;
+  align-items: center;
+
+  margin-top: 22px;
+}
+
+.coinsHeroSearchIcon {
+  position: absolute;
+
+  left: 14px;
+
+  color: #929292;
+
+  pointer-events: none;
+}
+
+.coinsHeroSearchInput {
+  width: 100%;
+  min-width: 0;
+  height: 46px;
+
+  padding:
+    0
+    88px
+    0
+    42px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.96);
+
+  color: #171717;
+
+  font-size: 11px;
+
+  outline: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.coinsHeroSearchInput::placeholder {
+  color: #9b9b9b;
+}
+
+.coinsHeroSearchInput:focus {
+  border-color:
+    rgba(217, 154, 49, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.1);
+}
+
+.coinsHeroSearchButton {
+  position: absolute;
+
+  right: 5px;
+
+  height: 36px;
+
+  padding:
+    0
+    16px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #d99a31;
+  color: #111111;
+
+  font: inherit;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  transition:
+    background-color 160ms ease,
+    transform 150ms ease;
+}
+
+.coinsHeroSearchButton:hover {
+  background: #e4a641;
+}
+
+.coinsHeroSearchButton:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 359px) {
+  .coinsHero {
+    padding:
+      28px
+      10px
+      24px;
+  }
+
+  .coinsHeroTitle {
+    font-size: 29px;
+  }
+
+  .coinsHeroDescription {
+    font-size: 10px;
+    line-height: 17px;
+  }
+
+  .coinsHeroSearchInput {
+    height: 44px;
+
+    padding-right: 78px;
+
+    font-size: 10px;
+  }
+
+  .coinsHeroSearchButton {
+    height: 34px;
+
+    padding:
+      0
+      13px;
+
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 640px) {
+  .coinsHero {
+    padding:
+      42px
+      24px
+      34px;
+  }
+
+  .coinsHeroTitle {
+    font-size: 44px;
+  }
+
+  .coinsHeroDescription {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .coinsHeroSearch {
+    margin-top: 26px;
+  }
+
+  .coinsHeroSearchInput {
+    height: 50px;
+
+    padding-left: 46px;
+
+    font-size: 12px;
+  }
+
+  .coinsHeroSearchButton {
+    height: 40px;
+
+    padding:
+      0
+      20px;
+
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .coinsHero {
+    padding:
+      54px
+      32px
+      42px;
+  }
+
+  .coinsHeroContent {
+    gap: 44px;
+  }
+
+  .coinsHeroTitle {
+    font-size: 52px;
+  }
+
+  .coinsHeroVisual {
+    display: block;
+  }
+}
