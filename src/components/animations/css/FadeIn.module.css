@@ -1,0 +1,11 @@
+.fadeInRoot,
+.fadeInRoot *,
+.fadeInRoot *::before,
+.fadeInRoot *::after {
+  box-sizing: border-box;
+}
+
+.fadeInRoot {
+  width: 100%;
+  min-width: 0;
+}

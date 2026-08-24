@@ -1,7 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+} from "framer-motion";
 import type { ReactNode } from "react";
+
+import styles from "@/components/animations/css/FadeIn.module.css";
 
 interface FadeInProps {
   children: ReactNode;
@@ -18,7 +23,15 @@ const FadeIn = ({
   y = 24,
   once = true,
 }: FadeInProps) => {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion =
+    useReducedMotion();
+
+  const combinedClassName = [
+    styles.fadeInRoot,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <motion.div
@@ -47,7 +60,7 @@ const FadeIn = ({
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className={`w-full min-w-0 ${className}`}
+      className={combinedClassName}
     >
       {children}
     </motion.div>

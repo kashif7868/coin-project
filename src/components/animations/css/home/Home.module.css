@@ -1,0 +1,150 @@
+.homePage,
+.homePage *,
+.homePage *::before,
+.homePage *::after {
+  box-sizing: border-box;
+}
+
+.homePage {
+  width: 100%;
+  min-width: 0;
+
+  background: #ffffff;
+  color: #000000;
+}
+
+.homeSearchSection {
+  position: relative;
+  z-index: 30;
+
+  width: 100%;
+
+  padding:
+    0
+    16px
+    16px;
+
+  background: #ffffff;
+}
+
+.homeSearchGrid {
+  width: 100%;
+  max-width: 1540px;
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  gap: 16px;
+
+  margin: 0 auto;
+}
+
+.homeSearchItem {
+  min-width: 0;
+}
+
+.homeMainSection {
+  width: 100%;
+
+  padding:
+    0
+    16px
+    24px;
+
+  background: #ffffff;
+}
+
+.homeMainGrid {
+  width: 100%;
+  max-width: 1540px;
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: 16px;
+
+  margin: 0 auto;
+}
+
+.homeLeftColumn {
+  min-width: 0;
+}
+
+.homeSectionBlock,
+.homeFeaturedBlock,
+.homeTrustBlock,
+.homeAuctionColumn,
+.homeFullWidthBlock {
+  min-width: 0;
+}
+
+.homeFeaturedBlock {
+  margin-top: 12px;
+}
+
+.homeTrustBlock {
+  margin-top: 8px;
+}
+
+.homeFullWidthBlock {
+  width: 100%;
+}
+
+/* Tablet */
+
+@media (min-width: 640px) {
+  .homeSearchSection {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .homeMainSection {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+  .homeSearchSection {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .homeSearchGrid {
+    grid-template-columns:
+      minmax(0, 3fr)
+      minmax(360px, 2fr);
+
+    gap: 20px;
+
+    margin-top: -16px;
+  }
+
+  .homeMainSection {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .homeMainGrid {
+    grid-template-columns:
+      minmax(0, 3fr)
+      minmax(360px, 2fr);
+
+    gap: 20px;
+  }
+}
+
+/* Large desktop */
+
+@media (min-width: 1280px) {
+  .homeSearchGrid,
+  .homeMainGrid {
+    gap: 24px;
+  }
+}

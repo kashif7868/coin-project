@@ -5,6 +5,8 @@ import {
   Users,
 } from "lucide-react";
 
+import styles from "@/components/animations/css/home/MarketplaceStats.module.css";
+
 const stats = [
   {
     label: "Coins Listed",
@@ -30,33 +32,33 @@ const stats = [
 
 const MarketplaceStats = () => {
   return (
-    <div className="hidden h-full w-full min-w-0 rounded-2xl border border-neutral-200 bg-[#fffdf9] px-4 py-4 shadow-[0_12px_34px_rgba(0,0,0,0.05)] lg:flex lg:flex-col lg:justify-center xl:px-5">
-      <h2 className="text-center text-[13px] font-semibold text-neutral-900 xl:text-[14px]">
+    <div className={styles.card}>
+      <h2 className={styles.title}>
         Why Collectors Choose Us?
       </h2>
 
-      <div className="mt-4 grid min-w-0 grid-cols-2 gap-3 xl:mt-5 xl:grid-cols-4">
+      <div className={styles.grid}>
         {stats.map((stat) => {
           const Icon = stat.icon;
 
           return (
             <div
               key={stat.label}
-              className="flex min-w-0 items-center gap-2 rounded-xl bg-white/50 px-2 py-2 xl:justify-center xl:bg-transparent xl:px-0 xl:py-0"
+              className={styles.item}
             >
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#fbf5ec] text-[#c57f18]">
+              <div className={styles.iconBox}>
                 <Icon
                   size={17}
                   strokeWidth={1.7}
                 />
               </div>
 
-              <div className="min-w-0">
-                <p className="truncate text-[14px] font-bold leading-none text-neutral-900 xl:text-[15px]">
+              <div className={styles.text}>
+                <p className={styles.value}>
                   {stat.value}
                 </p>
 
-                <p className="mt-1 truncate text-[8px] text-neutral-500">
+                <p className={styles.label}>
                   {stat.label}
                 </p>
               </div>

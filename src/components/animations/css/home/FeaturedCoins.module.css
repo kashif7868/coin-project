@@ -1,0 +1,639 @@
+.featuredCoinsSection,
+.featuredCoinsSection *,
+.featuredCoinsSection *::before,
+.featuredCoinsSection *::after {
+  box-sizing: border-box;
+}
+
+.featuredCoinsSection {
+  width: 100%;
+  min-width: 0;
+
+  padding: 12px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.04);
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.featuredCoinsHeader {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.featuredCoinsHeading {
+  min-width: 0;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 17px;
+  line-height: 1.2;
+  font-weight: 600;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.featuredCoinsViewAll {
+  flex: 0 0 auto;
+
+  color: #737373;
+
+  font-size: 9px;
+  line-height: 1.2;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.featuredCoinsViewAll:hover {
+  color: #b87516;
+}
+
+/* =========================================================
+   DESKTOP GRID
+   ========================================================= */
+
+.featuredCoinsDesktopGrid {
+  display: none;
+
+  min-width: 0;
+
+  margin-top: 12px;
+}
+
+.featuredCoinsGridItem {
+  min-width: 0;
+  height: 100%;
+}
+
+/* =========================================================
+   MOBILE SCROLLER
+   ========================================================= */
+
+.featuredCoinsMobileScroller {
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 12px;
+  padding-bottom: 8px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-snap-type: x mandatory;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.featuredCoinsMobileScroller::-webkit-scrollbar {
+  display: none;
+}
+
+.featuredCoinsMobileTrack {
+  width: max-content;
+  min-width: 100%;
+
+  display: flex;
+
+  gap: 12px;
+}
+
+.featuredCoinsMobileItem {
+  width: 72vw;
+  min-width: 180px;
+  max-width: 230px;
+
+  flex: 0 0 auto;
+
+  scroll-snap-align: start;
+}
+
+/* =========================================================
+   COIN CARD
+   ========================================================= */
+
+.featuredCoinCard {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 12px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.featuredCoinCard:hover {
+  border-color: rgba(214, 160, 81, 0.6);
+
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.featuredCoinCard:focus-visible {
+  box-shadow:
+    0 0 0 2px rgba(217, 154, 49, 0.4);
+}
+
+/* =========================================================
+   WISHLIST
+   ========================================================= */
+
+.featuredCoinWishlistButton {
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  z-index: 10;
+
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+
+  background: #ffffff;
+  color: #737373;
+
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08);
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.featuredCoinWishlistButton:hover {
+  border-color: #fecaca;
+  color: #ef4444;
+}
+
+.featuredCoinWishlistActive {
+  border-color: #fecaca;
+
+  background: #fffafa;
+
+  color: #ef4444;
+}
+
+/* =========================================================
+   COIN VISUAL
+   ========================================================= */
+
+.featuredCoinVisual {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(217, 154, 49, 0.08),
+      transparent 65%
+    );
+}
+
+.featuredCoinDisc {
+  position: relative;
+
+  width: 76px;
+  height: 76px;
+
+  flex: 0 0 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 4px solid #8f5d25;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #e5c07c,
+      #bb7f39 42%,
+      #74451f 78%
+    );
+
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.featuredCoinRingOuter,
+.featuredCoinRingInner {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.featuredCoinRingOuter {
+  inset: 5px;
+
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.featuredCoinRingInner {
+  inset: 10px;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.featuredCoinLabel {
+  position: relative;
+  z-index: 2;
+
+  color: rgba(0, 0, 0, 0.5);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.featuredCoinContent {
+  min-width: 0;
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 8px;
+}
+
+.featuredCoinName {
+  margin: 0;
+
+  color: #171717;
+
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 600;
+
+  transition: color 180ms ease;
+}
+
+.featuredCoinCard:hover .featuredCoinName {
+  color: #a66a17;
+}
+
+.featuredCoinMetadata {
+  min-height: 34px;
+}
+
+.featuredCoinSubtitle {
+  margin: 4px 0 0;
+
+  color: #737373;
+
+  font-size: 8px;
+  line-height: 12px;
+}
+
+.featuredCoinCondition {
+  margin: 4px 0 0;
+
+  overflow: hidden;
+
+  color: #a3a3a3;
+
+  font-size: 8px;
+  line-height: 12px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.featuredCoinFooter {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.featuredCoinPriceArea {
+  padding-top: 8px;
+
+  border-top: 1px solid #f5f5f5;
+}
+
+.featuredCoinPriceRow {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 8px;
+}
+
+.featuredCoinPriceDetails {
+  min-width: 0;
+}
+
+.featuredCoinPrice {
+  margin: 0;
+
+  color: #c07c1d;
+
+  font-size: 12px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.featuredCoinStock {
+  margin: 2px 0 0;
+
+  color: #737373;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.featuredCoinViewIndicator {
+  flex: 0 0 auto;
+
+  color: #a66a17;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 500;
+
+  opacity: 0;
+
+  transform: translateX(4px);
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.featuredCoinCard:hover
+.featuredCoinViewIndicator {
+  opacity: 1;
+
+  transform: translateX(0);
+}
+
+/* =========================================================
+   CART BUTTON
+   ========================================================= */
+
+.featuredCoinCartButton {
+  width: 100%;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 8px;
+  padding: 0 12px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: #11171c;
+  color: #ffffff;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.featuredCoinCartButton:hover {
+  background: #d99a31;
+  color: #000000;
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 359px) {
+  .featuredCoinsSection {
+    padding: 10px;
+  }
+
+  .featuredCoinsHeading {
+    font-size: 16px;
+  }
+
+  .featuredCoinsViewAll {
+    font-size: 8px;
+  }
+
+  .featuredCoinsMobileTrack {
+    gap: 10px;
+  }
+
+  .featuredCoinsMobileItem {
+    width: 76vw;
+    min-width: 170px;
+    max-width: 210px;
+  }
+
+  .featuredCoinCard {
+    padding: 10px;
+  }
+
+  .featuredCoinVisual {
+    height: 92px;
+  }
+
+  .featuredCoinDisc {
+    width: 70px;
+    height: 70px;
+
+    flex-basis: 70px;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 640px) {
+  .featuredCoinsSection {
+    padding: 16px;
+  }
+
+  .featuredCoinsHeading {
+    font-size: 18px;
+  }
+
+  .featuredCoinsViewAll {
+    font-size: 10px;
+  }
+
+  .featuredCoinsMobileItem {
+    width: 210px;
+  }
+}
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  .featuredCoinsMobileScroller {
+    display: none;
+  }
+
+  .featuredCoinsDesktopGrid {
+    display: grid;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1280px) {
+  .featuredCoinsDesktopGrid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   EXTRA LARGE
+   ========================================================= */
+
+@media (min-width: 1536px) {
+  .featuredCoinsDesktopGrid {
+    grid-template-columns:
+      repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   TOUCH
+   ========================================================= */
+
+@media (hover: none) {
+  .featuredCoinViewIndicator {
+    opacity: 1;
+
+    transform: none;
+  }
+
+  .featuredCoinCard:hover {
+    border-color: #e5e5e5;
+
+    box-shadow: none;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .featuredCoinCard,
+  .featuredCoinWishlistButton,
+  .featuredCoinCartButton,
+  .featuredCoinName,
+  .featuredCoinViewIndicator,
+  .featuredCoinsViewAll {
+    transition: none;
+  }
+
+  .featuredCoinsMobileScroller {
+    scroll-behavior: auto;
+  }
+}

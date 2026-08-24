@@ -11,17 +11,18 @@ import MarketplaceStats from "./components/MarketplaceStats";
 import Testimonials from "./components/Testimonials";
 import TrustSection from "./components/TrustSection";
 
+import styles from "@/components/animations/css/home/Home.module.css";
+
 const Home = () => {
   return (
-    <div className="w-full min-w-0 bg-white text-black">
+    <div className={styles.homePage}>
       <HeroSection />
 
-      {/* Search + Stats */}
-      <section className="relative z-30 w-full bg-white px-4 pb-4 sm:px-6 lg:px-8">
-        <div className="mx-auto grid w-full min-w-0 max-w-[1540px] gap-4 lg:-mt-4 lg:grid-cols-[minmax(0,3fr)_minmax(360px,2fr)] lg:gap-5">
+      <section className={styles.homeSearchSection}>
+        <div className={styles.homeSearchGrid}>
           <FadeIn
             y={18}
-            className="min-w-0"
+            className={styles.homeSearchItem}
           >
             <CoinSearchFilters />
           </FadeIn>
@@ -29,21 +30,19 @@ const Home = () => {
           <FadeIn
             delay={0.08}
             y={18}
-            className="min-w-0"
+            className={styles.homeSearchItem}
           >
             <MarketplaceStats />
           </FadeIn>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="w-full bg-white px-4 pb-6 sm:px-6 lg:px-8">
-        <div className="mx-auto grid w-full min-w-0 max-w-[1540px] items-start gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(360px,2fr)] lg:gap-5">
-          {/* Left Column */}
-          <div className="min-w-0">
+      <section className={styles.homeMainSection}>
+        <div className={styles.homeMainGrid}>
+          <div className={styles.homeLeftColumn}>
             <FadeIn
               y={20}
-              className="min-w-0"
+              className={styles.homeSectionBlock}
             >
               <HowItWorks />
             </FadeIn>
@@ -51,7 +50,7 @@ const Home = () => {
             <FadeIn
               delay={0.08}
               y={20}
-              className="mt-3 min-w-0"
+              className={styles.homeFeaturedBlock}
             >
               <FeaturedCoins />
             </FadeIn>
@@ -59,17 +58,16 @@ const Home = () => {
             <FadeIn
               delay={0.14}
               y={18}
-              className="mt-2 min-w-0"
+              className={styles.homeTrustBlock}
             >
               <TrustSection />
             </FadeIn>
           </div>
 
-          {/* Right Column */}
           <FadeIn
             delay={0.1}
             y={20}
-            className="min-w-0"
+            className={styles.homeAuctionColumn}
           >
             <AuctionSection />
           </FadeIn>
@@ -78,21 +76,21 @@ const Home = () => {
 
       <FadeIn
         y={24}
-        className="w-full min-w-0"
+        className={styles.homeFullWidthBlock}
       >
         <BlogSection />
       </FadeIn>
 
       <FadeIn
         y={24}
-        className="w-full min-w-0"
+        className={styles.homeFullWidthBlock}
       >
         <FaqSection />
       </FadeIn>
 
       <FadeIn
         y={24}
-        className="w-full min-w-0"
+        className={styles.homeFullWidthBlock}
       >
         <Testimonials />
       </FadeIn>

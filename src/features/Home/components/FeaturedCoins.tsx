@@ -16,6 +16,8 @@ import { toast } from "sonner";
 import { useAuthStore } from "@/store/authStore";
 import { useUIStore } from "@/store/uiStore";
 
+import styles from "@/components/animations/css/home/FeaturedCoins.module.css";
+
 interface Coin {
   id: number;
   name: string;
@@ -102,7 +104,6 @@ const FeaturedCoins = () => {
       toast.info("Already in wishlist", {
         description: coin.name,
       });
-
       return;
     }
 
@@ -128,22 +129,21 @@ const FeaturedCoins = () => {
   };
 
   return (
-    <div className="w-full min-w-0 rounded-xl border border-neutral-200 bg-white p-3 shadow-[0_6px_18px_rgba(0,0,0,0.04)] sm:p-4">
-      <div className="flex min-w-0 items-center justify-between gap-3">
-        <h2 className="truncate font-serif text-[17px] font-semibold text-neutral-900 sm:text-[18px]">
+    <section className={styles.featuredCoinsSection}>
+      <div className={styles.featuredCoinsHeader}>
+        <h2 className={styles.featuredCoinsHeading}>
           Featured Coins
         </h2>
 
         <Link
           href="/coins"
-          className="shrink-0 text-[9px] font-medium text-neutral-500 transition-colors hover:text-[#b87516] sm:text-[10px]"
+          className={styles.featuredCoinsViewAll}
         >
           View All Coins →
         </Link>
       </div>
 
-      {/* Desktop / Laptop */}
-      <div className="mt-3 hidden min-w-0 gap-3 lg:grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5">
+      <div className={styles.featuredCoinsDesktopGrid}>
         {coins.map((coin, index) => (
           <motion.div
             key={coin.id}
@@ -164,7 +164,7 @@ const FeaturedCoins = () => {
               delay: index * 0.04,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="min-w-0"
+            className={styles.featuredCoinsGridItem}
           >
             <CoinCard
               coin={coin}
@@ -178,13 +178,12 @@ const FeaturedCoins = () => {
         ))}
       </div>
 
-      {/* Mobile / Tablet */}
-      <div className="mt-3 w-full min-w-0 overflow-x-auto pb-2 lg:hidden">
-        <div className="flex w-max min-w-full snap-x snap-mandatory gap-3">
+      <div className={styles.featuredCoinsMobileScroller}>
+        <div className={styles.featuredCoinsMobileTrack}>
           {coins.map((coin) => (
             <div
               key={coin.id}
-              className="w-[72vw] min-w-[180px] max-w-[230px] shrink-0 snap-start sm:w-[210px]"
+              className={styles.featuredCoinsMobileItem}
             >
               <CoinCard
                 coin={coin}
@@ -198,7 +197,7 @@ const FeaturedCoins = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
@@ -255,9 +254,8 @@ const CoinCard = ({
         stiffness: 280,
         damping: 20,
       }}
-      className="group relative flex h-full min-w-0 cursor-pointer flex-col rounded-xl border border-neutral-200 bg-white p-3 outline-none transition-all duration-300 hover:border-[#d6a051]/60 hover:shadow-[0_12px_28px_rgba(0,0,0,0.10)] focus-visible:ring-2 focus-visible:ring-[#d99a31]/40"
+      className={styles.featuredCoinCard}
     >
-      {/* Wishlist */}
       <motion.button
         type="button"
         aria-label={
@@ -266,7 +264,9 @@ const CoinCard = ({
             : `Add ${coin.name} to wishlist`
         }
         onClick={(event) =>
-          stopAndRun(event, () => onWishlist(coin))
+          stopAndRun(event, () =>
+            onWishlist(coin)
+          )
         }
         whileHover={{
           scale: 1.1,
@@ -274,10 +274,10 @@ const CoinCard = ({
         whileTap={{
           scale: 0.9,
         }}
-        className={`absolute right-2 top-2 z-10 flex h-7 w-7 items-center justify-center rounded-full border bg-white shadow-sm transition-colors ${
+        className={`${styles.featuredCoinWishlistButton} ${
           isWishlisted
-            ? "border-red-200 text-red-500"
-            : "border-neutral-200 text-neutral-500 hover:border-red-200 hover:text-red-500"
+            ? styles.featuredCoinWishlistActive
+            : ""
         }`}
       >
         <Heart
@@ -291,8 +291,7 @@ const CoinCard = ({
         />
       </motion.button>
 
-      {/* Coin */}
-      <div className="relative flex h-[100px] min-w-0 items-center justify-center overflow-hidden rounded-lg bg-[radial-gradient(circle_at_center,rgba(217,154,49,0.08),transparent_65%)]">
+      <div className={styles.featuredCoinVisual}>
         <motion.div
           whileHover={{
             scale: 1.06,
@@ -303,50 +302,51 @@ const CoinCard = ({
             stiffness: 220,
             damping: 18,
           }}
-          className="relative flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border-[4px] border-[#8f5d25] bg-[radial-gradient(circle_at_35%_30%,#e5c07c,#bb7f39_42%,#74451f_78%)] shadow-[0_8px_16px_rgba(0,0,0,0.20)]"
+          className={styles.featuredCoinDisc}
         >
-          <div className="absolute inset-[5px] rounded-full border border-black/20" />
-          <div className="absolute inset-[10px] rounded-full border border-black/10" />
+          <div className={styles.featuredCoinRingOuter} />
+          <div className={styles.featuredCoinRingInner} />
 
-          <span className="relative font-serif text-[9px] font-semibold text-black/50">
+          <span className={styles.featuredCoinLabel}>
             {coin.label}
           </span>
         </motion.div>
       </div>
 
-      {/* Content */}
-      <div className="mt-2 flex flex-1 flex-col">
-        <h3 className="text-[10px] font-semibold leading-[14px] text-neutral-900 transition-colors group-hover:text-[#a66a17]">
+      <div className={styles.featuredCoinContent}>
+        <h3 className={styles.featuredCoinName}>
           {coin.name}
           {coin.year ? ` ${coin.year}` : ""}
         </h3>
 
-        {coin.subtitle && (
-          <p className="mt-1 text-[8px] text-neutral-500">
-            {coin.subtitle}
-          </p>
-        )}
+        <div className={styles.featuredCoinMetadata}>
+          {coin.subtitle && (
+            <p className={styles.featuredCoinSubtitle}>
+              {coin.subtitle}
+            </p>
+          )}
 
-        {coin.condition && (
-          <p className="mt-1 truncate text-[8px] text-neutral-400">
-            {coin.condition}
-          </p>
-        )}
+          {coin.condition && (
+            <p className={styles.featuredCoinCondition}>
+              {coin.condition}
+            </p>
+          )}
+        </div>
 
-        <div className="mt-auto pt-3">
-          <div className="border-t border-neutral-100 pt-2">
-            <div className="flex items-end justify-between gap-2">
-              <div className="min-w-0">
-                <p className="text-[12px] font-semibold text-[#c07c1d]">
+        <div className={styles.featuredCoinFooter}>
+          <div className={styles.featuredCoinPriceArea}>
+            <div className={styles.featuredCoinPriceRow}>
+              <div className={styles.featuredCoinPriceDetails}>
+                <p className={styles.featuredCoinPrice}>
                   {coin.price}
                 </p>
 
-                <p className="mt-0.5 text-[8px] text-neutral-500">
+                <p className={styles.featuredCoinStock}>
                   {coin.stock} in stock
                 </p>
               </div>
 
-              <span className="shrink-0 translate-x-1 text-[8px] font-medium text-[#a66a17] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
+              <span className={styles.featuredCoinViewIndicator}>
                 View →
               </span>
             </div>
@@ -361,13 +361,14 @@ const CoinCard = ({
               whileTap={{
                 scale: 0.96,
               }}
-              className="mt-2 flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-[#11171c] px-3 text-[9px] font-semibold text-white transition-colors hover:bg-[#d99a31] hover:text-black"
+              className={styles.featuredCoinCartButton}
             >
               <ShoppingCart
                 size={12}
                 strokeWidth={1.8}
               />
-              Add to Cart
+
+              <span>Add to Cart</span>
             </motion.button>
           </div>
         </div>

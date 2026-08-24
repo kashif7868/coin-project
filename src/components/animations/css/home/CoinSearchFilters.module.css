@@ -1,0 +1,453 @@
+.card,
+.card *,
+.card *::before,
+.card *::after {
+  box-sizing: border-box;
+}
+
+.card {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+
+  padding: 12px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.09);
+}
+
+.searchRow {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.searchField {
+  position: relative;
+
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.searchIcon {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  z-index: 1;
+
+  transform: translateY(-50%);
+
+  color: #a3a3a3;
+
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+
+  padding:
+    0
+    12px
+    0
+    40px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+
+  background: #ffffff;
+  color: #171717;
+
+  font-size: 12px;
+  line-height: 1;
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.input::placeholder {
+  color: #a3a3a3;
+}
+
+.input:focus {
+  border-color: #d99a31;
+
+  box-shadow:
+    0 0 0 2px rgba(217, 154, 49, 0.1);
+}
+
+/* Desktop search button */
+
+.desktopSearchButton {
+  display: none;
+
+  flex: 0 0 auto;
+
+  height: 44px;
+
+  padding: 0 20px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background: #dfa02d;
+  color: #000000;
+
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    transform 160ms ease;
+}
+
+.desktopSearchButton:hover {
+  background: #e9ad43;
+}
+
+.desktopSearchButton:active {
+  transform: scale(0.98);
+}
+
+/* Mobile filter toggle */
+
+.mobileFilterToggle {
+  width: 44px;
+  height: 44px;
+
+  flex: 0 0 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+
+  background: #ffffff;
+  color: #404040;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 160ms ease;
+}
+
+.mobileFilterToggle:hover {
+  border-color: #d9a354;
+}
+
+.mobileFilterToggle:active {
+  transform: scale(0.96);
+}
+
+.mobileFilterToggleActive {
+  border-color: rgba(217, 154, 49, 0.4);
+
+  background: #fff8ec;
+
+  color: #b87516;
+}
+
+/* Mobile filter reveal */
+
+.mobileFilters {
+  display: grid;
+
+  grid-template-rows: 0fr;
+
+  margin-top: 0;
+
+  opacity: 0;
+
+  transition:
+    grid-template-rows 200ms ease,
+    opacity 200ms ease,
+    margin-top 200ms ease;
+}
+
+.mobileFiltersOpen {
+  grid-template-rows: 1fr;
+
+  margin-top: 12px;
+
+  opacity: 1;
+}
+
+.mobileFiltersInner {
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+.mobileFilterGrid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.mobileFilterButton {
+  min-width: 0;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  padding: 0 12px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #525252;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.mobileFilterButton:hover {
+  border-color: #d9a354;
+
+  background: #fffdf9;
+}
+
+.mobileFilterButton span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mobileFilterButton svg {
+  flex: 0 0 auto;
+}
+
+/* Desktop filters */
+
+.desktopFilters {
+  display: none;
+
+  min-width: 0;
+
+  margin-top: 12px;
+
+  gap: 8px;
+}
+
+.desktopFilterButton {
+  min-width: 0;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  padding: 0 12px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #404040;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.desktopFilterButton:hover {
+  border-color: #d9a354;
+
+  background: #fffdf9;
+}
+
+.desktopFilterButton span {
+  min-width: 0;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.desktopFilterButton svg {
+  flex: 0 0 auto;
+}
+
+/* Very small phone */
+
+@media (max-width: 359px) {
+  .card {
+    padding: 10px;
+  }
+
+  .searchRow {
+    gap: 6px;
+  }
+
+  .input {
+    height: 42px;
+
+    padding-left: 38px;
+
+    font-size: 11px;
+  }
+
+  .searchIcon {
+    left: 12px;
+  }
+
+  .mobileFilterToggle {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+  }
+
+  .mobileFilterButton {
+    padding: 0 10px;
+
+    font-size: 9px;
+  }
+}
+
+/* 640+ */
+
+@media (min-width: 640px) {
+  .card {
+    padding: 16px;
+  }
+
+  .searchRow {
+    gap: 12px;
+  }
+
+  .input {
+    height: 48px;
+
+    padding:
+      0
+      16px
+      0
+      44px;
+
+    font-size: 13px;
+  }
+
+  .searchIcon {
+    left: 16px;
+  }
+
+  .mobileFilterToggle {
+    width: 48px;
+    height: 48px;
+
+    flex-basis: 48px;
+  }
+
+  .mobileFilterGrid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* 1024+ */
+
+@media (min-width: 1024px) {
+  .desktopSearchButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileFilterToggle,
+  .mobileFilters {
+    display: none;
+  }
+
+  .desktopFilters {
+    display: grid;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 1280+ */
+
+@media (min-width: 1280px) {
+  .desktopSearchButton {
+    height: 48px;
+
+    padding: 0 28px;
+
+    font-size: 13px;
+  }
+
+  .desktopFilters {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+
+  .desktopFilterButton {
+    padding: 0 16px;
+
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktopSearchButton,
+  .mobileFilterToggle,
+  .mobileFilters,
+  .mobileFilterButton,
+  .desktopFilterButton {
+    transition: none;
+  }
+}
