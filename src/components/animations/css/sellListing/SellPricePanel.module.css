@@ -1,0 +1,398 @@
+.sellPricePanel,
+.sellPricePanel *,
+.sellPricePanel *::before,
+.sellPricePanel *::after {
+  box-sizing: border-box;
+}
+
+.sellPricePanel {
+  width: 100%;
+  min-width: 0;
+
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.045);
+}
+
+.sellPricePanelHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.sellPricePanelHeader > div:first-child {
+  min-width: 0;
+}
+
+.sellPricePanelEyebrow {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sellPricePanelTitle {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.sellPricePanelDescription {
+  max-width: 560px;
+
+  margin: 7px 0 0;
+
+  color: #777777;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.sellPricePanelHeaderIcon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.sellPricePanelBody {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  gap: 12px;
+
+  margin-top: 16px;
+}
+
+.sellPriceField {
+  min-width: 0;
+}
+
+.sellPriceField label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #484848;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.sellPriceInputWrap {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+
+  display: grid;
+  grid-template-columns:
+    38px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  overflow: hidden;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.sellPriceInputWrap:focus-within {
+  border-color:
+    rgba(217, 154, 49, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.09);
+}
+
+.sellPriceInputWrap > span {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-right:
+    1px solid #eeeeee;
+
+  background: #faf9f7;
+  color: #a96d18;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sellPriceInputWrap input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+
+  padding:
+    0
+    12px;
+
+  border: 0;
+
+  background: transparent;
+  color: #171717;
+
+  font: inherit;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  outline: none;
+}
+
+.sellPriceInputWrap input::placeholder {
+  color: #b5b5b5;
+}
+
+.sellPriceField small {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #999999;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+.sellPriceSummary {
+  min-width: 0;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.14);
+  border-radius: 11px;
+
+  background: #fffbf5;
+}
+
+.sellPriceSummaryBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 5px;
+
+  padding:
+    5px
+    7px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(217, 154, 49, 0.1);
+
+  color: #a96d18;
+}
+
+.sellPriceSummaryBadge span {
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.sellPriceSummaryRows {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+
+  margin-top: 11px;
+}
+
+.sellPriceSummaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.sellPriceSummaryRow span {
+  color: #756957;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.sellPriceSummaryRow strong {
+  color: #3a2b16;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.sellPriceSummaryTotal {
+  margin-top: 2px;
+  padding-top: 10px;
+
+  border-top:
+    1px solid rgba(217, 154, 49, 0.16);
+}
+
+.sellPriceSummaryTotal span {
+  color: #4a3820;
+
+  font-weight: 700;
+}
+
+.sellPriceSummaryTotal strong {
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+}
+
+.sellPricePanelExample {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 14px;
+  padding: 10px;
+
+  border: 1px solid #e8eee9;
+  border-radius: 10px;
+
+  background: #f8fbf8;
+}
+
+.sellPricePanelExample > svg {
+  flex: 0 0 auto;
+
+  color: #4e865e;
+}
+
+.sellPricePanelExample strong,
+.sellPricePanelExample span {
+  display: block;
+}
+
+.sellPricePanelExample strong {
+  color: #345b40;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.sellPricePanelExample span {
+  margin-top: 3px;
+
+  color: #728177;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+@media (min-width: 640px) {
+  .sellPricePanel {
+    padding: 20px;
+  }
+
+  .sellPricePanelTitle {
+    font-size: 22px;
+  }
+
+  .sellPricePanelDescription {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .sellPriceField label {
+    font-size: 10px;
+  }
+
+  .sellPriceInputWrap {
+    height: 52px;
+  }
+
+  .sellPriceInputWrap input {
+    font-size: 16px;
+  }
+
+  .sellPricePanelBody {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(280px, 0.85fr);
+
+    align-items: start;
+
+    gap: 16px;
+  }
+
+  .sellPriceSummaryRow span {
+    font-size: 9px;
+  }
+
+  .sellPriceSummaryRow strong {
+    font-size: 11px;
+  }
+
+  .sellPriceSummaryTotal strong {
+    font-size: 18px;
+  }
+
+  .sellPricePanelExample strong {
+    font-size: 9px;
+  }
+
+  .sellPricePanelExample span {
+    font-size: 8px;
+    line-height: 14px;
+  }
+}

@@ -1,0 +1,89 @@
+.wishlistGridSection,
+.wishlistGridSection *,
+.wishlistGridSection *::before,
+.wishlistGridSection *::after {
+  box-sizing: border-box;
+}
+
+.wishlistGridSection {
+  width: 100%;
+  min-width: 0;
+}
+
+.wishlistGridTop {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+}
+
+.wishlistGridEyebrow {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wishlistGridTitle {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.wishlistGrid {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+@media (max-width: 359px) {
+  .wishlistGrid {
+    grid-template-columns:
+      minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .wishlistGridTitle {
+    font-size: 22px;
+  }
+
+  .wishlistGrid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wishlistGrid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+}

@@ -1,0 +1,416 @@
+.sellHero,
+.sellHero *,
+.sellHero *::before,
+.sellHero *::after {
+  box-sizing: border-box;
+}
+
+.sellHero {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  padding:
+    42px
+    14px
+    38px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #070707,
+      #11100d 62%,
+      #191106
+    );
+
+  color: #ffffff;
+}
+
+.sellHeroContainer {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1180px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.sellHeroGlowLeft,
+.sellHeroGlowRight {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(72px);
+}
+
+.sellHeroGlowLeft {
+  top: -120px;
+  left: -100px;
+
+  width: 280px;
+  height: 280px;
+
+  background:
+    rgba(217, 154, 49, 0.12);
+}
+
+.sellHeroGlowRight {
+  right: -130px;
+  bottom: -150px;
+
+  width: 340px;
+  height: 340px;
+
+  background:
+    rgba(151, 94, 16, 0.14);
+}
+
+.sellHeroBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 999px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+.sellHeroBadge span {
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.sellHeroContent {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 28px;
+
+  margin-top: 16px;
+}
+
+.sellHeroText {
+  min-width: 0;
+}
+
+.sellHeroTitle {
+  max-width: 760px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 600;
+
+  letter-spacing: -0.025em;
+}
+
+.sellHeroTitle span {
+  color: #d99a31;
+}
+
+.sellHeroDescription {
+  max-width: 620px;
+
+  margin: 13px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.sellHeroActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+.sellHeroPrimaryAction,
+.sellHeroSecondaryAction {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding:
+    0
+    14px;
+
+  border-radius: 10px;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.sellHeroPrimaryAction {
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+}
+
+.sellHeroSecondaryAction {
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #ffffff;
+}
+
+.sellHeroFreeNotice {
+  max-width: 470px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 14px;
+  padding: 10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.12);
+  border-radius: 10px;
+
+  background:
+    rgba(217, 154, 49, 0.05);
+}
+
+.sellHeroFreeNotice > svg {
+  flex: 0 0 auto;
+
+  color: #d99a31;
+}
+
+.sellHeroFreeNotice strong,
+.sellHeroFreeNotice span {
+  display: block;
+}
+
+.sellHeroFreeNotice strong {
+  color: #ffffff;
+
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.sellHeroFreeNotice span {
+  margin-top: 3px;
+
+  color:
+    rgba(255, 255, 255, 0.42);
+
+  font-size: 8px;
+  line-height: 14px;
+}
+
+.sellHeroVisual {
+  display: none;
+}
+
+.sellHeroCoinCircle {
+  width: 180px;
+  height: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.22);
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(217, 154, 49, 0.14),
+      rgba(217, 154, 49, 0.02)
+    );
+
+  color: #d99a31;
+}
+
+.sellHeroCommissionCard {
+  max-width: 210px;
+
+  margin:
+    -18px
+    auto
+    0;
+
+  padding: 12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 11px;
+
+  background:
+    rgba(12, 12, 12, 0.88);
+
+  text-align: center;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sellHeroCommissionCard span {
+  color:
+    rgba(255, 255, 255, 0.42);
+
+  font-size: 7px;
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sellHeroCommissionCard strong {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #d99a31;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 28px;
+  line-height: 1;
+}
+
+.sellHeroCommissionCard p {
+  margin: 6px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.44);
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+@media (max-width: 359px) {
+  .sellHero {
+    padding:
+      30px
+      10px
+      28px;
+  }
+
+  .sellHeroTitle {
+    font-size: 29px;
+  }
+
+  .sellHeroDescription {
+    font-size: 10px;
+    line-height: 17px;
+  }
+
+  .sellHeroPrimaryAction,
+  .sellHeroSecondaryAction {
+    width: 100%;
+  }
+}
+
+@media (min-width: 640px) {
+  .sellHero {
+    padding:
+      54px
+      24px
+      48px;
+  }
+
+  .sellHeroTitle {
+    font-size: 44px;
+  }
+
+  .sellHeroDescription {
+    font-size: 13px;
+    line-height: 21px;
+  }
+
+  .sellHeroPrimaryAction,
+  .sellHeroSecondaryAction {
+    min-height: 44px;
+
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sellHero {
+    padding:
+      64px
+      32px
+      56px;
+  }
+
+  .sellHeroContent {
+    grid-template-columns:
+      minmax(0, 1.35fr)
+      minmax(260px, 0.65fr);
+
+    gap: 40px;
+  }
+
+  .sellHeroTitle {
+    font-size: 52px;
+  }
+
+  .sellHeroVisual {
+    display: block;
+  }
+}

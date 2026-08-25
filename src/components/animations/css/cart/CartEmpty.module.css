@@ -1,0 +1,189 @@
+.cartEmpty,
+.cartEmpty *,
+.cartEmpty *::before,
+.cartEmpty *::after {
+  box-sizing: border-box;
+}
+
+.cartEmpty {
+  width: 100%;
+  min-width: 0;
+
+  min-height: 360px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    30px
+    18px;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 18px;
+
+  background: #ffffff;
+
+  text-align: center;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.045);
+}
+
+.cartEmptyIcon {
+  width: 66px;
+  height: 66px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.cartEmptyBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 16px;
+
+  padding:
+    5px
+    8px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.16);
+  border-radius: 999px;
+
+  background: #fffaf2;
+  color: #a96d18;
+}
+
+.cartEmptyBadge span {
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.cartEmptyTitle {
+  margin: 10px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 23px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.cartEmptyDescription {
+  max-width: 430px;
+
+  margin: 8px 0 0;
+
+  color: #777777;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.cartEmptyAction {
+  min-width: 150px;
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 16px;
+
+  padding:
+    0
+    14px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  color: #111111;
+
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 8px 20px rgba(217, 154, 49, 0.16);
+
+  transition:
+    transform 150ms ease,
+    box-shadow 160ms ease;
+}
+
+.cartEmptyAction:hover {
+  box-shadow:
+    0 11px 26px rgba(217, 154, 49, 0.22);
+}
+
+.cartEmptyAction:active {
+  transform: scale(0.98);
+}
+
+@media (min-width: 640px) {
+  .cartEmpty {
+    min-height: 400px;
+
+    padding:
+      40px
+      24px;
+  }
+
+  .cartEmptyIcon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .cartEmptyTitle {
+    font-size: 26px;
+  }
+
+  .cartEmptyDescription {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .cartEmptyAction {
+    height: 44px;
+
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartEmptyAction {
+    transition: none;
+  }
+}

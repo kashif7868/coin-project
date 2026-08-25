@@ -1,0 +1,135 @@
+.subscriptionPlans,
+.subscriptionPlans *,
+.subscriptionPlans *::before,
+.subscriptionPlans *::after {
+  box-sizing: border-box;
+}
+
+.subscriptionPlans {
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 16px;
+}
+
+.subscriptionPlansHeader {
+  max-width: 720px;
+}
+
+.subscriptionPlansEyebrow {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.subscriptionPlansTitle {
+  margin: 6px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.subscriptionPlansDescription {
+  margin: 8px 0 0;
+
+  color: #777777;
+
+  font-size: 9px;
+  line-height: 16px;
+}
+
+.subscriptionPlansGrid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  gap: 12px;
+
+  margin-top: 16px;
+}
+
+.subscriptionPlansNote {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-top: 14px;
+  padding: 11px;
+
+  border:
+    1px solid rgba(
+      217,
+      154,
+      49,
+      0.14
+    );
+  border-radius: 10px;
+
+  background: #fffbf5;
+}
+
+.subscriptionPlansNote strong {
+  color: #4a3820;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.subscriptionPlansNote span {
+  color: #81725f;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+@media (min-width: 640px) {
+  .subscriptionPlans {
+    margin-top: 20px;
+  }
+
+  .subscriptionPlansTitle {
+    font-size: 25px;
+  }
+
+  .subscriptionPlansDescription {
+    font-size: 10px;
+    line-height: 17px;
+  }
+
+  .subscriptionPlansGrid {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+
+    gap: 14px;
+
+    margin-top: 18px;
+  }
+
+  .subscriptionPlansNote strong {
+    font-size: 9px;
+  }
+
+  .subscriptionPlansNote span {
+    font-size: 8px;
+    line-height: 14px;
+  }
+}

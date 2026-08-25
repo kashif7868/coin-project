@@ -1,0 +1,48 @@
+.subscriptionPage,
+.subscriptionPage *,
+.subscriptionPage *::before,
+.subscriptionPage *::after {
+  box-sizing: border-box;
+}
+
+.subscriptionPage {
+  width: 100%;
+  min-width: 0;
+
+  background: #f7f5f1;
+}
+
+.subscriptionContent {
+  width: 100%;
+
+  padding:
+    18px
+    14px
+    100px;
+}
+
+.subscriptionContainer {
+  width: 100%;
+  max-width: 1180px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .subscriptionContent {
+    padding:
+      24px
+      24px
+      42px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subscriptionContent {
+    padding:
+      28px
+      32px
+      48px;
+  }
+}

@@ -1,0 +1,316 @@
+.sellPreviewCard,
+.sellPreviewCard *,
+.sellPreviewCard *::before,
+.sellPreviewCard *::after {
+  box-sizing: border-box;
+}
+
+.sellPreviewCard {
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.045);
+}
+
+.sellPreviewCardImageArea {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle,
+      #fffaf2,
+      #f1ede6
+    );
+}
+
+.sellPreviewCardImage {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  padding: 18px;
+}
+
+.sellPreviewCardPlaceholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  color: #b87516;
+}
+
+.sellPreviewCardPlaceholder span {
+  color: #8a8a8a;
+
+  font-size: 9px;
+}
+
+.sellPreviewCardBadge {
+  position: absolute;
+
+  left: 12px;
+  bottom: 12px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding:
+    6px
+    8px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.18);
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.92);
+
+  color: #a96d18;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.sellPreviewCardBadge span {
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sellPreviewCardBody {
+  padding: 16px;
+}
+
+.sellPreviewCardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.sellPreviewCardTop > div:first-child {
+  min-width: 0;
+}
+
+.sellPreviewCardCountry {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sellPreviewCardTitle {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.sellPreviewCardPrice {
+  flex: 0 0 auto;
+
+  text-align: right;
+}
+
+.sellPreviewCardPrice span,
+.sellPreviewCardPrice strong {
+  display: block;
+}
+
+.sellPreviewCardPrice span {
+  color: #999999;
+
+  font-size: 7px;
+}
+
+.sellPreviewCardPrice strong {
+  margin-top: 4px;
+
+  color: #171717;
+
+  font-size: 16px;
+  line-height: 1;
+}
+
+.sellPreviewCardFacts {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin-top: 14px;
+}
+
+.sellPreviewCardFact {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px;
+
+  border: 1px solid #eeeeee;
+  border-radius: 9px;
+
+  background: #faf9f7;
+}
+
+.sellPreviewCardFact > svg {
+  flex: 0 0 auto;
+
+  color: #b87516;
+}
+
+.sellPreviewCardFact div {
+  min-width: 0;
+}
+
+.sellPreviewCardFact span,
+.sellPreviewCardFact strong {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sellPreviewCardFact span {
+  color: #999999;
+
+  font-size: 7px;
+  line-height: 1;
+}
+
+.sellPreviewCardFact strong {
+  margin-top: 4px;
+
+  color: #333333;
+
+  font-size: 9px;
+  line-height: 1.1;
+}
+
+.sellPreviewCardFooter {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 14px;
+  padding-top: 12px;
+
+  border-top: 1px solid #eeeeee;
+}
+
+.sellPreviewCardFooter > div {
+  min-width: 0;
+}
+
+.sellPreviewCardFooter span,
+.sellPreviewCardFooter strong {
+  display: block;
+}
+
+.sellPreviewCardFooter span {
+  color: #999999;
+
+  font-size: 7px;
+  line-height: 1;
+}
+
+.sellPreviewCardFooter strong {
+  margin-top: 4px;
+
+  overflow: hidden;
+
+  color: #333333;
+
+  font-size: 10px;
+  line-height: 1.2;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 640px) {
+  .sellPreviewCardBody {
+    padding: 20px;
+  }
+
+  .sellPreviewCardTitle {
+    font-size: 23px;
+  }
+
+  .sellPreviewCardPrice strong {
+    font-size: 18px;
+  }
+
+  .sellPreviewCardFacts {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .sellPreviewCardFact span {
+    font-size: 8px;
+  }
+
+  .sellPreviewCardFact strong {
+    font-size: 10px;
+  }
+
+  .sellPreviewCardFooter span {
+    font-size: 8px;
+  }
+
+  .sellPreviewCardFooter strong {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,48 @@
+.sellReviewPage,
+.sellReviewPage *,
+.sellReviewPage *::before,
+.sellReviewPage *::after {
+  box-sizing: border-box;
+}
+
+.sellReviewPage {
+  width: 100%;
+  min-width: 0;
+
+  background: #f7f5f1;
+}
+
+.sellReviewContent {
+  width: 100%;
+
+  padding:
+    18px
+    14px
+    100px;
+}
+
+.sellReviewContainer {
+  width: 100%;
+  max-width: 1180px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .sellReviewContent {
+    padding:
+      24px
+      24px
+      42px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sellReviewContent {
+    padding:
+      28px
+      32px
+      48px;
+  }
+}

@@ -1,0 +1,273 @@
+.sellDescriptionForm,
+.sellDescriptionForm *,
+.sellDescriptionForm *::before,
+.sellDescriptionForm *::after {
+  box-sizing: border-box;
+}
+
+.sellDescriptionForm {
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 16px;
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.045);
+}
+
+.sellDescriptionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.sellDescriptionHeader > div:first-child {
+  min-width: 0;
+}
+
+.sellDescriptionEyebrow {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sellDescriptionTitle {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.sellDescriptionDescription {
+  max-width: 580px;
+
+  margin: 7px 0 0;
+
+  color: #777777;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.sellDescriptionHeaderIcon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.sellDescriptionField {
+  margin-top: 16px;
+}
+
+.sellDescriptionField label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #484848;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.sellDescriptionField textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 145px;
+
+  resize: vertical;
+
+  padding:
+    11px
+    12px;
+
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #202020;
+
+  font: inherit;
+
+  font-size: 10px;
+  line-height: 17px;
+
+  outline: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.sellDescriptionField textarea::placeholder {
+  color: #aaaaaa;
+}
+
+.sellDescriptionField textarea:focus {
+  border-color:
+    rgba(217, 154, 49, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(217, 154, 49, 0.09);
+}
+
+.sellDescriptionMeta {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-top: 6px;
+}
+
+.sellDescriptionMeta span {
+  color: #999999;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+.sellDescriptionMeta strong {
+  color: #888888;
+
+  font-size: 7px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.sellDescriptionLimit {
+  color: #aa633f !important;
+}
+
+.sellDescriptionTip {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 14px;
+  padding: 10px;
+
+  border: 1px solid #e8eee9;
+  border-radius: 10px;
+
+  background: #f8fbf8;
+}
+
+.sellDescriptionTip > svg {
+  flex: 0 0 auto;
+
+  color: #4e865e;
+}
+
+.sellDescriptionTip strong,
+.sellDescriptionTip span {
+  display: block;
+}
+
+.sellDescriptionTip strong {
+  color: #345b40;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.sellDescriptionTip span {
+  margin-top: 3px;
+
+  color: #728177;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+@media (min-width: 640px) {
+  .sellDescriptionForm {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  .sellDescriptionTitle {
+    font-size: 22px;
+  }
+
+  .sellDescriptionDescription {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .sellDescriptionField label {
+    font-size: 10px;
+  }
+
+  .sellDescriptionField textarea {
+    min-height: 160px;
+
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .sellDescriptionMeta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+  }
+
+  .sellDescriptionMeta span,
+  .sellDescriptionMeta strong {
+    font-size: 8px;
+  }
+
+  .sellDescriptionTip strong {
+    font-size: 9px;
+  }
+
+  .sellDescriptionTip span {
+    font-size: 8px;
+    line-height: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sellDescriptionField textarea {
+    transition: none;
+  }
+}

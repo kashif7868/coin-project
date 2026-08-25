@@ -16,8 +16,13 @@ import {
   useState,
   type ChangeEvent,
 } from "react";
-import { useSearchParams } from "next/navigation";
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { toast } from "sonner";
+
+import { useSellerListingStore } from "@/store/sellerListingStore";
 
 import styles from "@/components/animations/css/scan/ScanPageContent.module.css";
 
@@ -28,7 +33,9 @@ type CameraStatus =
   | "denied"
   | "unavailable";
 
-type CoinSide = "front" | "back";
+type CoinSide =
+  | "front"
+  | "back";
 
 interface CapturedCoinImages {
   front: string | null;
@@ -36,21 +43,47 @@ interface CapturedCoinImages {
 }
 
 const ScanPageContent = () => {
-  const searchParams = useSearchParams();
+  const router = useRouter();
+  const searchParams =
+    useSearchParams();
 
-  const requestedMode = searchParams.get("mode");
+  const requestedMode =
+    searchParams.get("mode");
+
+  const requestedSource =
+    searchParams.get("source");
+
+  const isSellerMode =
+    requestedMode === "sell";
+
+  const isUploadMode =
+    requestedMode === "upload" ||
+    requestedSource === "upload";
+
+  const setSellerImages =
+    useSellerListingStore(
+      (state) => state.setImages
+    );
 
   const videoRef =
-    useRef<HTMLVideoElement | null>(null);
+    useRef<HTMLVideoElement | null>(
+      null
+    );
 
   const canvasRef =
-    useRef<HTMLCanvasElement | null>(null);
+    useRef<HTMLCanvasElement | null>(
+      null
+    );
 
   const streamRef =
-    useRef<MediaStream | null>(null);
+    useRef<MediaStream | null>(
+      null
+    );
 
   const fileInputRef =
-    useRef<HTMLInputElement | null>(null);
+    useRef<HTMLInputElement | null>(
+      null
+    );
 
   const [cameraStatus, setCameraStatus] =
     useState<CameraStatus>("idle");
@@ -58,117 +91,150 @@ const ScanPageContent = () => {
   const [currentSide, setCurrentSide] =
     useState<CoinSide>("front");
 
-  const [capturedImages, setCapturedImages] =
-    useState<CapturedCoinImages>({
-      front: null,
-      back: null,
-    });
+  const [
+    capturedImages,
+    setCapturedImages,
+  ] = useState<CapturedCoinImages>({
+    front: null,
+    back: null,
+  });
 
-  const [uploadedFiles, setUploadedFiles] =
-    useState<File[]>([]);
+  const [
+    uploadedFiles,
+    setUploadedFiles,
+  ] = useState<File[]>([]);
 
-  const stopCamera = useCallback(() => {
-    const stream = streamRef.current;
+  const [isProcessing, setIsProcessing] =
+    useState(false);
 
-    if (stream) {
-      stream
-        .getTracks()
-        .forEach((track) => track.stop());
-    }
-
-    streamRef.current = null;
-
-    if (videoRef.current) {
-      videoRef.current.srcObject = null;
-    }
-
-    setCameraStatus("idle");
-  }, []);
-
-  const startCamera = useCallback(async () => {
-    if (
-      typeof navigator === "undefined" ||
-      !navigator.mediaDevices?.getUserMedia
-    ) {
-      setCameraStatus("unavailable");
-
-      toast.error(
-        "Camera is not available on this device."
-      );
-
-      return;
-    }
-
-    stopCamera();
-
-    setCameraStatus("requesting");
-
-    try {
+  const stopCamera =
+    useCallback(() => {
       const stream =
-        await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: {
-              ideal: "environment",
-            },
-            width: {
-              ideal: 1920,
-            },
-            height: {
-              ideal: 1080,
-            },
-          },
-          audio: false,
-        });
+        streamRef.current;
 
-      streamRef.current = stream;
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
+      if (stream) {
+        stream
+          .getTracks()
+          .forEach((track) =>
+            track.stop()
+          );
       }
 
-      setCameraStatus("active");
-    } catch (error) {
-      console.error(
-        "Camera access error:",
-        error
-      );
+      streamRef.current = null;
 
+      if (videoRef.current) {
+        videoRef.current.srcObject =
+          null;
+      }
+
+      setCameraStatus("idle");
+    }, []);
+
+  const startCamera =
+    useCallback(async () => {
       if (
-        error instanceof DOMException &&
-        (
-          error.name === "NotAllowedError" ||
-          error.name ===
-            "PermissionDeniedError"
-        )
+        typeof navigator ===
+          "undefined" ||
+        !navigator.mediaDevices
+          ?.getUserMedia
       ) {
-        setCameraStatus("denied");
+        setCameraStatus(
+          "unavailable"
+        );
 
         toast.error(
-          "Camera permission was denied.",
-          {
-            description:
-              "Please allow camera access in your browser settings.",
-          }
+          "Camera is not available on this device."
         );
 
         return;
       }
 
-      setCameraStatus("unavailable");
+      stopCamera();
 
-      toast.error(
-        "Unable to open the camera.",
-        {
-          description:
-            "You can upload coin images instead.",
-        }
+      setCameraStatus(
+        "requesting"
       );
-    }
-  }, [stopCamera]);
+
+      try {
+        const stream =
+          await navigator.mediaDevices.getUserMedia(
+            {
+              video: {
+                facingMode: {
+                  ideal:
+                    "environment",
+                },
+                width: {
+                  ideal: 1920,
+                },
+                height: {
+                  ideal: 1080,
+                },
+              },
+              audio: false,
+            }
+          );
+
+        streamRef.current =
+          stream;
+
+        if (videoRef.current) {
+          videoRef.current.srcObject =
+            stream;
+
+          await videoRef.current.play();
+        }
+
+        setCameraStatus(
+          "active"
+        );
+      } catch (error) {
+        console.error(
+          "Camera access error:",
+          error
+        );
+
+        if (
+          error instanceof
+            DOMException &&
+          (
+            error.name ===
+              "NotAllowedError" ||
+            error.name ===
+              "PermissionDeniedError"
+          )
+        ) {
+          setCameraStatus(
+            "denied"
+          );
+
+          toast.error(
+            "Camera permission was denied.",
+            {
+              description:
+                "Please allow camera access in your browser settings.",
+            }
+          );
+
+          return;
+        }
+
+        setCameraStatus(
+          "unavailable"
+        );
+
+        toast.error(
+          "Unable to open the camera.",
+          {
+            description:
+              "You can upload coin images instead.",
+          }
+        );
+      }
+    }, [stopCamera]);
 
   useEffect(() => {
-    if (requestedMode === "upload") {
+    if (isUploadMode) {
       stopCamera();
       return;
     }
@@ -179,199 +245,431 @@ const ScanPageContent = () => {
       stopCamera();
     };
   }, [
-    requestedMode,
+    isUploadMode,
     startCamera,
     stopCamera,
   ]);
 
-  const captureCurrentSide = () => {
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
+  const captureCurrentSide =
+    () => {
+      const video =
+        videoRef.current;
 
-    if (
-      !video ||
-      !canvas ||
-      cameraStatus !== "active"
-    ) {
-      return;
-    }
+      const canvas =
+        canvasRef.current;
 
-    const width =
-      video.videoWidth || 1280;
+      if (
+        !video ||
+        !canvas ||
+        cameraStatus !==
+          "active"
+      ) {
+        return;
+      }
 
-    const height =
-      video.videoHeight || 720;
+      const width =
+        video.videoWidth ||
+        1280;
 
-    canvas.width = width;
-    canvas.height = height;
+      const height =
+        video.videoHeight ||
+        720;
 
-    const context =
-      canvas.getContext("2d");
+      canvas.width =
+        width;
 
-    if (!context) {
-      return;
-    }
+      canvas.height =
+        height;
 
-    context.drawImage(
-      video,
-      0,
-      0,
-      width,
-      height
-    );
+      const context =
+        canvas.getContext(
+          "2d"
+        );
 
-    const image =
-      canvas.toDataURL(
-        "image/jpeg",
-        0.92
+      if (!context) {
+        return;
+      }
+
+      context.drawImage(
+        video,
+        0,
+        0,
+        width,
+        height
       );
 
-    setCapturedImages((current) => ({
-      ...current,
-      [currentSide]: image,
-    }));
+      const image =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.92
+        );
 
-    if (currentSide === "front") {
-      setCurrentSide("back");
+      setCapturedImages(
+        (current) => ({
+          ...current,
+          [currentSide]:
+            image,
+        })
+      );
+
+      if (
+        currentSide ===
+        "front"
+      ) {
+        setCurrentSide(
+          "back"
+        );
+
+        toast.success(
+          "Front side captured",
+          {
+            description:
+              "Now turn the coin over and capture the back.",
+          }
+        );
+
+        return;
+      }
+
+      stopCamera();
 
       toast.success(
-        "Front side captured",
-        {
-          description:
-            "Now turn the coin over and capture the back.",
-        }
+        "Both sides captured"
       );
-
-      return;
-    }
-
-    stopCamera();
-
-    toast.success(
-      "Both sides captured"
-    );
-  };
+    };
 
   const retakeSide = (
     side: CoinSide
   ) => {
-    setCapturedImages((current) => ({
-      ...current,
-      [side]: null,
-    }));
+    setCapturedImages(
+      (current) => ({
+        ...current,
+        [side]: null,
+      })
+    );
 
     setCurrentSide(side);
 
     void startCamera();
   };
 
-  const restartCapture = () => {
-    setCapturedImages({
-      front: null,
-      back: null,
-    });
+  const restartCapture =
+    () => {
+      setCapturedImages({
+        front: null,
+        back: null,
+      });
 
-    setCurrentSide("front");
+      setUploadedFiles([]);
 
-    void startCamera();
-  };
+      setCurrentSide(
+        "front"
+      );
 
-  const openUploadPicker = () => {
-    fileInputRef.current?.click();
-  };
+      void startCamera();
+    };
+
+  const openUploadPicker =
+    () => {
+      fileInputRef.current?.click();
+    };
 
   const handleFileUpload = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    const files = Array.from(
-      event.target.files ?? []
-    );
+    const files =
+      Array.from(
+        event.target.files ??
+          []
+      );
 
     if (!files.length) {
       return;
     }
 
-    const validFiles = files.filter(
-      (file) =>
+    const validFiles =
+      files.filter((file) =>
         [
           "image/jpeg",
           "image/png",
           "image/webp",
         ].includes(file.type)
-    );
+      );
 
-    if (!validFiles.length) {
+    if (
+      !validFiles.length
+    ) {
       toast.error(
         "Please select JPG, PNG or WEBP images."
       );
+
+      event.target.value =
+        "";
 
       return;
     }
 
     const selected =
-      validFiles.slice(0, 2);
+      validFiles.slice(
+        0,
+        2
+      );
 
-    setUploadedFiles(selected);
+    setUploadedFiles(
+      selected
+    );
+
+    setCapturedImages({
+      front: null,
+      back: null,
+    });
+
+    stopCamera();
 
     toast.success(
       selected.length === 2
         ? "Front and back images selected"
-        : "Coin image selected"
+        : "Coin image selected",
+      {
+        description:
+          selected.length ===
+          2
+            ? "Review the selected files, then analyze the coin."
+            : "Please select both front and back images.",
+      }
+    );
+
+    event.target.value =
+      "";
+  };
+
+  const fileToDataUrl = (
+    file: File
+  ): Promise<string> => {
+    return new Promise(
+      (
+        resolve,
+        reject
+      ) => {
+        const reader =
+          new FileReader();
+
+        reader.onload =
+          () => {
+            if (
+              typeof reader.result ===
+              "string"
+            ) {
+              resolve(
+                reader.result
+              );
+
+              return;
+            }
+
+            reject(
+              new Error(
+                "Unable to read image."
+              )
+            );
+          };
+
+        reader.onerror =
+          () => {
+            reject(
+              new Error(
+                "Unable to read image."
+              )
+            );
+          };
+
+        reader.readAsDataURL(
+          file
+        );
+      }
     );
   };
 
   const isCaptureComplete =
     Boolean(
       capturedImages.front &&
-      capturedImages.back
+        capturedImages.back
     );
 
-  const handleAnalyze = () => {
-    if (
-      !isCaptureComplete &&
-      uploadedFiles.length < 2
-    ) {
-      toast.error(
-        "Please provide both front and back images."
-      );
-
-      return;
-    }
-
-    toast.info(
-      "Coin analysis ready",
-      {
-        description:
-          "Next step is connecting these images to your quality and identification API.",
+  const handleAnalyze =
+    async () => {
+      if (isProcessing) {
+        return;
       }
-    );
-  };
+
+      if (
+        !isCaptureComplete &&
+        uploadedFiles.length <
+          2
+      ) {
+        toast.error(
+          "Please provide both front and back images."
+        );
+
+        return;
+      }
+
+      setIsProcessing(true);
+
+      try {
+        let frontImage:
+          | string
+          | null =
+          capturedImages.front;
+
+        let backImage:
+          | string
+          | null =
+          capturedImages.back;
+
+        if (
+          uploadedFiles.length >=
+          2
+        ) {
+          const [
+            uploadedFront,
+            uploadedBack,
+          ] =
+            await Promise.all([
+              fileToDataUrl(
+                uploadedFiles[0]
+              ),
+              fileToDataUrl(
+                uploadedFiles[1]
+              ),
+            ]);
+
+          frontImage =
+            uploadedFront;
+
+          backImage =
+            uploadedBack;
+        }
+
+        if (
+          !frontImage ||
+          !backImage
+        ) {
+          toast.error(
+            "Both front and back images are required."
+          );
+
+          return;
+        }
+
+        /*
+         * SELLER FLOW
+         *
+         * We save the images
+         * before leaving the
+         * scanner so the next
+         * seller page can use
+         * them.
+         */
+        if (isSellerMode) {
+          setSellerImages(
+            frontImage,
+            backImage
+          );
+
+          stopCamera();
+
+          toast.success(
+            "Coin images ready",
+            {
+              description:
+                "Continue to review the coin details.",
+            }
+          );
+
+          router.push(
+            "/sell-review"
+          );
+
+          return;
+        }
+
+        /*
+         * NORMAL SCANNER FLOW
+         *
+         * Keep the current
+         * behaviour until the
+         * identification API is
+         * connected.
+         */
+        toast.info(
+          "Coin analysis ready",
+          {
+            description:
+              "Next step is connecting these images to your quality and identification API.",
+          }
+        );
+      } catch (error) {
+        console.error(
+          "Coin image processing error:",
+          error
+        );
+
+        toast.error(
+          "Unable to process the coin images."
+        );
+      } finally {
+        setIsProcessing(
+          false
+        );
+      }
+    };
 
   return (
-    <section className={styles.scanPage}>
-      <div className={styles.scanContainer}>
-        <div className={styles.scanHeading}>
+    <section
+      className={
+        styles.scanPage
+      }
+    >
+      <div
+        className={
+          styles.scanContainer
+        }
+      >
+        <div
+          className={
+            styles.scanHeading
+          }
+        >
           <span
             className={
               styles.scanHeadingBadge
             }
           >
-            Coin Identifier
+            {isSellerMode
+              ? "Seller Coin Scanner"
+              : "Coin Identifier"}
           </span>
 
           <h1>
-            Scan Your Coin
+            {isSellerMode
+              ? "Scan Your Coin to Sell"
+              : "Scan Your Coin"}
           </h1>
 
           <p>
-            Capture clear images of both sides of
-            your coin to discover its identity,
-            history and collectible details.
+            {isSellerMode
+              ? "Capture clear images of both sides of your coin. We will use them to begin your marketplace listing."
+              : "Capture clear images of both sides of your coin to discover its identity, history and collectible details."}
           </p>
         </div>
 
-        <div className={styles.scanWorkspace}>
-          {requestedMode !== "upload" && (
+        <div
+          className={
+            styles.scanWorkspace
+          }
+        >
+          {!isUploadMode && (
             <div
               className={
                 styles.cameraPanel
@@ -386,13 +684,19 @@ const ScanPageContent = () => {
                   className={`${styles.captureStep} ${
                     capturedImages.front
                       ? styles.captureStepDone
-                      : currentSide === "front"
+                      : currentSide ===
+                        "front"
                       ? styles.captureStepActive
                       : ""
                   }`}
                 >
-                  <span>1</span>
-                  <p>Front</p>
+                  <span>
+                    1
+                  </span>
+
+                  <p>
+                    Front
+                  </p>
                 </div>
 
                 <div
@@ -405,13 +709,19 @@ const ScanPageContent = () => {
                   className={`${styles.captureStep} ${
                     capturedImages.back
                       ? styles.captureStepDone
-                      : currentSide === "back"
+                      : currentSide ===
+                        "back"
                       ? styles.captureStepActive
                       : ""
                   }`}
                 >
-                  <span>2</span>
-                  <p>Back</p>
+                  <span>
+                    2
+                  </span>
+
+                  <p>
+                    Back
+                  </p>
                 </div>
               </div>
 
@@ -422,14 +732,22 @@ const ScanPageContent = () => {
                       styles.captureInstruction
                     }
                   >
-                    <ScanLine size={16} />
+                    <ScanLine
+                      size={
+                        16
+                      }
+                    />
 
                     <span>
-                      Capture the{" "}
+                      Capture
+                      the{" "}
                       <strong>
-                        {currentSide}
+                        {
+                          currentSide
+                        }
                       </strong>{" "}
-                      side of the coin
+                      side of
+                      the coin
                     </span>
                   </div>
 
@@ -439,7 +757,9 @@ const ScanPageContent = () => {
                     }
                   >
                     <video
-                      ref={videoRef}
+                      ref={
+                        videoRef
+                      }
                       autoPlay
                       muted
                       playsInline
@@ -456,11 +776,14 @@ const ScanPageContent = () => {
                         }
                       >
                         <Camera
-                          size={28}
+                          size={
+                            28
+                          }
                         />
 
                         <p>
-                          Opening camera...
+                          Opening
+                          camera...
                         </p>
                       </div>
                     )}
@@ -477,16 +800,23 @@ const ScanPageContent = () => {
                         }
                       >
                         <CameraOff
-                          size={30}
+                          size={
+                            30
+                          }
                         />
 
                         <p>
-                          Camera unavailable
+                          Camera
+                          unavailable
                         </p>
 
                         <span>
-                          Allow camera access or
-                          upload images instead.
+                          Allow
+                          camera
+                          access or
+                          upload
+                          images
+                          instead.
                         </span>
                       </div>
                     )}
@@ -509,15 +839,21 @@ const ScanPageContent = () => {
                             styles.coinGuideLabel
                           }
                         >
-                          Keep the full coin inside
-                          the circle
+                          Keep
+                          the full
+                          coin
+                          inside
+                          the
+                          circle
                         </span>
                       </div>
                     )}
                   </div>
 
                   <canvas
-                    ref={canvasRef}
+                    ref={
+                      canvasRef
+                    }
                     className={
                       styles.hiddenCanvas
                     }
@@ -539,10 +875,15 @@ const ScanPageContent = () => {
                           styles.captureButton
                         }
                       >
-                        <Camera size={18} />
+                        <Camera
+                          size={
+                            18
+                          }
+                        />
 
                         Capture{" "}
-                        {currentSide === "front"
+                        {currentSide ===
+                        "front"
                           ? "Front"
                           : "Back"}
                       </button>
@@ -559,9 +900,14 @@ const ScanPageContent = () => {
                           styles.captureButton
                         }
                       >
-                        <Camera size={17} />
+                        <Camera
+                          size={
+                            17
+                          }
+                        />
 
-                        Open Camera
+                        Open
+                        Camera
                       </button>
                     )}
 
@@ -574,9 +920,14 @@ const ScanPageContent = () => {
                         styles.secondaryButton
                       }
                     >
-                      <Upload size={17} />
+                      <Upload
+                        size={
+                          17
+                        }
+                      />
 
-                      Upload Instead
+                      Upload
+                      Instead
                     </button>
                   </div>
                 </>
@@ -592,16 +943,23 @@ const ScanPageContent = () => {
                     }
                   >
                     <CheckCircle2
-                      size={20}
+                      size={
+                        20
+                      }
                     />
 
                     <div>
                       <h2>
-                        Both sides captured
+                        Both
+                        sides
+                        captured
                       </h2>
 
                       <p>
-                        Review the images before
+                        Review
+                        the
+                        images
+                        before
                         analysis.
                       </p>
                     </div>
@@ -639,8 +997,11 @@ const ScanPageContent = () => {
                         }
                       >
                         <RefreshCcw
-                          size={14}
+                          size={
+                            14
+                          }
                         />
+
                         Retake
                       </button>
                     </div>
@@ -672,8 +1033,11 @@ const ScanPageContent = () => {
                         }
                       >
                         <RefreshCcw
-                          size={14}
+                          size={
+                            14
+                          }
                         />
+
                         Retake
                       </button>
                     </div>
@@ -689,29 +1053,46 @@ const ScanPageContent = () => {
                       onClick={
                         restartCapture
                       }
+                      disabled={
+                        isProcessing
+                      }
                       className={
                         styles.secondaryButton
                       }
                     >
                       <RotateCcw
-                        size={16}
+                        size={
+                          16
+                        }
                       />
-                      Start Again
+
+                      Start
+                      Again
                     </button>
 
                     <button
                       type="button"
-                      onClick={
-                        handleAnalyze
+                      onClick={() =>
+                        void handleAnalyze()
+                      }
+                      disabled={
+                        isProcessing
                       }
                       className={
                         styles.analyzeButton
                       }
                     >
                       <ScanLine
-                        size={17}
+                        size={
+                          17
+                        }
                       />
-                      Analyze Coin
+
+                      {isProcessing
+                        ? "Processing..."
+                        : isSellerMode
+                        ? "Continue to Review"
+                        : "Analyze Coin"}
                     </button>
                   </div>
                 </div>
@@ -729,16 +1110,22 @@ const ScanPageContent = () => {
                 styles.uploadIcon
               }
             >
-              <Upload size={24} />
+              <Upload
+                size={24}
+              />
             </div>
 
             <h2>
-              Upload Front &amp; Back
+              Upload Front
+              &amp; Back
             </h2>
 
             <p>
-              Use sharp, well-lit images with
-              minimal glare and the complete coin
+              Use sharp,
+              well-lit images
+              with minimal
+              glare and the
+              complete coin
               visible.
             </p>
 
@@ -747,15 +1134,21 @@ const ScanPageContent = () => {
               onClick={
                 openUploadPicker
               }
+              disabled={
+                isProcessing
+              }
               className={
                 styles.uploadButton
               }
             >
-              Choose Coin Images
+              Choose Coin
+              Images
             </button>
 
             <input
-              ref={fileInputRef}
+              ref={
+                fileInputRef
+              }
               type="file"
               accept="image/jpeg,image/png,image/webp"
               multiple
@@ -775,7 +1168,10 @@ const ScanPageContent = () => {
                 }
               >
                 {uploadedFiles.map(
-                  (file, index) => (
+                  (
+                    file,
+                    index
+                  ) => (
                     <div
                       key={`${file.name}-${index}`}
                       className={
@@ -783,14 +1179,20 @@ const ScanPageContent = () => {
                       }
                     >
                       <CheckCircle2
-                        size={15}
+                        size={
+                          15
+                        }
                       />
 
                       <span>
-                        {index === 0
+                        {index ===
+                        0
                           ? "Front"
                           : "Back"}
-                        : {file.name}
+                        :{" "}
+                        {
+                          file.name
+                        }
                       </span>
                     </div>
                   )
@@ -800,17 +1202,27 @@ const ScanPageContent = () => {
                   2 && (
                   <button
                     type="button"
-                    onClick={
-                      handleAnalyze
+                    onClick={() =>
+                      void handleAnalyze()
+                    }
+                    disabled={
+                      isProcessing
                     }
                     className={
                       styles.analyzeButton
                     }
                   >
                     <ScanLine
-                      size={17}
+                      size={
+                        17
+                      }
                     />
-                    Analyze Coin
+
+                    {isProcessing
+                      ? "Processing..."
+                      : isSellerMode
+                      ? "Continue to Review"
+                      : "Analyze Coin"}
                   </button>
                 )}
               </div>

@@ -1,0 +1,299 @@
+.sellPublishSummary,
+.sellPublishSummary *,
+.sellPublishSummary *::before,
+.sellPublishSummary *::after {
+  box-sizing: border-box;
+}
+
+.sellPublishSummary {
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 16px;
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.045);
+}
+
+.sellPublishSummaryHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.sellPublishSummaryHeader > div:first-child {
+  min-width: 0;
+}
+
+.sellPublishSummaryEyebrow {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sellPublishSummaryTitle {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.sellPublishSummaryDescription {
+  max-width: 560px;
+
+  margin: 7px 0 0;
+
+  color: #777777;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.sellPublishSummaryIcon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.sellPublishSummaryGrid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin-top: 16px;
+}
+
+.sellPublishSummaryCard {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 10px;
+
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+
+  background: #faf9f7;
+}
+
+.sellPublishSummaryCardIcon {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.sellPublishSummaryCardText {
+  min-width: 0;
+}
+
+.sellPublishSummaryCardText span,
+.sellPublishSummaryCardText strong {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.sellPublishSummaryCardText span {
+  color: #999999;
+
+  font-size: 7px;
+  line-height: 1;
+}
+
+.sellPublishSummaryCardText strong {
+  margin-top: 4px;
+
+  color: #333333;
+
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.sellPublishSummaryNet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-top: 12px;
+  padding: 12px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.16);
+  border-radius: 11px;
+
+  background: #fffbf5;
+}
+
+.sellPublishSummaryNet > div {
+  min-width: 0;
+}
+
+.sellPublishSummaryNet span,
+.sellPublishSummaryNet small {
+  display: block;
+}
+
+.sellPublishSummaryNet span {
+  color: #4a3820;
+
+  font-size: 8px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.sellPublishSummaryNet small {
+  margin-top: 3px;
+
+  color: #81725f;
+
+  font-size: 7px;
+  line-height: 12px;
+}
+
+.sellPublishSummaryNet > strong {
+  flex: 0 0 auto;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 18px;
+  line-height: 1;
+}
+
+.sellPublishSummaryNote {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 8px;
+
+  margin-top: 10px;
+  padding: 9px;
+
+  border: 1px solid #e7ece8;
+  border-radius: 9px;
+
+  background: #f8fbf8;
+}
+
+.sellPublishSummaryNote svg {
+  flex: 0 0 auto;
+
+  color: #4e865e;
+}
+
+.sellPublishSummaryNote span {
+  color: #728177;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+@media (min-width: 640px) {
+  .sellPublishSummary {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  .sellPublishSummaryTitle {
+    font-size: 22px;
+  }
+
+  .sellPublishSummaryDescription {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .sellPublishSummaryGrid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 11px;
+  }
+
+  .sellPublishSummaryCardText span {
+    font-size: 8px;
+  }
+
+  .sellPublishSummaryCardText strong {
+    font-size: 11px;
+  }
+
+  .sellPublishSummaryNet span {
+    font-size: 9px;
+  }
+
+  .sellPublishSummaryNet small {
+    font-size: 8px;
+    line-height: 13px;
+  }
+
+  .sellPublishSummaryNet > strong {
+    font-size: 21px;
+  }
+
+  .sellPublishSummaryNote span {
+    font-size: 8px;
+    line-height: 14px;
+  }
+}

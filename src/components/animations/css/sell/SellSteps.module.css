@@ -1,0 +1,179 @@
+.sellSteps,
+.sellSteps *,
+.sellSteps *::before,
+.sellSteps *::after {
+  box-sizing: border-box;
+}
+
+.sellSteps {
+  width: 100%;
+  min-width: 0;
+}
+
+.sellStepsHeader {
+  max-width: 720px;
+}
+
+.sellStepsEyebrow {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.sellStepsTitle {
+  margin: 6px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.sellStepsDescription {
+  margin: 8px 0 0;
+
+  color: #777777;
+
+  font-size: 9px;
+  line-height: 16px;
+}
+
+.sellStepsGrid {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  gap: 10px;
+
+  margin-top: 16px;
+}
+
+.sellStepCard {
+  min-width: 0;
+
+  padding: 15px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 14px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.04);
+}
+
+.sellStepTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.sellStepIcon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.sellStepNumber {
+  color: #d1d1d1;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 21px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.sellStepCard h3 {
+  margin: 13px 0 0;
+
+  color: #202020;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.sellStepCard p {
+  margin: 6px 0 0;
+
+  color: #777777;
+
+  font-size: 8px;
+  line-height: 14px;
+}
+
+@media (min-width: 520px) {
+  .sellStepsGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+  }
+}
+
+@media (min-width: 640px) {
+  .sellStepsTitle {
+    font-size: 25px;
+  }
+
+  .sellStepsDescription {
+    font-size: 10px;
+    line-height: 17px;
+  }
+
+  .sellStepCard {
+    padding: 18px;
+  }
+
+  .sellStepCard h3 {
+    font-size: 18px;
+  }
+
+  .sellStepCard p {
+    font-size: 9px;
+    line-height: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sellStepsGrid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+}

@@ -1,0 +1,348 @@
+.freeListingStatus,
+.freeListingStatus *,
+.freeListingStatus *::before,
+.freeListingStatus *::after {
+  box-sizing: border-box;
+}
+
+.freeListingStatus {
+  width: 100%;
+  min-width: 0;
+
+  padding: 16px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.045);
+}
+
+.freeListingStatusHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+}
+
+.freeListingStatusHeader > div:first-child {
+  min-width: 0;
+}
+
+.freeListingStatusEyebrow {
+  margin: 0;
+
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.freeListingStatusTitle {
+  margin: 5px 0 0;
+
+  color: #171717;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 600;
+}
+
+.freeListingStatusDescription {
+  max-width: 580px;
+
+  margin: 7px 0 0;
+
+  color: #777777;
+
+  font-size: 9px;
+  line-height: 15px;
+}
+
+.freeListingStatusIcon {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.freeListingStatusStats {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr);
+
+  gap: 9px;
+
+  margin-top: 16px;
+}
+
+.freeListingStatusCard {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 10px;
+
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+
+  background: #faf9f7;
+}
+
+.freeListingStatusCardIcon {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(217, 154, 49, 0.09);
+
+  color: #b87516;
+}
+
+.freeListingStatusCardText {
+  min-width: 0;
+}
+
+.freeListingStatusCardText span,
+.freeListingStatusCardText strong {
+  display: block;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.freeListingStatusCardText span {
+  color: #999999;
+
+  font-size: 7px;
+  line-height: 1;
+}
+
+.freeListingStatusCardText strong {
+  margin-top: 4px;
+
+  color: #333333;
+
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.freeListingStatusProgress {
+  margin-top: 14px;
+}
+
+.freeListingStatusProgressTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+}
+
+.freeListingStatusProgressTop span {
+  color: #777777;
+
+  font-size: 8px;
+  line-height: 1;
+}
+
+.freeListingStatusProgressTop strong {
+  color: #a47a37;
+
+  font-size: 8px;
+  line-height: 1;
+}
+
+.freeListingStatusProgressTrack {
+  width: 100%;
+  height: 8px;
+
+  margin-top: 7px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #eeeeee;
+}
+
+.freeListingStatusProgressBar {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #d79621,
+      #e6aa43
+    );
+
+  transition:
+    width 220ms ease;
+}
+
+.freeListingStatusNotice,
+.freeListingStatusNoticeLocked {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 14px;
+  padding: 10px;
+
+  border-radius: 10px;
+}
+
+.freeListingStatusNotice {
+  border: 1px solid #e8eee9;
+
+  background: #f8fbf8;
+}
+
+.freeListingStatusNoticeLocked {
+  border:
+    1px solid rgba(217, 154, 49, 0.16);
+
+  background: #fffbf5;
+}
+
+.freeListingStatusNotice > svg {
+  flex: 0 0 auto;
+
+  color: #4e865e;
+}
+
+.freeListingStatusNoticeLocked > svg {
+  flex: 0 0 auto;
+
+  color: #b87516;
+}
+
+.freeListingStatusNotice strong,
+.freeListingStatusNotice span,
+.freeListingStatusNoticeLocked strong,
+.freeListingStatusNoticeLocked span {
+  display: block;
+}
+
+.freeListingStatusNotice strong {
+  color: #345b40;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.freeListingStatusNoticeLocked strong {
+  color: #4a3820;
+
+  font-size: 8px;
+  line-height: 1.2;
+}
+
+.freeListingStatusNotice span {
+  margin-top: 3px;
+
+  color: #728177;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+.freeListingStatusNoticeLocked span {
+  margin-top: 3px;
+
+  color: #81725f;
+
+  font-size: 7px;
+  line-height: 13px;
+}
+
+@media (min-width: 520px) {
+  .freeListingStatusStats {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) {
+  .freeListingStatus {
+    padding: 20px;
+  }
+
+  .freeListingStatusTitle {
+    font-size: 22px;
+  }
+
+  .freeListingStatusDescription {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .freeListingStatusCardText span {
+    font-size: 8px;
+  }
+
+  .freeListingStatusCardText strong {
+    font-size: 11px;
+  }
+
+  .freeListingStatusProgressTop span,
+  .freeListingStatusProgressTop strong {
+    font-size: 9px;
+  }
+
+  .freeListingStatusNotice strong,
+  .freeListingStatusNoticeLocked strong {
+    font-size: 9px;
+  }
+
+  .freeListingStatusNotice span,
+  .freeListingStatusNoticeLocked span {
+    font-size: 8px;
+    line-height: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .freeListingStatusProgressBar {
+    transition: none;
+  }
+}

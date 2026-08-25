@@ -1,0 +1,203 @@
+.sellPreviewHeader,
+.sellPreviewHeader *,
+.sellPreviewHeader *::before,
+.sellPreviewHeader *::after {
+  box-sizing: border-box;
+}
+
+.sellPreviewHeader {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  padding:
+    32px
+    14px
+    28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #070707,
+      #11100d 62%,
+      #191106
+    );
+
+  color: #ffffff;
+}
+
+.sellPreviewHeaderContainer {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1180px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.sellPreviewHeaderGlowLeft,
+.sellPreviewHeaderGlowRight {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(70px);
+
+  pointer-events: none;
+}
+
+.sellPreviewHeaderGlowLeft {
+  top: -120px;
+  left: -100px;
+
+  width: 280px;
+  height: 280px;
+
+  background:
+    rgba(217, 154, 49, 0.12);
+}
+
+.sellPreviewHeaderGlowRight {
+  right: -120px;
+  bottom: -130px;
+
+  width: 310px;
+  height: 310px;
+
+  background:
+    rgba(151, 94, 16, 0.14);
+}
+
+.sellPreviewHeaderBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 999px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+.sellPreviewHeaderBadge span {
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.sellPreviewHeaderContent {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 14px;
+}
+
+.sellPreviewHeaderContent > div:first-child {
+  min-width: 0;
+}
+
+.sellPreviewHeaderContent h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 600;
+}
+
+.sellPreviewHeaderContent h1 span {
+  color: #d99a31;
+}
+
+.sellPreviewHeaderContent p {
+  max-width: 620px;
+
+  margin: 10px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.56);
+
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.sellPreviewHeaderIcon {
+  width: 54px;
+  height: 54px;
+
+  flex: 0 0 54px;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.2);
+  border-radius: 15px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+@media (min-width: 640px) {
+  .sellPreviewHeader {
+    padding:
+      40px
+      24px
+      34px;
+  }
+
+  .sellPreviewHeaderContent h1 {
+    font-size: 42px;
+  }
+
+  .sellPreviewHeaderContent p {
+    font-size: 12px;
+    line-height: 19px;
+  }
+
+  .sellPreviewHeaderIcon {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sellPreviewHeader {
+    padding:
+      46px
+      32px
+      40px;
+  }
+
+  .sellPreviewHeaderContent h1 {
+    font-size: 48px;
+  }
+}

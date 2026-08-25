@@ -1,0 +1,203 @@
+.cartHeader,
+.cartHeader *,
+.cartHeader *::before,
+.cartHeader *::after {
+  box-sizing: border-box;
+}
+
+.cartHeader {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  padding:
+    32px
+    14px
+    28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #070707,
+      #11100d 62%,
+      #191106
+    );
+
+  color: #ffffff;
+}
+
+.cartHeaderContainer {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1240px;
+  min-width: 0;
+
+  margin: 0 auto;
+}
+
+.cartHeaderGlowLeft,
+.cartHeaderGlowRight {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(70px);
+
+  pointer-events: none;
+}
+
+.cartHeaderGlowLeft {
+  top: -120px;
+  left: -100px;
+
+  width: 280px;
+  height: 280px;
+
+  background:
+    rgba(217, 154, 49, 0.12);
+}
+
+.cartHeaderGlowRight {
+  right: -120px;
+  bottom: -130px;
+
+  width: 310px;
+  height: 310px;
+
+  background:
+    rgba(151, 94, 16, 0.14);
+}
+
+.cartHeaderBadge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding:
+    6px
+    10px;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.25);
+  border-radius: 999px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+.cartHeaderBadge span {
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.cartHeaderContent {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 14px;
+}
+
+.cartHeaderContent > div:first-child {
+  min-width: 0;
+}
+
+.cartHeaderContent h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+  line-height: 1.08;
+  font-weight: 600;
+}
+
+.cartHeaderContent h1 span {
+  color: #d99a31;
+}
+
+.cartHeaderContent p {
+  max-width: 560px;
+
+  margin: 10px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.56);
+
+  font-size: 10px;
+  line-height: 17px;
+}
+
+.cartHeaderIcon {
+  width: 54px;
+  height: 54px;
+
+  flex: 0 0 54px;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(217, 154, 49, 0.2);
+  border-radius: 15px;
+
+  background:
+    rgba(217, 154, 49, 0.08);
+
+  color: #d99a31;
+}
+
+@media (min-width: 640px) {
+  .cartHeader {
+    padding:
+      40px
+      24px
+      34px;
+  }
+
+  .cartHeaderContent h1 {
+    font-size: 42px;
+  }
+
+  .cartHeaderContent p {
+    font-size: 12px;
+    line-height: 19px;
+  }
+
+  .cartHeaderIcon {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cartHeader {
+    padding:
+      46px
+      32px
+      40px;
+  }
+
+  .cartHeaderContent h1 {
+    font-size: 48px;
+  }
+}
