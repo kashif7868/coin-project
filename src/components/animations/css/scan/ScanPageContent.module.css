@@ -95,7 +95,8 @@
   width: 100%;
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns:
+    minmax(0, 1fr);
 
   gap: 16px;
 
@@ -165,6 +166,16 @@
   font-size: 9px;
   line-height: 1;
   font-weight: 700;
+
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.captureStep > div {
+  min-width: 0;
 }
 
 .captureStep p {
@@ -173,6 +184,18 @@
   font-size: 9px;
   line-height: 1;
   font-weight: 600;
+}
+
+.captureStep small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #a0a0a0;
+
+  font-size: 7px;
+  line-height: 1;
+  font-weight: 500;
 }
 
 .captureStepActive {
@@ -185,6 +208,13 @@
   background: rgba(217, 154, 49, 0.1);
 
   color: #b87516;
+
+  box-shadow:
+    0 0 0 4px rgba(217, 154, 49, 0.08);
+}
+
+.captureStepActive small {
+  color: #a96d18;
 }
 
 .captureStepDone {
@@ -197,6 +227,13 @@
   background: #eff8f2;
 
   color: #347249;
+
+  box-shadow:
+    0 0 0 4px rgba(75, 124, 91, 0.07);
+}
+
+.captureStepDone small {
+  color: #4b7c5b;
 }
 
 .captureProgressLine {
@@ -235,7 +272,7 @@
 .captureInstruction strong {
   color: #171717;
 
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 .cameraViewport {
@@ -251,6 +288,20 @@
   border-radius: 14px;
 
   background: #090909;
+}
+
+.cameraViewport::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.04);
+
+  border-radius: inherit;
 }
 
 .cameraVideo,
@@ -275,6 +326,8 @@
 .cameraMessage {
   position: absolute;
   inset: 0;
+
+  z-index: 5;
 
   display: flex;
   flex-direction: column;
@@ -313,6 +366,91 @@
   line-height: 16px;
 }
 
+/* LIVE SIDE INDICATOR */
+
+.liveSideIndicator {
+  position: absolute;
+
+  top: 14px;
+  left: 50%;
+
+  z-index: 8;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events: none;
+}
+
+.liveSideIndicator span {
+  min-height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0
+    12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.25);
+
+  border-radius: 999px;
+
+  background:
+    rgba(0, 0, 0, 0.62);
+
+  color: #ffffff;
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* CAMERA SHUTTER FLASH */
+
+.captureFlash {
+  position: absolute;
+  inset: 0;
+
+  z-index: 12;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  pointer-events: none;
+
+  animation:
+    scannerCaptureFlash
+    180ms
+    ease-out
+    forwards;
+}
+
+@keyframes scannerCaptureFlash {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 /* COIN GUIDE */
 
 .coinGuide {
@@ -320,11 +458,8 @@
   inset: 0;
 
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  gap: 16px;
 
   pointer-events: none;
 }
@@ -339,25 +474,184 @@
   box-shadow:
     0 0 0 999px rgba(0, 0, 0, 0.13),
     0 0 30px rgba(217, 154, 49, 0.12);
+
+  animation:
+    coinGuidePulse
+    2.2s
+    ease-in-out
+    infinite;
 }
 
-.coinGuideLabel {
-  padding: 6px 10px;
+@keyframes coinGuidePulse {
+  0%,
+  100% {
+    border-color:
+      rgba(217, 154, 49, 0.58);
 
-  border-radius: 999px;
+    box-shadow:
+      0 0 0 999px rgba(0, 0, 0, 0.13),
+      0 0 22px rgba(217, 154, 49, 0.08);
+  }
 
-  background: rgba(0, 0, 0, 0.58);
-  color: rgba(255, 255, 255, 0.85);
+  50% {
+    border-color:
+      rgba(217, 154, 49, 0.92);
 
-  font-size: 9px;
+    box-shadow:
+      0 0 0 999px rgba(0, 0, 0, 0.13),
+      0 0 38px rgba(217, 154, 49, 0.16);
+  }
+}
+
+.coinGuideInstructions {
+  position: absolute;
+
+  left: 50%;
+  bottom: 18px;
+
+  transform:
+    translateX(-50%);
+
+  width: max-content;
+  max-width:
+    calc(100% - 28px);
+
+  padding:
+    8px
+    12px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 10px;
+
+  background:
+    rgba(0, 0, 0, 0.66);
+
+  text-align: center;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.16);
+}
+
+.coinGuideInstructions strong,
+.coinGuideInstructions span {
+  display: block;
+}
+
+.coinGuideInstructions strong {
+  color: #e3a13a;
+
+  font-size: 10px;
   line-height: 1;
+  font-weight: 800;
 
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.coinGuideInstructions span {
+  margin-top: 5px;
+
+  color:
+    rgba(255, 255, 255, 0.82);
+
+  font-size: 8px;
+  line-height: 1.25;
 }
 
 .hiddenCanvas {
   display: none;
+}
+
+/* VALIDATION STATUS */
+
+.captureStatusMessage {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 10px;
+  padding:
+    9px
+    11px;
+
+  border:
+    1px solid #ebe5db;
+
+  border-radius: 10px;
+
+  background: #fffaf2;
+
+  color: #746856;
+
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.captureStatusMessage > svg {
+  flex: 0 0 auto;
+
+  color: #b87516;
+}
+
+.captureStatusMessage span {
+  color: inherit;
+
+  font-size: 9px;
+  line-height: 14px;
+  font-weight: 600;
+}
+
+.captureStatusSuccess {
+  border-color:
+    rgba(75, 124, 91, 0.24);
+
+  background: #f3faf5;
+
+  color: #406b4d;
+}
+
+.captureStatusSuccess > svg {
+  color: #3f8757;
+}
+
+.captureStatusError {
+  border-color:
+    rgba(177, 73, 73, 0.22);
+
+  background: #fff6f6;
+
+  color: #985151;
+}
+
+.captureStatusError > svg {
+  color: #b14949;
+}
+
+.validationSpinner {
+  flex: 0 0 auto;
+
+  animation:
+    scannerSpin
+    800ms
+    linear
+    infinite;
+}
+
+@keyframes scannerSpin {
+  to {
+    transform:
+      rotate(360deg);
+  }
 }
 
 /* ACTIONS */
@@ -367,7 +661,8 @@
   width: 100%;
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns:
+    minmax(0, 1fr);
 
   gap: 9px;
 
@@ -388,7 +683,9 @@
   gap: 8px;
 
   margin: 0;
-  padding: 0 14px;
+  padding:
+    0
+    14px;
 
   border-radius: 10px;
 
@@ -404,6 +701,7 @@
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
+    color 160ms ease,
     transform 150ms ease,
     box-shadow 160ms ease;
 }
@@ -429,8 +727,8 @@
     0 8px 20px rgba(217, 154, 49, 0.17);
 }
 
-.captureButton:hover,
-.analyzeButton:hover {
+.captureButton:hover:not(:disabled),
+.analyzeButton:hover:not(:disabled) {
   box-shadow:
     0 10px 24px rgba(217, 154, 49, 0.22);
 }
@@ -446,16 +744,38 @@
   font-weight: 600;
 }
 
-.secondaryButton:hover {
-  border-color: rgba(217, 154, 49, 0.38);
+.secondaryButton:hover:not(:disabled) {
+  border-color:
+    rgba(217, 154, 49, 0.38);
 
   background: #fffaf2;
+
+  color: #a96d18;
 }
 
-.captureButton:active,
-.secondaryButton:active,
-.uploadButton:active,
-.analyzeButton:active {
+.uploadButton {
+  max-width: 240px;
+
+  margin-top: 16px;
+
+  border: 1px solid #d99a31;
+
+  background: #12171c;
+  color: #ffffff;
+
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.uploadButton:hover:not(:disabled) {
+  background: #000000;
+}
+
+.captureButton:active:not(:disabled),
+.secondaryButton:active:not(:disabled),
+.uploadButton:active:not(:disabled),
+.analyzeButton:active:not(:disabled) {
   transform: scale(0.99);
 }
 
@@ -465,6 +785,19 @@
 .analyzeButton:focus-visible {
   box-shadow:
     0 0 0 3px rgba(217, 154, 49, 0.14);
+}
+
+.captureButton:disabled,
+.secondaryButton:disabled,
+.uploadButton:disabled,
+.analyzeButton:disabled {
+  opacity: 0.58;
+
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
 }
 
 /* REVIEW */
@@ -539,14 +872,14 @@
 
   margin-bottom: 7px;
 
-  color: #666666;
+  color: #a96d18;
 
-  font-size: 9px;
+  font-size: 8px;
   line-height: 1;
-  font-weight: 600;
+  font-weight: 800;
 
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
 }
 
 .reviewImageCard img {
@@ -555,11 +888,16 @@
 
   display: block;
 
-  object-fit: cover;
+  object-fit: contain;
 
   border-radius: 10px;
 
-  background: #111111;
+  background:
+    radial-gradient(
+      circle,
+      #262626,
+      #111111
+    );
 }
 
 .reviewImageCard button {
@@ -573,7 +911,9 @@
   gap: 6px;
 
   margin-top: 8px;
-  padding: 0 10px;
+  padding:
+    0
+    10px;
 
   border: 1px solid #e2e2e2;
   border-radius: 8px;
@@ -590,6 +930,20 @@
 
   appearance: none;
   -webkit-appearance: none;
+
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.reviewImageCard button:hover {
+  border-color:
+    rgba(217, 154, 49, 0.36);
+
+  background: #fffaf2;
+
+  color: #a96d18;
 }
 
 /* UPLOAD */
@@ -599,7 +953,9 @@
   flex-direction: column;
   align-items: center;
 
-  padding: 24px 18px;
+  padding:
+    24px
+    18px;
 
   text-align: center;
 }
@@ -644,25 +1000,6 @@
   line-height: 17px;
 }
 
-.uploadButton {
-  max-width: 240px;
-
-  margin-top: 16px;
-
-  border: 1px solid #d99a31;
-
-  background: #12171c;
-  color: #ffffff;
-
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 600;
-}
-
-.uploadButton:hover {
-  background: #000000;
-}
-
 .fileInput {
   position: absolute;
 
@@ -696,7 +1033,9 @@
 
   gap: 8px;
 
-  padding: 9px 10px;
+  padding:
+    9px
+    10px;
 
   border: 1px solid #ececec;
   border-radius: 9px;
@@ -706,6 +1045,17 @@
   color: #555555;
 
   text-align: left;
+
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.selectedFile:hover {
+  border-color:
+    rgba(217, 154, 49, 0.24);
+
+  background: #fffaf2;
 }
 
 .selectedFile svg {
@@ -768,7 +1118,8 @@
   }
 
   .reviewGrid {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns:
+      minmax(0, 1fr);
   }
 
   .uploadPanel {
@@ -779,6 +1130,55 @@
 
   .uploadPanel h2 {
     font-size: 18px;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 479px) {
+  .liveSideIndicator {
+    top: 10px;
+  }
+
+  .liveSideIndicator span {
+    min-height: 26px;
+
+    padding:
+      0
+      10px;
+
+    font-size: 8px;
+  }
+
+  .coinGuideInstructions {
+    bottom: 12px;
+
+    padding:
+      7px
+      10px;
+  }
+
+  .coinGuideInstructions strong {
+    font-size: 9px;
+  }
+
+  .coinGuideInstructions span {
+    font-size: 7px;
+  }
+
+  .captureStatusMessage {
+    padding:
+      8px
+      9px;
+  }
+
+  .captureStatusMessage span {
+    font-size: 8px;
+    line-height: 13px;
+  }
+
+  .captureStep small {
+    font-size: 6px;
   }
 }
 
@@ -832,6 +1232,39 @@
 
   .captureStep p {
     font-size: 10px;
+  }
+
+  .captureStep small {
+    font-size: 8px;
+  }
+
+  .liveSideIndicator span {
+    min-height: 30px;
+
+    padding:
+      0
+      14px;
+
+    font-size: 10px;
+  }
+
+  .coinGuideInstructions strong {
+    font-size: 11px;
+  }
+
+  .coinGuideInstructions span {
+    font-size: 9px;
+  }
+
+  .captureStatusMessage {
+    padding:
+      10px
+      12px;
+  }
+
+  .captureStatusMessage span {
+    font-size: 10px;
+    line-height: 15px;
   }
 
   .uploadPanel {
@@ -908,7 +1341,15 @@
   .captureButton,
   .secondaryButton,
   .uploadButton,
-  .analyzeButton {
+  .analyzeButton,
+  .captureStatusMessage,
+  .selectedFile {
     transition: none;
+  }
+
+  .captureFlash,
+  .validationSpinner,
+  .coinGuideCircle {
+    animation: none;
   }
 }
